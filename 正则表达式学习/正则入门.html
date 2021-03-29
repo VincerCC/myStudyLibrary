@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.字面量写法 /规则/g
+    var p = /mjj/g
+    p.test('mj2j1')//false 字符串不包含mjj
+    p.test('mjj1')//true 字符串包含mjj
+    p.test('1mjj')//true 字符串包含mjj
+    console.warn(p.test('mj2j1'))
+    // 2.构造函数写法
+
+    var p1 = new RegExp('mjj','g')
+    p1.test('mj2j1')//false 字符串不包含mjj
+    p1.test('mjj1')//true 字符串包含mjj
+    p1.test('1mjj')//true 字符串包含mjj
+    console.warn(p1.test('mj2j1'))
+
+    // test()校验匹配规则是否符合，符合返回true
+  </script>
+</body>
+</html>

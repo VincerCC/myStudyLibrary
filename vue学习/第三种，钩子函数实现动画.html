@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="animate.css"/>
+		<style>
+			.boll{
+				width: 20px;
+				height: 20px;
+				background-color: #66AFE9;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<input type="button" value="变" @click="flag=!flag" />
+			<transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
+				<div class="boll" v-if="flag"></div>
+			</transition>
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					flag:false
+				},
+				methods:{
+					//el表示要控制动画的那个DOM元素，是原生JS的对象
+					beforeEnter(el){
+						//beforeEnter表示动画入场之前，此时动画还没开始，可以在这里设置元素动画开始之前的起始样式
+						//设置小球动画开始前，小球的起始位置
+						el.style.transform="translate(0px,0px)"
+					},
+					enter(el,done){
+						el.offsetWidth
+						//enter表示动画开始之后的样式，这里可以设置小球完成动画之后的结束状态
+						el.style.transform="translate(150px,450px)";
+						el.style.transition="all 1s ease-in-out";
+						done();//这里的done()其实就是afterEnter函数的引用
+					},
+					afterEnter(el ){
+						//动画完成之后，控制小球消失
+						this.flag=!this.flag;
+						//但是这样做小球会等一段时间才会消失，如果要立即消失需要在enter中使用第二个参数done
+					}
+				}
+		})
+		</script>
+	</body>
+</html>

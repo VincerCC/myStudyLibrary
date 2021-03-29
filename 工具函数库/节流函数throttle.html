@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      height: 20000px;
+    }
+  </style>
+
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+
+    // window.addEventListener('scroll', function(){
+    //   console.log(66)
+    // })//节流前，滚动一下触发12次
+    window.addEventListener('scroll', throttle((e)=>{
+      console.log(e)
+    }, 1000))//节流前，滚动一下触发1次
+  </script>
+</body>
+</html>

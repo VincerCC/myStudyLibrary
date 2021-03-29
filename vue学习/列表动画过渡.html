@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/* li{
+				border: 1px dashed #999;
+				margin: 5px;
+				line-height: 35px;
+				padding-left: 5px;
+				width: 100%;
+			} */
+			/* li:hover{
+				background-color: hotpink;
+				transition: all 1s ease
+			} */
+			.v-enter,.v-leave-to{
+				opacity: 0;
+				transform: translateY(80px);
+
+			}
+			.v-enter-active,.v-leave-active{
+				transition: all 1s ease;
+			}
+			.v-move{
+				/*删除时候，能让下边的渐渐地飘上来效果，需要在.v-leave-active加上position: absolute;*/
+				transition: all 1s ease
+			}
+			/*一般写了v-move就要加上v-leave-active*/
+			.v-leave-active{
+				/* position: absolute;+-- */
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<table>
+				ID:<input type="text" v-model="id"/>
+				Name:<input type="text" v-model="name"/>
+				<input type="button" value="添加" @click="add" />
+			</table>
+
+			<ul>
+				<!--
+                	如果需要让列表过渡效果，如果是通过v-for循环渲染出来的 ，不能用transition包裹，需要用transition-group
+                	给transition-group加上appear属性，实现页面刚展示出来时候的入场效果
+                	通过为transition-group元素设置tag="ul"属性，指定transition-group渲染为指定的元素ul，如果不设置，浏览器会默认渲染为span元素
+                -->
+                <transition-group appear tag="ul">
+                	<li v-for="(item,i) in list" :key="item.id ">
+					{{item.id}}----------{{item.name}}
+					<button @click="up(i)">上移</button>
+					<button @click="down(i)">下移</button>
+					</li>
+                </transition-group>
+			</ul>
+
+
+		</div>
+
+
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					id:'',
+					name:'',
+					list:[
+					{id:1,name:'天'},
+					{id:2,name:'地'},
+					{id:3,name:'人'}
+					]
+				},
+				methods:{
+					add(){
+						this.list.push({id:this.id,name:this.name})
+						this.id=this.name=''
+					},
+					del(i){
+						this.list.splice(i,1);
+					},
+					up(index){
+						let addMarkTarget = this.list
+						let clickValue = this.list[index]//我点击的下标对应元素
+						console.log(clickValue,'clickValue')
+						let spliceValue = addMarkTarget.splice(index - 1,1,clickValue)//将我点击元素的前一个元素 替换为我点击的元素，并返回被裁剪的元素数组
+						console.log(spliceValue,'spliceValue')
+						addMarkTarget.splice(index,1,...spliceValue)//将我点击的这个元素位置，替换为被裁剪的元素
+						console.log(addMarkTarget,'addMarkTarget')
+						this.list = addMarkTarget
+					},
+					down(index){
+						let addMarkTarget = this.list
+								//下移
+						//当前index 跟当前index + 1 的元素交换
+						let clickValue = this.list[index]//我点击的下标对应元素
+						let spliceValue = addMarkTarget.splice(index + 1,1,clickValue)//将我点击元素的前一个元素 替换为我点击的元素，并返回被裁剪的元素
+						addMarkTarget.splice(index,1,...spliceValue)//将我点击的这个元素位置，替换为被裁剪的元素
+						this.list = addMarkTarget
+					}
+				}
+		})
+		</script>
+	</body>
+</html>

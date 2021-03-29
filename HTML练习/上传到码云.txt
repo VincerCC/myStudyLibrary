@@ -1,0 +1,10 @@
+git status查看有哪些没提交有哪些已经提交
+
+1.传统命令行方式
+	1.git add .
+	2.git commit -m "提交信息"     
+	3.git push
+
+
+强制push
+	git push -u origin master -f

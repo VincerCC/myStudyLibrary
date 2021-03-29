@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var arr=[8,10,96,120,3,8,96,11,8,0,10,0,10,82]
+			var t=[];
+			t[0]=arr[0];
+			for(var i=0;i<arr.length;i++){
+				for(var j=0;j<t.length;j++){
+					if(t[j]==arr[i]){
+						break;
+					}
+					if(j==t.length-1){
+						t[j+1]=arr[i];//向数组增加一个值，可用t.push(arr[i]);代替
+					}
+				}
+			}
+			console.log(t);
+
+
+
+
+
+			function unique(arr) {
+          var unique = {}
+          arr.forEach(function (item) {
+						// 循环数组，将数组的每个值，转化为JSON格式，作为对象unique的键名，不会重复，最终unique是这样的
+						// unique = {'a':1,'b':2}
+            unique[JSON.stringify(item)] = item
+					})
+					// Object.keys(unique),获取到对象的键名，产生新数组，进行map遍历，遍历中将键名格式转换为js，并且return出去，返回遍历结果组成的数组.将unique对象的键名还原成对象数组
+          arr = Object.keys(unique).map(function (u) {
+            return JSON.parse(u)
+          })
+          return arr
+				}
+				let aarr=[1,3,9,'9',5,9,9,4]
+				console.log(unique(aarr))
+
+
+
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+var div=document.querySelector("#div");
+
+if(div.addEventListener){//在IE9及以上的浏览器，这里this是div
+	div.addEventListener("click",function(){
+	console.log(1);
+	})
+
+	div.addEventListener("click",function(){
+	console.log(2);
+	})
+
+	div.addEventListener("click",function(){
+	console.log(3);
+	//输出结果为
+			1
+			2
+			3
+	})
+
+}else{//在IE9以下的浏览器，这里this是window
+	div.attachEvent("onclick",function(){
+	console.log(1);
+	})
+
+	div.attachEvent("onclick",function(){
+	console.log(2);
+	})
+
+	div.attachEvent("onclick",function(){
+	console.log(3);
+	})
+	//输出结果为
+			3
+			2
+			1
+}

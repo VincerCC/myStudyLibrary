@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let obj = {
+      a:'1',
+      b: '',
+      c: true,
+      d: false,
+      e: {
+        name: '',
+        age: 18
+      },
+      f: null,
+      g: undefined
+    }
+    let obj1 = {
+      // a:'1',
+      b: '',
+    //   c: true,
+      // d: false,
+      e: {
+        name: '',
+    //     age: 18
+      },
+      h:{
+        g:{h:{i:{a:'null'}}}
+      },
+      f: null,
+      g: undefined
+
+    }
+    function filterObjectValue1(obj) {
+      let nonEmpty = {};
+      for(let key in obj) {
+        let type = Object.prototype.toString.call(obj[key]).slice(8,-1)
+        if(type !== 'Object' && obj[key] !== "" && obj[key] !== null && obj[key] !== undefined) {
+          nonEmpty[key] = obj[key]
+        }
+        if(type === 'Object'){
+          nonEmpty[key] =filterObjectValue1(obj[key])
+        }
+      }
+      for(let key in nonEmpty){
+        if(JSON.stringify(nonEmpty[key]) === '{}') {
+          console.log(nonEmpty[key])
+          delete nonEmpty[key]
+        }
+      }
+      return nonEmpty;
+    }
+    function filterObjectValue2(obj) {
+      let nonEmpty = {};
+      for(let key in obj) {
+        if(Object.prototype.toString.call(obj[key]) !== '[object Object]' && obj[key] !== "" && obj[key] !== null && obj[key] !== undefined) {
+          nonEmpty[key] = obj[key]
+        }
+        if(Object.prototype.toString.call(obj[key]) === '[object Object]'){
+          nonEmpty[key] = filterObjectValue2(obj[key])
+        }
+      }
+      return nonEmpty;
+    }
+    let o1 = filterObjectValue1(obj)
+    let o3 = filterObjectValue1(obj1)
+    let o2 = filterObjectValue2(obj)
+    // console.log(o1)
+    // console.log(o2)
+    console.log(o3)
+  </script>
+</body>
+</html>

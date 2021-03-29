@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.(`[]`)字符集合，匹配区间字符
+    var p1 = /[a-fA-Z]/g
+    console.log(h.replace(p1,'正则')) //h正则llo worl正则 @2020。 替换a-f和A-Z的所有字符
+
+
+    // 2.(`[\u4e00-\u9fa5]`)字符集合，匹配中文字符
+    var p2 = /[\u4e00-\u9fa5]/g
+    console.log('123你好'.replace(p2,'正则')) //123正则正则。 替换中文字符
+
+    // 3.(`[^\u4e00-\u9fa5]`)字符集合，匹配所有的非中文字符，在[]中使用 ^ 不表示开头，表示取不在集合内的元素
+    var p3 = /[^\u4e00-\u9fa5]/g
+    console.log('123你好'.replace(p3,'正则')) //正则正则正则你好。 替换所有的非中文字符
+  </script>
+</body>
+</html>

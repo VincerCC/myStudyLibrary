@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 数组的常用方法
+
+    // 1.concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。
+    let arr = [1,2,7,8,6]
+    let brr = [3,4]
+    let crr = arr.concat(brr)
+    console.log(crr)//[1,2,3,4]
+
+    // 2.every() 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值。
+    console.log(arr.every(item => item>0))//数组arr的每一项都大于0 返回true
+    console.log(arr.every(item => item>1))//数组arr的有一项等于1，不符合大于1  返回false
+
+    // 3.some() 方法测试数组中是不是至少有1个元素通过了被提供的函数测试。它返回的是一个Boolean类型的值。
+    console.log(arr.some(item => item>1))//数组arr的只要有一项大于1 返回true
+
+
+    // 4.filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。
+    let drr = arr.filter((item) => {return item > 3})
+    console.log(drr)// [7,8,6]
+
+    // 5.find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined
+    console.log(arr.find(item => item > 6))// 7
+
+    // 6.findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+    console.log(arr.findIndex(item => item > 6))// 2
+
+    // 7.flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个 新数组 返回。Infinity可展开任意深度的嵌套数组
+    //扁平化嵌套数组
+    let err = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]]
+    console.log(err.flat(Infinity))// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    //扁平化去除数组的空项
+    let frr = [1, 2,,6]
+    console.log(frr.flat(Infinity)) // [1,2,6]
+
+    // 8.map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。
+    let grr = arr.map((item) => {
+      return item*2
+    })
+    console.log(grr) //[2, 4, 14, 16, 12]
+
+    // 9.forEach() 方法对数组的每个元素执行一次给定的函数。
+    arr.forEach((item) => {
+      console.log(item)
+    })
+
+    // 10.includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。
+    console.log(arr.includes(3))// false
+
+    // 11.indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+    console.log(arr.indexOf(7))// 2
+
+    // 12.lastIndexOf() 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 fromIndex 处开始。
+    console.log(arr.lastIndexOf(7))// 2
+
+
+    // 13.join() 方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
+    console.log(arr.join('-'))//1-2-7-8-6
+    console.log([1].join('-'))//1
+
+    // 14.pop()方法从数组中删除最后一个元素，并返回该元素的值。此方法会更改原数组的长度。
+    arr.pop()
+    console.log(arr)//[1, 2, 7, 8]
+
+    // 15.push() 方法将一个或多个元素添加到数组的末尾，此方法会更改原数组,返回该数组的新长度。
+    arr.push(9)
+    console.log(arr)//[1, 2, 7, 8 ,9]
+
+    // 16.shift() 方法从数组中删除第一个元素，并返回该元素的值。此方法更改数组的长度。
+    arr.shift()
+    console.log(arr)//[2, 7, 8 ,9]
+
+    // 17.unshift()() 方法将一个或多个元素添加到数组的开头，此方法会更改原数组,返回该数组的新长度。
+    arr.unshift(10)
+    console.log(arr)//[10,2, 7, 8 ,9]
+
+    // 18.reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值。
+    // reduce 里的函数函数接收4个参数:
+              // total	必需。计算结束后的返回值。
+              // currentValue	必需。当前元素
+              // currentIndex	可选。当前元素的索引
+              // array	可选。当前元素所属的数组对象。
+              // 最后接受一个initialValue	，可选。传递给函数的初始值
+              // reduce( (total, currentValue, currentIndex, array)=>{
+
+              // },initialValue)
+    console.log(arr.reduce((total, currentValue, currentIndex, array) => {
+      return total + currentValue
+    }),0)//10+2+7+8+9=36
+
+    // 19.reverse() 方法将数组中元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组。
+    arr.reverse()
+    console.log(arr)//[9, 8, 7, 2, 10]
+
+    // 20.slice() 方法返回一个新的数组对象，这一对象是一个由 start 和 end 决定的原数组的浅拷贝（包括 start，不包括end）。原始数组不会被改变。
+    // start	可选。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。
+    // end	可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。
+    arr.slice(2,-1)//从下标为2的开始，删除到数组末尾最后一个元素，不包括最后一个元素
+    console.log(arr.slice(2,-1))//[7,2]
+
+    // 21. sort() 方法用于对数组的元素进行排序。排序顺序可以是字母或数字，并按升序或降序。默认排序顺序为按字母升序。会改变原数组
+    arr.sort((a,b) => {
+      return a-b//升序  [2, 7, 8, 9, 10]
+      // return b-a//降序  [10, 9, 8, 7, 2]
+    })
+    console.log(arr)
+    //对数组里边对象排序
+    //结果：[{num:1},{num:2},{num:3}]
+    let arr =[{num:2},{num:1},{num:3}]
+    arr.sort((a,b) => {
+      return a.num-b.num
+    })
+    // 22.splice() 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。
+    // index	必需。规定从何处添加/删除元素。该参数是开始插入和（或）删除的数组元素的下标，必须是数字。
+    // howmany	可选。规定应该删除多少元素。必须是数字，但可以是 "0"。如果未规定此参数，则删除从 index 开始到原数组结尾的所有元素。
+    // item1, ..., itemX	可选。要添加到数组的新元素
+    arr.splice(2,1)//从下标为2的元素开始删除一个元素
+    console.log(arr)//[2, 7, 9, 10]
+    arr.splice(2,1,19)//从下标为2的元素开始删除一个元素，并且在这里添加新元素
+    console.log(arr)//[2, 7, 19, 10]
+  </script>
+</body>
+</html>

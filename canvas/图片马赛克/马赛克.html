@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#can{
+				position: absolute;
+				left:50%;
+				top:50%;
+				transform: translate3d(-50%,-50%,0);/*让画布原点偏移-50%，-50%*/
+				/*background: gray;*/
+
+			}
+			#btn{
+				position: absolute;
+				left:60%;
+				top:75%;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="can" ></canvas>
+		<button id="btn">点我增大马赛克密度</button>
+	</body>
+
+	<script type="text/javascript">
+		window.onload=function(){
+
+			var canvas=document.querySelector("#can");
+			if(canvas.getContext){
+				var ctx=canvas.getContext("2d");
+
+				console.log(ctx.getImageData)
+				//引入图片
+				var img=new Image();
+				img.crossOrigin = '';
+				img.src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1188923622,400867403&fm=26&gp=0.jpg";
+				img.onload=function(){
+					canvas.width=img.width*2;
+					canvas.height=img.height;
+
+					draw();
+
+				}
+
+
+
+				function draw(){
+				ctx.drawImage(img,0,0);
+
+				//拿到图片的所有像素点
+				var oldImageData=ctx.getImageData(0,0,img.width,img.height);
+
+				//创建新的
+				var newImageData=ctx.createImageData(img.width,img.height);
+
+				//给newImageData做马赛克
+				/*
+				 * 1、选取一个马赛克矩形
+				 * 2、从马赛克矩形中随机抽出一个像素点（rgba）
+				 * 		矩形[0，0]，就是像素点[0,0]到[4,4]
+				 * 		Math.random()-----[0,1)的随机数
+				 * 		Math.random()*size-----[0,size)的随机数
+				 * 		Math.floor(Math.random()*size)-----[0,size)的随机整数
+				 * 3、 将整个马赛克矩形中的像素点信息统一修改为随机抽出的那个
+				 */
+				 var size=1;//马赛克矩形变成设置为1
+
+				var btn=document.getElementById("btn");//单击按钮更改马赛克密度
+					btn.onclick=function(){
+					size+=1;
+					for(var i=0;i<oldImageData.width/size;i++){
+						for(var j=0;j<oldImageData.height/size;j++){
+							//[i,j]代表矩形坐标
+							var color=getPxInfo(oldImageData,size*i+Math.floor(Math.random()*size),size*j+Math.floor(Math.random()*size));
+
+
+							for (var a=0;a<size;a++){
+								for(var b=0;b<size;b++){
+									setPxInfo(newImageData,size*i+a,size*j+b,color);//代表，拿到旧照片的像素点，在新照片中从[0，0]到[4,4]替换整个马赛克矩形
+								}
+							}
+						}
+				}
+//				 ctx.clearRect(0,0,oc.width,oc.height);//清空样式
+				 //放置newImageData
+				ctx.putImageData(newImageData,img.width,0);
+		}
+
+
+
+				 for(var i=0;i<oldImageData.width/size;i++){
+				 	for(var j=0;j<oldImageData.height/size;j++){
+				 		//[i,j]代表矩形坐标
+				 	var color=getPxInfo(oldImageData,size*i+Math.floor(Math.random()*size),size*j+Math.floor(Math.random()*size));
+
+
+				 	for (var a=0;a<size;a++){
+				 	for(var b=0;b<size;b++){
+				 		setPxInfo(newImageData,size*i+a,size*j+b,color);//代表，拿到旧照片的像素点，在新照片中从[0，0]到[4,4]替换整个马赛克矩形
+				 		}
+				 	}
+				}
+			}
+//				 ctx.clearRect(0,0,oc.width,oc.height);//清空样式
+				 //放置newImageData
+				ctx.putImageData(newImageData,img.width,0);
+
+			}
+
+			function getPxInfo(imagedata,x,y){
+				var color=[];
+				var data=imagedata.data;
+				var w=imagedata.width;
+				color[0]=data[(y*w+x)*4];
+				color[1]=data[(y*w+x)*4+1];
+				color[2]=data[(y*w+x)*4+2];
+				color[3]=data[(y*w+x)*4+3];
+				return color;
+			};
+
+			function setPxInfo(imagedata,x,y,color){
+				var data=imagedata.data;
+				var w=imagedata.width;
+				data[(y*w+x)*4]=color[0];
+				data[(y*w+x)*4+1]=color[1];
+				data[(y*w+x)*4+2]=color[2];
+				data[(y*w+x)*4+3]=color[3];
+
+			};
+
+		}
+		};
+
+	</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>text</title>
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+  <script>
+    var obj = {
+      name: '??',
+      age: 12
+    }
+    console.log(obj["name"])
+    console.log(obj.name)
+    const MAP = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      "/": "&#x2F;",
+    }
+    console.log(MAP["/"])
+    // function zifuchuanmap(string){
+    // 	const MAP={
+    // 		"&":"&amp;",
+    // 		"<":"&lt;",
+    // 		">":"&gt;",
+    // 		"'":"&#39;",
+    // 		"/":"&#x2F;",
+    // 	}
+    // 	return String(string).replace(/[&<>'\/]/g,(item)=>{
+    // 		console.log(arguments)
+    // 		console.log(item)
+    // 		return MAP[item]
+    // 	})
+    // }
+    // console.log(zifuchuanmap('</span>'))
+    function PunctuationFormatting(string) {
+      const MAP = {
+        ",": "，",
+        ".": "。",
+        ":": "：",
+        "!": "！",
+        "?": "？",
+      }
+      return String(string).replace(/[,.:!?]/g, (item) => {
+        return MAP[item]
+      })
+    }
+    console.log('输入为英文符号,.:?!', '转换为中文', PunctuationFormatting(',.:?!'))
+    var str = "abcdefg"
+    console.log(str.replace('b', (item) => {
+      console.log(item)
+    }))
+    // console.log(zifuchuanmap("<sspan/>"))
+    console.log(parseInt("10")) //10
+    console.log(parseInt("19", 10)) //代表将'19'转换为十进制 19
+    console.log(parseInt("11", 2)) //代表将'11'转换为二进制 3
+    console.log(parseInt("17", 8)) //代表将'14'转换为八进制 15
+    console.log(parseInt("1f", 16)) //代表将'1f'转换为十六进制 31
+    console.log(parseInt("010")) // 10
+    console.log(parseInt("He was 40")) //NaN
+    let a = 1;
+
+    function foo(a) {
+      a = a + 1
+    }
+    foo(a)
+    console.log(a);
+
+    (() => {
+      console.log("我是自调用")
+    })();
+
+    (() => {
+      var a = 1
+
+      function text() {
+        console.log(++a)
+      }
+
+      function foo() {
+        return {
+          text: text
+        }
+      }
+      window.BL = foo //向外暴露foo函数，BL随意定义
+    })()
+    BL().text() //BL()是一个函数，函数返回一个对象，对象里有text方法
+  </script>
+</body>
+
+</html>

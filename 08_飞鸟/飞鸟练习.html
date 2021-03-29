@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: black;
+			}
+			#test{
+				background: white;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="test" width="300" height="300">
+			
+			
+	</body>
+	<script type="text/javascript" >
+				window.onload=function(){
+					//获取画布
+					var canvas=document.querySelector("#test");
+					//获取画笔
+					if(canvas.getContext)
+					{
+						var ctx=canvas.getContext("2d");
+						var num=0;
+						
+						var x=0;
+						
+					//设置画布高度宽度
+					canvas.width=document.documentElement.clientWidth;
+					canvas.height=document.documentElement.clientHeight;
+					
+					setInterval(function(){
+						ctx.clearRect(0,0,canvas.width,canvas.height);
+						num++;
+						x+=10;
+						if(num==9)
+						{
+							num=1;
+						}
+						//画布中移入图片
+						var img=new Image();
+						img.src="img/q_r"+(num)+".jpg";
+						img.onload=function(){
+						draw(this);
+						
+						}
+					},100);
+					function draw(img){
+						ctx.drawImage(img,x,0);
+					}
+					}
+				};
+
+			</script>
+</html>

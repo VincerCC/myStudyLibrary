@@ -1,0 +1,23 @@
+window.onload=function(){
+
+var text=document.querySelector("#text");
+
+if(text.addEventListener){
+	//火狐浏览器,滚轮方向，往上=负值，往下=正值
+	text.addEventListener("DOMMouseScroll",fn)
+}
+
+//非火狐浏览器，滚轮方向，往上=正值，往下=负值，需要弄个兼容版本滚轮方向
+text.onmousewheel=fn;
+
+function fn(ev){//兼容版本滚轮方向，往上=正值，往下=负值
+	ev=ev||event；
+	var dir="";
+	if(ev.whellDelta){//非火狐浏览器
+		dir=ev.wheelDelta>0?"up":"down"；
+		}
+	if(ev.dedail){//火狐浏览器
+		dir=ev.dedail<0?"up":"down"；
+		}
+	}
+}

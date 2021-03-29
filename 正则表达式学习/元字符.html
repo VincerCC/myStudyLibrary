@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let h = 'hello world @2020'
+    // 1. (`.`)匹配所有的字符
+    var p1 = /./g
+    console.log(h.replace(p1,'正则')) //正则正则正则正则正则正则正则正则正则正则正则正则正则正则正则正则正则。替换所有字符
+    // 2. (`^`)匹配字符串开始的位置
+    var p2 = /^hello/g
+    console.log(h.replace(p2,'正则')) //正则 world @2020。替换hello开头的
+    // 3. (`$`)匹配字符串结束的位置
+    var p3 = /0$/g
+    console.log(h.replace(p3,'正则')) //hello world @202正则。 替换0结尾的
+    // 4.(`\w`)匹配数字和字母
+    var p4 = /\w/g
+    console.log(h.replace(p4,'正则')) //正则正则正则正则正则 正则正则正则正则正则 @正则正则正则正则。 替换所有的数字和字母
+    // 5.(`\W`)匹配非数字和字母
+    var p5 = /\W/g
+    console.log(h.replace(p5,'正则')) //hello正则world正则正则2020。 替换所有的非数字和字母包括空格
+    // 6.(`\d`)匹配数字
+    var p6 = /\d/g
+    console.log(h.replace(p6,'正则')) //hello world @正则正则正则正则。 替换所有的数字
+    // 7.(`\D`)匹配非数字
+    var p7 = /\D/g
+    console.log(h.replace(p7,'正则')) //正则正则正则正则正则正则正则正则正则正则正则正则正则2020。 替换所有的非数字
+    // 8.(`\s`)匹配空格
+    var p8 = /\s/g
+    console.log(h.replace(p8,'正则')) //hello正则world正则@2020。 替换所有的空格
+    // 9.(`\S`)匹配非空格
+    var p9 = /\S/g
+    console.log(h.replace(p9,'正则')) //正则正则正则正则正则 正则正则正则正则正则 正则正则正则正则正则。 替换所有的非空格
+
+  </script>
+</body>
+</html>

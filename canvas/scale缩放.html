@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    // 保留最初的画笔状态
+    ctx.save()
+    ctx.fillRect(0,0,100,50)
+    // 缩放，(x,y)水平缩放倍数，竖直缩放倍数，直接缩放坐标轴
+    ctx.scale(2,2)
+    // 保留缩放两倍画笔状态
+    ctx.save()
+    // 绘制填充矩形
+    ctx.fillRect(100,0,100,50)
+    // 复原回最初状态方法一
+    ctx.scale(0.5,0.5)
+    ctx.fillRect(0,60,100,50)
+
+    ctx.scale(1.1,1.1)
+    ctx.fillRect(0,120,100,50)
+    // 恢复缩放两倍的画笔状态
+    ctx.restore()
+    ctx.fillRect(0,120,100,50)
+    // 恢复最初的画笔状态
+    ctx.restore()
+    ctx.fillRect(0,400,100,50)
+  </script>
+</body>
+</html>

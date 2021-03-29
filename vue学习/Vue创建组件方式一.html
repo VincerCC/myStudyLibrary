@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			父组件的值{{myName}}
+			<!--如果要使用组件，直接将组件的名称，以html格式引入页面
+				如果使用的驼峰命名，则需要改为-结构
+			-->
+			<my-com :name.sync="myName">
+				<div slot='top'>top</div>
+			</my-com>
+			<input type="text" v-on="{input:onInput,focus:onFocus,blur:onBlur}" />
+			<!-- sync，使用sync能在子组件中修改父组件传递的值-->
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//1.1使用Vue.extend来创建全局的Vue组件
+			let myCom = Vue.extend({
+				template:`
+				<div>
+					<h3>这是用extend创建的组件{{name}}</h3>
+					<button @click="btn">改变父组件的值</button>
+					<slot name='top'></slot>
+				</div>`,
+				props:{
+					name: {
+						type: String,
+						default: 'tom'
+					}
+				},
+				methods:{
+					btn(){
+						this.$emit('update:name','vincer')
+					}
+				}
+			})
+			//1.2使用Vue.component('组件的名称'，创建出来的组件模板对象)
+			Vue.component('myCom',myCom)
+			//可简写
+			// Vue.component('myCom',Vue.extend({
+			// 	//通过template，指定组件要展示的html结构
+			// 	template:'<h3>这是用extend创建的组件</h3>'
+			// }))
+
+
+
+
+
+
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					myName:'liSa'
+				},
+				methods:{
+					onInput(){
+						console.log('onInput')
+					},
+					onFocus(){
+						console.log('onFocus')
+					},
+					onBlur(){
+						console.log('onBlur')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

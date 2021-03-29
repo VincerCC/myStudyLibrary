@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+    let arr = [1,2,3]
+    let b = myEvery(arr, (item)=>{
+      return item > 0
+    })
+    let c = myEvery(arr, (item)=>{
+      return item > 5
+    })
+    let d = arr.every((item)=>{
+      return item > 0
+    })
+    let e = arr.every((item)=>{
+      return item > 5
+    })
+    console.log(b)
+    console.log(c)
+    console.log(d)
+    console.log(e)
+    console.log('++++++++++++++++++++++++++++++++++++++++')
+    let f = mySome(arr, (item)=>{
+      return item > 2
+    })
+    let g = mySome(arr, (item)=>{
+      return item > 5
+    })
+    let h = arr.some((item)=>{
+      return item > 2
+    })
+    let i = arr.some((item)=>{
+      return item > 5
+    })
+    console.log(f)
+    console.log(g)
+    console.log(h)
+    console.log(i)
+  </script>
+</body>
+</html>

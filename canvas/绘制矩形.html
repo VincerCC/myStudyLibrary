@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+
+    // 绘制无填充色的矩形，以50,50为矩形左上角原点，画长100宽100的矩形
+    ctx.rect(50,50,100,100)
+
+    // 设置路径填充颜色，不设置默认为#000000
+    ctx.fillStyle = "orange"
+    // 填充路径
+    ctx.fill()
+
+    // 绘制有填充色的矩形
+    ctx.fillRect(150,150,50,50)
+
+    // 清除指定fillRect矩形区域，让清除部分完全透明。
+    ctx.clearRect(162.5, 162.5, 25, 25);
+
+    // 设置路径的颜色，默认为#000000
+    ctx.strokeStyle = "red"
+    // 绘制一个矩形的路径
+    ctx.strokeRect(200, 200, 10, 10);
+
+
+    // // 设置路径的颜色，默认为#000000
+    // ctx.strokeStyle = "red"
+    // // 设置路径线段的宽度
+    // ctx.lineWidth = 10
+    // // 渲染路径
+    // // ctx.stroke()
+
+
+    // // 绘制线段
+    // // 设置绘制的起点
+    // ctx.moveTo(155,155)
+    // // 设置线段经过某个位置
+    // ctx.lineTo(200,200)
+    // ctx.lineTo(100,300)
+    // // 设置线条样式 起点或者结束点的样式
+    // // ctx.lineCap = "butt"默认为平角
+    // ctx.lineCap = "round"//设置为圆角
+
+    // // 设置线段拐角的样式
+    // // ctx.lineJoin = "miter"//默认是尖锐的
+    // ctx.lineJoin = "round"//设置为圆角的
+    // // 渲染路径
+    // ctx.stroke()
+  </script>
+</body>
+</html>

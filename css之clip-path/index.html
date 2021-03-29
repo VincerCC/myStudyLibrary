@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .img{
+      width: 300px;
+      height: 300px;
+      background-image: url(./Snipaste_2020-11-23_14-14-54.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      clip-path: polygon(0 0, 300px 0px, 300px 150px,150px 300px, 0px 300px)
+      /* clip-path: circle(100px at 100px 100px); */
+      /* clip-path: ellipse(100px 50px at 100px 100px); */
+      /* clip-path: inset(10px 20px 30px 10px round 20px 10px 50px 100px); */
+
+      /*
+      多边形polygon(<x1> <y1>, <x2> <y2>, ..., <xn> <yn>) 定义了每一个点的坐标，最终按书写顺序，闭合这些点，只保留闭合区域，其余裁剪。
+        起点是从当前图片的左上角开始计算的，可以用百分百，也可以用px等单位。
+        在这里，起点是图片的左上角0,0，第二个点是图片的右上角300px 0px，第三个点是图片右边中间300px 150px,第四个点是图片的下边中间150px 300px，第五个点是图片的左下角0 300px,
+        依次连线，最终保留连线区域内内容，其余裁剪
+      */
+      /*
+      圆形circle（半径at圆心坐标），只保留闭合区域，其余裁剪。100为半径，100px,100px圆心，保留圆形部分其余裁剪
+      */
+      /*
+      椭圆形ellipse（长(x)、短(y)轴半径at圆心坐标）, 水平方向100px 垂直方向50px 圆心为100,100画椭圆
+      */
+      /*
+      内置矩形inset（上右下左的裁剪的高度round上右下左圆角），上边裁剪10px，圆角20px，右边裁剪20px，圆角10px,下边裁剪30px，圆角50px, 左边裁剪10px，圆角100px
+      */
+    }
+  </style>
+</head>
+<body>
+    <div class="img"></div>
+</body>
+</html>

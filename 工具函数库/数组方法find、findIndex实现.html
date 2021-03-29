@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+
+    let arr = [1,2,3]
+    let b = myFind(arr, (item, index) => {
+      return item > 1
+    })
+    let c = myFind(arr, (item, index) => {
+      return item > 5
+    })
+    let d = arr.find((item, index) => {
+      return item > 1
+    })
+    console.log(b)
+    console.log(c)
+    console.log(d)
+
+    let e = myFindIndex(arr, (item, index)=>{
+      return item > 1
+    })
+    let f = myFindIndex(arr, (item, index)=>{
+      return item > 5
+    })
+    let g = arr.findIndex((item, index) => {
+      return item > 1
+    })
+
+    console.log(e)
+    console.log(f)
+    console.log(g)
+  </script>
+</body>
+</html>

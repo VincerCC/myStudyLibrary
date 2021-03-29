@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	</head>
+	<body>
+		<input id="btn" type="button" value="按钮" v-on:mouseover="show">
+		<input v-focus>
+		<script >
+			//使用Vue.directive("名称",{对象})定义全局指令
+			//参数1：指令名称，不需要加v-前缀，但是调用的时候需要加v-前缀
+			//参数2：对象，对象身上有一些函数，这些函数在特定时候可以执行相关操作
+			// 注册一个全局自定义指令 `v-focus`页面加载时自动获取焦点
+			//实例查看品牌管理案例
+			Vue.directive('focus', {
+			  // 当被绑定的元素插入到 DOM 中时……只执行一次
+			  inserted: function (el) {
+			    // 聚焦元素
+			    //和JS行为有关的最好在inserted中
+			    el.focus()
+			  }
+			  })
+//			  //当指令绑定到元素上时执行，只执行一次
+//			  //当指令绑定到元素上时，还没有插入到DOM去，页面就已经执行完毕
+//			  bind: function (el) {
+//			    // 聚焦元素
+//				//和样式有关的一般在bind中
+//			    el.focus()
+//			  },
+
+//			  //所在组件的 VNode 更新时调用，可执行多次
+//			  updated: function (el) {
+//			    // 聚焦元素
+//			    el.focus()
+//			  }
+			
+			// 注册一个全局自定义指令 `v-focus`
+
+		</script>
+	</body>
+</html>

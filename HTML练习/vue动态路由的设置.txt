@@ -1,0 +1,10 @@
+方法一：
+1.在点击的路由连接中，将循环的下标传过去:to="'/home/newsinfo/'+index"
+2.配置动态路由{path:'/home/newsinfo/:id',component:newsinfo}
+3.在目标跳转链接中，获取动态路由的值this.$route.params.id
+
+
+方法二 get传值：
+1.在点击的路由连接中，将循环的下标传过去:to="'/home/newsinfo？id='+index"
+2.配置动态路由{path:'/home/newsinfo',component:newsinfo}
+3.在目标跳转链接中，获取动态路由的值this.$route.query.id

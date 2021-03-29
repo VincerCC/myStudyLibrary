@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul></ul>
+  <script>
+    // 会出现明显卡顿
+    let ul = document.querySelector('ul')
+    // 十万条数据
+    let dataNum = 100000
+    // 一次插入20条
+    let setNum = 20
+    // 需要插入多少次,总数/一次插入数量，向下取整
+    let needNum = Math.ceil(dataNum/setNum)
+    // 记录插入次数
+    let hasSetNum = 0
+    function add(){
+      for(let i=0; i<setNum; i++){
+        let li = document.createElement('li')
+        li.innerText = Math.floor(Math.random()* 100000)
+        // 将所有li设置为虚拟节点的子节点
+        ul.appendChild(li)
+      }
+      hasSetNum++
+      loop()
+    }
+
+    function loop(){
+      if(hasSetNum < needNum){
+
+        setInterval(()=>{
+          add()
+        },16)
+      }
+    }
+    loop()
+  </script>
+</body>
+</html>

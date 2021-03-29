@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css" >
+			#panel{
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: #BBFFAA;
+				cursor: pointer;/*鼠标指针样式*/
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.7.2.js" ></script>
+		<script type="text/javascript"  >
+			$(function(){
+				$("#panel").hover(function(){
+					$(this).stop(false,true)
+						   .animate({height:"150"},200)
+						   .delay(1000)
+						   .animate({width:"300"},300)
+						   
+				},function(){
+					$(this).stop()
+						   .animate({height:"22"},200)
+						   .animate({width:"60"},300);
+				})
+				});
+						   
+		</script>
+	</head>
+	<body>
+		<div id="panel"></div>
+	</body>
+</html> 

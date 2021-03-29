@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+
+  var arr=[1,9,'',8,6,2,'',7]
+  var brr=arr.filter((item)=>{//会筛选出不为空的值保存到新数组brr，不修改原数组
+    return item
+  })
+  var crr=arr.filter((item)=>{//会筛选出为空的值保存到新数组crr，不修改原数组
+    return !item
+  })
+  brr.sort((a,b)=>{//会按照降序排序，会更改原数组brr
+    return a-b
+  })
+  var drr=brr.concat(crr)//将原来的空值拼接到最后面，不会更改原数组
+  console.log(arr)
+  console.log(brr)
+  console.log(crr)
+  console.log(drr)
+  </script>
+</head>
+<body>
+
+</body>
+</html>

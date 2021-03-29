@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+    let arr = [1,2,3,4,5]
+    let brr = [3,5]
+    let crr = []
+
+    let drr = myDifference(arr, brr) //差异是 [1, 2, 4]
+    let err = myDifference(arr, crr) //差异是 [1,2,3,4,5]
+    console.log(drr)
+    console.log(err)
+  </script>
+</body>
+</html>

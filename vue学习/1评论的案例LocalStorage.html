@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="js/bootstrap.min.css">
+		<style>
+			[v-cloak]{display:none;}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<cmt-box @func="loadComments"></cmt-box>
+			 <ul class="list-group">
+			 	<li class="list-group-item" v-for="(item,i) in list" :key="item.id" v-cloak>
+					 <span class="badge">评论人：{{item.user}}</span>
+					 {{item.content}}
+					 <button @click="delitem(i)">删除</button>
+			 	</li>
+			 </ul>
+		</div>
+		
+		
+		<template id="box">
+			<div>
+				<div class="form-group">
+					<label>评论人：</label>
+					<input type="text" class="form-control" v-model="user"></input>
+				</div>
+				<div class="form-group">
+					<label>评论内容：</label>
+					<textarea class="form-control" v-model="content"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="button" value="发表" class="btn btn-primary" @click="postBtn"/>
+				</div>
+			</div>
+		</template>
+		
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			
+			//
+			var comentBox={
+				template:'#box',
+				data(){
+					return {
+						user:'',
+						content:''
+					}
+				},
+				methods:{
+					postBtn(){
+						//分析：
+//						localStorage.getItem(key):获取指定key本地存储的值，kye自己随意指定
+//
+//						localStorage.setItem(key,value)：将value存储到key字段
+//						
+//						localStorage.removeItem(key):删除指定key本地存储的值
+
+						//1.评论数据存到哪里去？ 存放到localStorage中
+						//2.先组织出一个最新的评论对象
+						//3.把第二步中得到的评论保存到存放到localStorage中，localStorage.setItem()
+						// 3.1 localStorage只支持存放字符串，要先调用JSON.stringify
+						// 3.2 在保存最新的评论数据之前，要先从localStorage获取到之前的评论数据（string），转换为数组对象。然后把最新的评论push到这个数组对象 前面
+						// 3.3 如果获取到的localStorage字符串为空，则可以返回一个"[]"，让JSON.parse去转换为空对象
+						// 3.4把最新的评论数组再次调用JSON.stringify转为字符串，然后调用localStorage.setItem()
+						
+						var newComments={id:Date.now(),user:this.user,content:this.content}//获取输入框的值保存到对象中
+						
+						//从localStorage.getItem获取数据,JSON.parse() 方法用于将一个 JSON 字符串转换为对象。'[]'只是为了防止为空的时候报错
+						var newList=JSON.parse(localStorage.getItem('cmts')||'[]')
+						newList.unshift(newComments)//插入到对象数组前边
+						
+						//重新保存最新的数据，JSON.stringify() 用于将 JavaScript 值转换为 JSON 字符串。
+						localStorage.setItem('cmts',JSON.stringify(newList))
+						
+						//清空输入框
+						this.user=this.content=''
+						
+						this.$emit('func')
+					}
+					
+				}
+			}
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					list:[]
+				},
+				created(){
+					//每次页面进来能获取到所有评论
+					this.loadComments()
+				},
+				methods:{
+					loadComments(){
+						//从本地中加载评论列表
+						var newList=JSON.parse(localStorage.getItem('cmts')||'[]')
+						this.list=newList//更新页面上的数据
+					},
+					delitem(index){
+						this.list.splice(index,1)//删除页面上的列表
+						
+						var newList=JSON.parse(localStorage.getItem('cmts')||'[]')//获取到localStorage中所有数据
+						newList.splice(index,1)//删除localStorage中对应的对象
+						// console.log(newList)
+						localStorage.setItem('cmts',JSON.stringify(newList));//将新数据保存到cnts中
+						// console.log(newList)
+					}
+				},
+				components:{
+					'cmt-box':comentBox
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="demo">
+			姓：<input type="text" placeholder="firstName" v-model="firstName"/>
+			<br>
+			名：<input type="text" placeholder="lastName" v-model="lastName"/>
+			<br>
+			姓名（计算属性单向）：<input type="text" placeholder="fullName1" v-model="fullName1"/>
+			<br>
+			姓名（监视单向）：<input type="text" placeholder="fullName1" v-model="fullName2"/>
+			<br>
+			姓名（双向）：<input type="text" placeholder="fullName2" v-model="fullName3"/>
+		</div>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" >
+			var vm=new Vue({
+				el:'.demo',
+				data:{
+					firstName:'',
+					lastName:'',
+					fullName2:''
+					
+				},
+				//computed 计算属性    不需要在data中初始化
+				computed:{
+					//这是一个函数
+					'fullName1':function(){//计算属性中的一个方法，方法的返回值作为属性值
+						return this.firstName+' 计算属性 '+this.lastName
+					},
+					//这是一个对象
+					fullName3:{
+						//get计算并返回当前属性值
+						get(){
+							return this.firstName+' '+this.lastName
+						},
+						//set 监视属性值的变化
+						set(value){//value 就是fullName3最新输入的值
+							var names=value.split(' ')//将fullName3的值从' '分隔成两部分
+							this.firstName=names[0]
+							this.lastName=names[1]
+						}
+					}
+				},
+				//watch 监视属性
+				watch:{
+					firstName:function(value){
+						this.fullName2=value+' 监视 '+this.lastName
+					},
+					lastName:function(value){
+						this.fullName2=this.firstName+' 监视 '+value
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

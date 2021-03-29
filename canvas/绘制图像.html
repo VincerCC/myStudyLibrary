@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <canvas id="myCanvas2" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    let myCanvas2 = document.getElementById('myCanvas2')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    let ctx2 = myCanvas2.getContext("2d")
+
+    // 绘制图像,
+    // ctx.drawImage(image, dx, dy);
+    // ctx.drawImage(image, dx, dy, dWidth, dHeight);
+    // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    // image:图片对象
+    // sx:图片x轴裁剪的左上角位置
+    // sy:图片y轴裁剪的左上角位置
+    // sWidth:图片裁剪的宽
+    // sHeight:图片裁剪的高
+    // dx:左上角在目标canvas上 X 轴坐标
+    // dy:左上角在目标canvas上 Y 轴坐标
+    // dWidth:图片宽度
+    // dHeight:图片高度
+    var img = new Image()
+
+    img.crossOrigin = '';
+    img.src = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1188923622,400867403&fm=26&gp=0.jpg'
+    // 图片载入之后再绘制
+    img.onload = function () {
+      // 将图片放到0,0位置,宽高为canvas的宽高
+      // ctx.drawImage(img, 0, 0)
+
+      // 将图片放到0,0位置以宽300高300进行展示
+      ctx.drawImage(img, 0, 0,300,300)
+
+
+      // 从0,0开始，裁剪60*60的位置，将裁剪出来的放到0,0位置以宽300高300进行展示
+      // ctx.drawImage(img, 0, 0, 60, 60, 0, 0, 300, 300)
+
+      // 获取图片从0,0开始，宽度300，高度为300的图片数据
+      let imageData = ctx.getImageData(0,0,100,100)
+      console.log(imageData)
+
+
+      // ctx.putImageData(imagedata, dx, dy);
+      // ctx.putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+
+      // imageData,包含像素值的数组对象。
+      // dx源图像数据在目标画布中的位置偏移量（x 轴方向的偏移量）。
+      // dy源图像数据在目标画布中的位置偏移量（y 轴方向的偏移量）。
+      // dirtyX 可选,在源图像数据中，矩形区域左上角的位置。默认是整个图像数据的左上角（x 坐标）。
+      // dirtyY 可选,在源图像数据中，矩形区域左上角的位置。默认是整个图像数据的左上角（y 坐标）。
+      // dirtyWidth 可选,在源图像数据中，矩形区域的宽度。默认是图像数据的宽度。
+      // dirtyHeight 可选,在源图像数据中，矩形区域的高度。默认是图像数据的高度。
+
+      // 在ctx2画布上画出来截取到的图片数据
+      ctx2.putImageData(imageData,0,0)
+
+    }
+    console.log(img)
+  </script>
+</body>
+</html>

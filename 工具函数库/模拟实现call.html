@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+
+
+    function text(a,b) {
+      return a + b + this.c
+    }
+    let obj = {
+      c: 100
+    }
+    window.c = 5
+    let res = myCall(text, obj, 10, 20)
+    console.log(res) // 130， this.c指向了obj，使用的是obj.c
+
+    res = myCall(text, null, 10, 20)
+    console.log(res) // 35， this.c指向了全局window，使用的是window.c
+  </script>
+</body>
+</html>

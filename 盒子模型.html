@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<style type="text/css">
+			.contentBox{
+				box-sizing:content-box;
+				width:100px;
+				height:100px;
+				background:pink;
+				padding:10px;
+				margin:10px;
+				border:10px solid #000;
+			}
+			.borderBox{
+				box-sizing:border-box;
+				width:100px;
+				height:100px;
+				background:#bfa;
+				padding:10px;
+				margin:10px;
+				border:10px solid #000;
+			}
+
+		</style>
+	</head>
+	<body>
+<!--
+盒模型分为： border-box(IE盒模型)和content-box(W3C盒模型),CSS3的属性box-sizing可以指定两种盒模型
+
+W3C盒盒子模型：包括margin,border,padding,content,并且content部分不包括其他部分
+IE盒子模型：包括margin,border,padding,content，content包含了border和padding
+
+区别：
+
+content-box盒模型,css中设置的样式width指的是content区域的宽度
+border-box盒模型，css样式中的width指的是content + padding + border的总宽度
+
+
+-->
+	<div class="contentBox" id="contentBox"></div>
+	<div class="borderBox" id="borderBox"></div>
+	<script>
+		let contentBox = document.getElementById("contentBox")
+		contentBox.onclick = function(){
+			// 输出width根据padding，margin，tborder计算，本例中，padding-left + padding-right + border-left + border-right = 40,加上本身width=100，总width为140
+			console.log(contentBox.getBoundingClientRect().width)
+		}
+		let borderBox = document.getElementById("borderBox")
+		borderBox.onclick = function(){
+			// 输出始终为width100
+			console.log(borderBox.getBoundingClientRect().width)
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="demo">
+			<p v-cloak v-for="(item,i) in list">{{i}}---{{item}}</p>
+			<!--其中item为每一项，i为每一项的索引，list为所遍历的数组-->
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					list:[1,2,3,4,5]
+				},
+		})
+		</script>
+	</body>
+</html>

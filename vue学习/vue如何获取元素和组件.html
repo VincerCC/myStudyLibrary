@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<input type="button" value="获取元素" @click="getElement" />
+			<!--Vue中，可以通过给要获取的元素添加ref值ref="myh3"，通过this.$refs.myh3获取到这个元素-->
+			<h3 ref="myh3">获取到了元素</h3>
+			<hr />
+			<!--Vue中，可以通过给要获取的元素添加ref值ref="mycom"，通过this.$refs.mycom.也能获取到组件的data以及 methods-->
+			<input type="button" value="获取元素" @click="getConponent" />
+			<login ref="mycom"></login>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			
+			var login={
+				template:'<h1>这是组件</h1>',
+				data(){
+					return {
+						msg:'组件的msg'
+					}
+				},
+				methods:{
+					show(){
+						console.log("调用了组件的方法")
+					}
+					
+				}
+			}
+			
+			var vm=new Vue({
+				el:'#demo',
+				data:{},
+				methods:{
+					getElement(){
+						console.log(this.$refs.myh3.innerText)
+					},
+					getConponent(){
+						console.log(this.$refs.mycom.msg);//获取组件的data里的数据
+						this.$refs.mycom.show()//获取组件的方法
+					}
+				},
+				components:{
+					login
+				}
+			})
+		</script>
+	</body>
+</html>

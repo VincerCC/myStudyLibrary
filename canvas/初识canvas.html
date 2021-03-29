@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 必须的三要素，id，画布宽，画布高 -->
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    console.log(myCanvas)
+    console.log(ctx)
+
+  </script>
+</body>
+</html>

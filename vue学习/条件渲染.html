@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<p v-if="a">true</p>
+			<p v-else>false</p>
+			<p v-show="a">true1</p>
+			<p v-show="!a">false1</p>
+			<button @click="a=!a">点我</button>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					a:true
+				}
+				
+			})
+		</script>
+	</body>
+</html>

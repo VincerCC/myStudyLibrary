@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 经典面试题，实现add(1)(2)(3)(4) = 10；add(1)(1,2,3)(2)=9
+    // 指的是讲一个接收多个参数的函数，变为接受一个参数，返回一个函数的固定形式
+    // 这样便于再次调用，例如fn(1)(2)
+    function add(){
+      // arguments 将args类数组对象转换成数组，方便获取 传入的不定数量的参数
+
+      // 第一次执行时，定义一个数组专门用来存储所有的参数
+      var _args = Array.prototype.slice.call(arguments)
+      // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+      var _adder = function (){
+        _args.push(...arguments)
+        return _adder
+      }
+
+      // toString隐形转换,当最后执行时隐式转换，并计算最终的值返回
+      _adder.toString = function (){
+        return _args.reduce((sum,item)=>{
+          return sum+item
+        },0)
+      }
+      return _adder
+    }
+    let num1 = add(1,2,3)
+    let num2 = add(1)(2)(3)
+    console.log(num1)
+    console.log(num2)
+    console.log(num2 == 6)
+    /*
+    _adder函数内部进行递归
+    执行第一个括号的时候，将第一个括号的参数放进去_args数组保存，然后返回_adder函数
+    执行第二个括号的时候，将第二个括号的参数放进去_args数组保存，返回_adder函数
+    执行第N个括号的时候， 将第N个括号的参数放进去_args数组保存，
+
+    最终函数输出为被toString后的字符串
+    */
+
+    const heroMidList = [
+      {mid:'亚索',profession:'中'},
+      {mid:'卡牌',profession:'中'}
+    ]
+    const heroAdcList = [
+      {adc:'VN',profession:'ADC'},
+      {adc:'EZ',profession:'ADC'}
+    ]
+    console.log(heroMidList.map((item)=> item.mid))//["亚索", "卡牌"]
+    console.log(heroAdcList.map((item)=> item.adc))//["VN", "EZ"]
+    // 如果有很多个数组，且每个数组的对象键值对不一致，就会导致书写很多歌map方法
+    let curring = (name)=>{
+      return (item)=>{
+        return item[name]
+      }
+    }
+    let midMap = curring('mid') //这个函数返回的是(item)=>item['mid']
+    let adcMap = curring('adc')
+    console.log(heroMidList.map(midMap))//["亚索", "卡牌"]
+    console.log(heroAdcList.map(adcMap))//["VN", "EZ"]
+  </script>
+</body>
+</html>

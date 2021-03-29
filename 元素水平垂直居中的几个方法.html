@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#Bbox{
+				width: 500px;
+				height: 500px;
+				background: #808080;
+				display: -webkit-box;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				/*方式四
+				 * 新版本的flex
+				display:flex;
+				
+				(justify-content 用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式)
+				justify-content: center;
+				
+				(align-items：设置了flex容器在侧轴（竖轴）方向上的对齐方式)
+				align-items: center;
+				*/
+				
+				/*方式五
+				 * 老版本的flex
+				display: -webkit-box;
+				-webkit-box-pack: center;主轴（横轴）方向上的对齐方式
+				-webkit-box-align: center;侧轴（竖轴）方向上的对齐方式
+				*/
+				
+			}
+			.Sbox{
+				width: 200px;
+				height: 200px;
+				background: #99FF99;
+				
+				/*方式一 
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+				*/
+				
+				/*方式二
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -100px;
+				margin-top: -100px;
+				*/
+				
+				/*方式三
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				或者
+				transform: translate(-100px,-100px);
+				transform---2D变换
+				translate---移动
+				-100px,-100px，往左100px往上100px
+				-50%,-50%，往左自身宽度的50%，往右自身高度的50%
+				*/
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="Bbox">
+			<div class="Sbox"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,137 @@
+第一步：npm init -y    --创建package.json:
+第二步：npm install jquery -S     --node_modules
+第三步：webpack .\src\main.js -o .\dist\bundle.js
+	webpack 要打包的文件路径 -output 打包好的输出文件件路径
+第四步： cnpm i webpack -D   安装webpack
+	cnpm i webpack-cli -D 安装webpack-cli
+第五步：安装工具 cnpm i webpack-dev-server -D帮助我们实时打包
+第六步：本地目录创建webpack.config.js
+webpack.config.js目录中写
+	const path=require('path')
+	module.exports={
+	entry:path.join(__dirname,'./src/main.js'),//入口,要打包的文件
+	output:{//输出文件
+		path:path.join(__dirname,'./dist'),//指定打包好的文件，输出到哪个目录去
+		filename:'bundle.js'//指定输出到的文件名称
+	}}
+
+
+package.Json的test下边写
+	"dev": "webpack-dev-server --open --contentBase src"
+
+第七步：cnpm i html-webpack-plugin -D   这个插件的作用：1.自动在内存中根据指定页面生成一个内存的页面2.自动，把打包好的bundle.js追加到页面中去，然后在config中加上const htmlWebpackPlugin=require('html-webpack-plugin')，然后继续在output后边加上plugins:[
+	//创建一个在内存中生成html页面的插件
+	new htmlWebpackPlugin({
+		//指定模板页面地址，将来会根据这个地址，去生成内存中的页面
+		template:path.join(__dirname,'./src/index.html'),
+		filename:'index.html'//指定生成页面的名称
+		
+	})
+	]
+第八步：途中最好上传到码云
+	git status查看有哪些没提交有哪些已经提交
+
+	1.传统命令行方式
+	1.git add .
+	2.git commit -m "提交信息"     
+	3.git push
+
+第九步：项目全部开发完后，运行npm run build，将会把项目打包出dist文件夹
+
+
+如果要用css样式，先在main.js中import './css/index.css'，然后安装第三方loader：npm i style-loader css-loader -D，然后在webpack.config.js中的module中配置规则
+module:{
+		//这个节点用于配置所有而第三方模块加载器
+		rules:[
+		//这里放所有的匹配规则
+		{test:/\.css$/,use:['style-loader','css-loader']},//匹配所有以.css结尾的文件，使用style-loader css-loader来处理
+		]
+	}
+
+安装loader完后输入npm run dev 会出错，重新npm install后就好了
+
+
+
+less样式，需要在css基础上，再安装cnpm i less-loader less -D
+
+
+
+
+如果要使用图片，也需要安装loader：cnpm i url-loader file-loader -D然后再webpack.config.js进行配置
+		{test:/\.(jpg|png|gif|jpeg)$/,//处理图片路径
+			use:[{
+				loader:'url-loader',
+				options:{
+					limit:8570,
+					mimetype: 'images/kakaxi.jpg',
+				//上边两个一起用，是为了将字节数小于8570的图片转为base64，大于或者等于将不会转换
+					name : '[hash:8]-[name].[ext]'
+				//为了让打包后的图片跟原来图片名字一致,加上哈希值是为了当有重名图片时能区别开
+					}
+				}]
+			}
+
+
+
+1.安装bootstrap    cnpm i bootstrap@3 -S
+
+2.main.js引入安装好的bootstrap，通过路径形式引入位于node_modules的文件，可以直接省略node_modules这层路径，直接写包的名称然后跟上具体文件路径
+import 'bootstrap/dist/css/bootstrap.css'
+3.因为bootstrap有很多字体文件不能被webpack识别，需要配置规则
+	{test:/\.(eot|svg|ttf|woff|woff2)$/,use:[{loader:'url-loader'}]}
+
+
+
+安装vue    npm i vue -S   但是在webpack中，这样导入的vue功能不完整，
+有三种方法
+1.需要在main.js开头 import Vue from '../node_modules/vue/dist/vue.js'
+2.main.js开头，import Vue from 'vue'，然后找到node_modules/vue/package.json，把main属性中的路径改为dist/vue.js
+3.这个方法是修改vue被导入时候包的路径
+main.js开头，import Vue from 'vue'，然后在webpack.config.js中，与output、plugins、module平级，加上resolve:{
+				alias:{
+					"vue$":"vue/dist/vue.js"}}
+
+
+webpakc中推荐使用.vue文件定义模板，如果要使用.vue文件，webpack需要装loader：cnpm i vue-loader vue-template-compiler -D,然后在config中，开头const VueLoaderPlugin=require('vue-loader/lib/plugin')，然后plugins中：new VueLoaderPlugin()，最后在modules下的rules中新增{test:/\.vue$/,use:'vue-loader'}
+
+webpack如何使用vue：
+1.安装vue的包 npm i vue -S
+
+2.由于webpack推荐.vue定义 组件，所以要安装解析这个文件的loader,cnpm i vue-loader vue-template-compiler -D
+
+3.在main.js中，导入vue模块 import Vue from 'vue'
+
+4.在config中，开头const VueLoaderPlugin=require('vue-loader/lib/plugin')，然后plugins中：new VueLoaderPlugin()，最后在modules下的rules中新增{test:/\.vue$/,use:'vue-loader'}
+
+5.定义一个.vue结尾的模板文件，有三部分组成：template script style
+
+6.使用import xxx from './xxx.vue'导入组件
+
+7.创建vm实例var vm =new Vue({el：‘app’,render:function(creatElements){return creatElements(xxx)}})
+
+8.页面中创建id为app的div元素
+
+
+使用vue-router路由：1.npm install vue-router，2.import VueRouter from 'vue-router' 3. Vue.use(VueRouter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

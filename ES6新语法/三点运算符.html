@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <script>
+
+//     使用方法一：在函数的传参数过程。作用将剩余的参数放入一个数组中。合并
+//      rest参数形式为（...变量名），其值为一个数组，用于获取函数多余参数。
+
+        function f(a,...arr){//...arr只能放在最后，否则会报错
+            console.log(a,arr);//a为1，arr为[2,3,4,5]
+        }
+        f(1,2,3,4,5);
+
+//      使用方法二：用来在数组中插入另一个数组
+        var arr1=[1,6]
+        var arr2=[2,3,4,5]
+        var arr3=['a','b']
+        arr1=[1,...arr2,...arr3,6]
+        console.log(arr1)//输出[1, 2, 3, 4, 5,'a','b', 6]
+
+
+//      使用方法三：解构赋值
+        let a5=[1,2,3,4,'abc']
+        let [a,...b]=a5
+        console.log(a,b)//a:1,b:[2,3,4,'abc']
+
+// function foo(options) {
+// 	if (object.optionalProp1 === undefined) {
+// 		object.optionalProp1 = 'Default value 1';
+// 	}
+// 	console.log(options)
+// }
+let object={a:'1'}
+function foo(options) {
+	const defaultProps = {
+		optionalProp1: 'Default value 1'
+  };
+  let objaa={name:'ll'}
+	options = {
+    ...options,
+    ...objaa,
+    ...defaultProps,
+	}
+	console.log(options)
+}
+foo(object)
+
+
+
+function  funn(x) {
+    return x>3
+}
+let arar=[1,2,3]
+console.log(arar.every(funn))//检测数组arar是否每个元素都满足函数funn    返回false
+
+
+
+const all = (arr, fn = Boolean) => arr.every(fn);//检测数组是否每个元素都满足函数,all方法接收2个参数，参数1为数组，参数2为返回布尔值的函数
+console.log(all([4, 2, 3], x => x > 3)); // false
+console.log(all([1, 2, 3,1000])); // true
+    </script>
+</body>
+
+</html>

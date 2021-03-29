@@ -1,0 +1,100 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-09 16:30:51
+ * @LastEditTime: 2020-04-29 14:35:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \managere:\新建文件夹\HelloHBuilder\vue学习\父组件方法如何传递给子组件.html
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<!--
+				父组件中，可以在引用子组件的时候，通过属性绑定v-on的形式，把需要传递给子组件
+				的方法，传递到子组件内部,简写@
+			-->
+			<button @click="parentBtn">这是父组件</button>
+			<com @func='show' v-on:funcc='show2' ref='com' v-if="$data.$flag"></com>
+
+		</div>
+
+
+		<template id="tmp">
+				<div>
+					<h1>这是子组件</h1>
+					<input type="button" value="点击我触发父组件方法" @click="btn"/>
+					<input type="button" value="父组件通过依赖注入传递给其所有子组件的数据/方法" @click="showw"/>
+				</div>
+		</template>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//子
+			//定义了一个字面量类型的组件模板对象
+			var com={
+				template:'#tmp',
+				data(){
+					return {
+						automan:{name:"迪迦",age:6}
+					}
+				},
+				//子组件接收到父组件的依赖注入
+				inject:['show','arr'],
+				methods:{
+					showw(){
+						this.show()
+						console.log(this.arr)
+					},
+					btn(){
+						//当点击子组件按钮后，如何拿到父组件传过来的func方法？
+						//1.使用this.$emit('方法名')，拿到传递过来的方法
+						this.$emit('func')
+						this.$emit('funcc',this.automan)//这里可以给这个方法传参数，也可以实现子组件向父组件传递数据
+
+						//直接this.$parent获取父级元素的属性方法
+						this.$parent.show()
+					}
+				}
+			}
+
+			//父
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					dataAutoman:null,
+					arr:[1,2,3],
+					$flag:true
+				},
+				provide(){
+					//向后代元素注入属性，后代能够通过inject获取
+					return {
+						show: this.show,
+						arr:this.arr
+					}
+				},
+				methods:{
+					parentBtn(){
+						this.$data.$flag=false
+						//通过refs获取到子组件的方法/互相属性
+						console.log(this.$refs.com.arr)
+					},
+					show(){
+						console.log("这是父组件的方法")
+					},
+					show2(data){
+						console.log("这是父组件的方法",data)
+						this.dataAutoman=data;//子组件的data传过来后，赋值给父组件的data
+					}
+				},
+				components:{
+					//子组件默认无法直接访问父组件的data和methods
+					com:com
+				}
+			})
+		</script>
+	</body>
+</html>

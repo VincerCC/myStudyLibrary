@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let cvsCtx = myCanvas.getContext("2d")
+
+    cvsCtx.beginPath();
+      // 目标图像
+      cvsCtx.fillStyle = "red";
+      cvsCtx.fillRect(0, 0, 200, 200);
+    cvsCtx.closePath();
+
+
+
+    cvsCtx.globalCompositeOperation = "destination-out"
+
+    cvsCtx.beginPath();
+      // 源图像
+      cvsCtx.fillStyle = "deepskyblue";
+      cvsCtx.fillRect(100, 100, 200, 200);
+    cvsCtx.closePath();
+
+    // cvsCtx.globalCompositeOperation = "source-over" 设置源图像和目标图像的排版规则
+
+    // 默认 source-over 在目标图像上显示源图像
+    // source-atop 在目标图像上显示源图像,超过目标图像的源图像部分不可见
+    // source-in 在目标图像上显示源图像,只有目标图像之内的源图像才会显示（重合部分），目标图像透明
+    // source-out 在目标图像之外显示源图像,只有目标图像之外的源图像才会显示（超出部分），目标图像透明
+
+    // destination-over 在源图像上显示目标图像
+    // destination-atop  在源图像上显示目标图像,超过源图像的目标图像不可见
+    // destination-in  在源图像上显示目标图像,只有源图像之内的目标图像才会显示（重合部分），源图像透明
+    // destination-out  在源图像之外显示目标图像,只有源图像之外的目标图像才会显示（超出部分），源图像透明
+
+    // lighter 显示源图像 + 目标图像,重合部分采用两个颜色的合成色
+    // copy 显示源图像，忽略目标图像
+    // xor 使用异或操作对源图像与目标图像进行组合
+  </script>
+</body>
+</html>

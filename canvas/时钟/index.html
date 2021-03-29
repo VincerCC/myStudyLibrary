@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    *{
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    console.log(ctx)
+
+    let renderClock = function(){
+      // 每次进来清空画布
+      ctx.clearRect(0,0,600,600)
+      // 保存一下最原始状态
+      ctx.save()
+      // 移动坐标轴原点到canvas中心，方便后续操作
+      ctx.translate(300,300)
+      // 保存一下移动原点后状态
+      ctx.save()
+
+      // 首先画一个表盘
+      ctx.beginPath()
+
+        ctx.lineWidth = 2
+        ctx.arc(0, 0, 100, 0, Math.PI*2, false);   // 表盘
+        ctx.stroke()
+      ctx.closePath()
+
+      // 绘制刻度
+      ctx.beginPath()
+        // 绘制时针刻度
+        for(let i = 0; i < 12; i++){
+          ctx.moveTo(0,-100)
+          ctx.lineWidth = 3
+          ctx.lineTo(0,-85)
+
+          // 循环只需要选择坐标轴即可
+          // 360度的圆，画12个刻度，每个刻度之间间隔30度
+          ctx.rotate(2*Math.PI/12)
+          ctx.stroke()
+        }
+        // 恢复旋转之前的状态translate(300,300)
+        ctx.restore()
+
+
+        // 保存一下移动原点后状态
+        ctx.save()
+        // 绘制分针刻度
+        for(let j = 0; j < 60; j++){
+          ctx.moveTo(0,-95)
+          ctx.lineWidth = 1
+          ctx.lineTo(0,-90)
+          // 循环只需要选择坐标轴即可
+          // 360度的圆，画60个刻度，每个刻度之间间隔6度,Math.PI为180度
+          ctx.rotate(2*Math.PI/60)
+
+          ctx.stroke()
+        }
+        // 恢复旋转之前的状态translate(300,300)
+        ctx.restore()
+      ctx.closePath()
+
+
+      ctx.save()//保存一下移动原点后状态
+
+      // 获取当前时间
+      let date = new Date()
+      let hours = date.getHours()//24小时，需要减去12
+      let minutes = date.getMinutes()
+      let second  = date.getSeconds()
+      if(hours > 12) {
+        hours-=12
+      }
+      console.log(hours+'-'+minutes+'-'+second)
+      // 绘制时针分针秒针
+      ctx.beginPath()
+        // 时针
+        ctx.moveTo(0,0)
+        ctx.rotate(Math.PI*2/12*hours)
+        ctx.strokeStyle = 'orange'
+        ctx.lineWidth = 2
+        ctx.lineTo(0,-50)
+        ctx.stroke()
+
+        // 恢复旋转之前的状态translate(300,300)
+        ctx.restore()
+      ctx.closePath()
+        ctx.save()//保存一下移动原点后状态
+
+
+      ctx.beginPath()
+        // 分针
+        ctx.moveTo(0,0)
+        ctx.rotate(2*Math.PI/60*minutes)
+        ctx.lineWidth = 3
+        ctx.strokeStyle = 'red'
+        ctx.lineTo(0,-70)
+        ctx.stroke()
+
+        // 恢复旋转之前的状态translate(300,300)
+        ctx.restore()
+      ctx.closePath()
+        ctx.save()//保存一下移动原点后状态
+
+
+      ctx.beginPath()
+        // 秒针
+
+        ctx.moveTo(0,0)
+        ctx.rotate(2*Math.PI/60*second)
+        ctx.strokeStyle = '#000000'
+        ctx.lineWidth = 1
+        ctx.lineTo(0,-80)
+        ctx.stroke()
+
+        // 恢复旋转之前的状态translate(300,300)
+        ctx.restore()
+      ctx.closePath()
+
+      ctx.restore()//恢复最原始状态
+    }
+    renderClock()
+    setInterval(() => {
+      renderClock()
+    }, 1000);
+
+  </script>
+</body>
+</html>

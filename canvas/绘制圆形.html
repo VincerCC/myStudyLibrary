@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+
+
+    // arc(x, y, radius, startAngle, endAngle, anticlockwise)
+    // 画一个以（x,y）为圆心的以radius为半径的圆弧（圆），从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
+    // startAngle圆弧的起始点， x轴方向开始计算，单位以弧度表示。Math.PI为180度
+    // anticlockwise为true时，是逆时针方向，否则顺时针方向
+
+    // 开始绘制
+    ctx.beginPath();
+    // 绘制一个以75,75为圆心，50为半径，弧度从0到360度的逆时针圆形
+    ctx.arc(75, 75, 50, 0, Math.PI * 2, false); // 绘制
+
+    ctx.moveTo(110, 75);
+    ctx.arc(75, 75, 35, 0, Math.PI, false);   // 口(顺时针)
+
+    ctx.moveTo(65, 65);
+    ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // 左眼
+
+    ctx.moveTo(95, 65);
+    ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // 右眼
+
+    ctx.stroke();
+
+
+
+  </script>
+</body>
+</html>

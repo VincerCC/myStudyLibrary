@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="demo">
+			<p v-cloak v-for="(val,key,i) in list">索引:{{i}}---键:{{key}}---值:{{val}}</p>
+			<!--其中val为值，key为键，i为索引用的不多-->
+			
+			<p v-cloak v-for="content in 10">content：{{content}}</p>
+			<!--v-for用来迭代数字时，content从1开始-->
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					list:{
+						id:1,
+						name:"tony",
+						gender:"男"
+					}
+				}
+		})
+		</script>
+	</body>
+</html>

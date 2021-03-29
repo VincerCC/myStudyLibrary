@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<a href="#" @click.prevent="btnLog">登录</a>
+			<a href="#" @click.prevent="btnReg">注册</a>
+			<login v-if="flag"></login>
+			<register v-else="flag"></register>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//此方法只能切换两个，如果有多个需要切换，需要用方式二
+			Vue.component('login',{
+				template:'<h3>这是登录组件</h3>'
+			})
+			
+			Vue.component('register',{
+				template:'<h3>这是注册组件</h3>'
+			})
+			
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					flag:true
+				},
+				methods:{
+					btnLog(){
+						this.flag=!this.flag;
+					},
+					btnReg(){
+						this.flag=!this.flag;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

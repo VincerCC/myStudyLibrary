@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  防抖，首次进入立即调用<input id="inputDebounceCallFirst" type="text" />
+  <hr/>
+  防抖，首次进入不会调用<input id="inputDebounce" type="text" />
+  <hr/>
+  节流时间戳，第一次触发最后一次不触发<input id="inputThrottleByTime" type="text" />
+  <hr/>
+  节流定时器，第一次不触发最后一次触发<input id="inputBySetTimeOut" type="text" />
+
+  <script>
+    let inputDebounceCallFirst = document.getElementById('inputDebounceCallFirst')
+    let inputDebounce = document.getElementById('inputDebounce')
+    let inputThrottleByTime = document.getElementById('inputThrottleByTime')
+    let inputBySetTimeOut = document.getElementById('inputBySetTimeOut')
+    // fn 函数传入用户方法
+    // delay 延迟执行的时间，默认 500ms
+    // 立即执行版
+    function debounceCallFirst (fn,wait){
+      let timeout
+      let self=this   //为了保证下面箭头函数中的this指向不受影响
+      let args = arguments;
+      return function(){
+        if(timeout) clearTimeout(timeout)
+        var callNow = !timeout;
+        if (callNow) fn.apply(self, args)
+        timeout = setTimeout(() => {
+            timeout = null;
+          }, wait)
+      }
+      //默认进来是没有timeout的，此时callNow为true，立即调用一次函数，然后开启一次定时器
+      //再次进来timeout有值了，清除定时器，再次开启定时器
+      //当我在wait时间内不再触发事件，timeout被成功置空
+      // timeout置空后，整个防抖结束
+      // 作用就是，保证在一段时间内连续点击，只生效第一次
+    }
+
+
+    // fn 函数传入用户方法
+    // delay 延迟执行的时间，默认 500ms
+    // 非立即执行版
+    function debounce(fn,wait){
+    var timer=null;
+    return function(){
+      //清除上一次延时器
+      clearTimeout(timer);
+      //重新设置新的延时器，每次点击都会清空定时器，重启一个定时器，所以只会触发最后一次func函数
+      timer=setTimeout(function(){
+        fn.apply(this);//将传进的fn的this指向window，并执行fn
+      },wait);
+    }
+    //每次进来都清空一下定时器
+    //重新设置新的延时器，每次点击都会清空定时器，重启一个定时器，所以只会触发最后一次func函数
+    //作用就是，保证在一段时间内连续点击，只生效最后一次
+  }
+
+
+  // 第一次触发，最后一次不触发
+
+  function throttleByTime (fn,wait){
+      let that = this
+      let oldTime = 0
+
+      return function(){
+        let newTime = Date.now()
+        if (newTime - oldTime > wait) {
+
+            fn.apply(that)
+            oldTime = newTime
+        }
+      }
+  }
+
+  // 第一次不触发，最后一次触发
+    function throttleinputBySetTimeOut (fn,wait){
+      let that = this
+      let timer = null
+      return function(){
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(that)
+            timer = null
+          }, wait)
+        }
+      }
+  }
+  inputDebounceCallFirst.addEventListener('keyup', debounceCallFirst(()=>{console.log('inputDebounceCallFirst')},1000))
+  inputDebounce.addEventListener('keyup', debounce(()=>{console.log('inputDebounce')},1000))
+  inputThrottleByTime.addEventListener('keyup', throttleByTime(()=>{console.log('inputThrottleByTime')},1000))
+  inputBySetTimeOut.addEventListener('keyup', throttleinputBySetTimeOut(()=>{console.log('inputBySetTimeOut')},1000))
+  </script>
+</body>
+</html>

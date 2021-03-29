@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<input type="text" v-model="firstname" />+
+			<input type="text" v-model="lastname" />=
+			<input type="text" v-model="fullname" />
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					firstname:'',
+					lastname:'',
+					fullname:''
+				},
+				methods:{},
+				watch:{
+					//watch监听data中数据的变化，然后触发watch中对应的function处理函数
+					'firstname':function(newvalue,oldvalue){
+//						this.fullname=this.firstname+'-'+this.lastname
+//						或者通过newvalue参数获得
+						this.fullname=newvalue+'-'+this.lastname
+					},
+					'lastname':function(newvalue,oldvalue){
+						this.fullname=this.firstname+'-'+newvalue
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <a id="myInput" type="text" class="input" data-nice="nice" href="666">
+
+    <script>
+        let myInput = document.getElementById('myInput')
+        console.log(myInput.className)
+        console.log(myInput)
+        console.log(myInput.getAttribute('data-nice'))
+        console.log(myInput.getAttribute('class'))
+        console.log(myInput.getAttribute('href'))
+        let arr=[0,1,2,3,4]
+        let brr=arr.reduce((itemSum,item)=>{
+            console.log(itemSum,item)
+            return itemSum+item
+        },0)
+        console.log(brr)
+        //代表遍历arr数组，返回0+1+2+3+4，itemSum代表累加和，item代表遍历的每一项0,1,2,3,4，最后的0代表你从0开始做累加，不知道的话就从数组第一个开始
+        //console.log(itemSum,item)
+        //控制台为
+        // 0 0   从0开始，0+数组第一项0=0
+        // 0 1   前边累加和为0,0+数组第二项1=1
+        // 1 2   前边累加和为1,1+数组第三项2=3
+        // 3 3   前边累加和为3,3+数组第四项3=6
+        // 6 4   前边累加和为6,6+数组第五项4=10
+
+
+        var obj={
+            id: '2',
+            name: '罗湖区',
+            children: [
+            {
+                id: '13',
+                name: '桂园街道',
+                children: [
+                    {deptId: '8395a955cc31429dac81ee7c57194b8e', name: '红村社区', id: '118'},
+                    {deptId: 'd7ef5f9b91c54339abc6517481babdd6', name: '鹿丹村社区', id: '116'},
+                    {deptId: 'df59286c0dda4c71bd792bb8dd4f7e56', name: '新围社区', id: '120'}
+                ]
+            }
+        ]}
+        console.log(obj)
+        function name(id){
+            let arr={
+                title:'',
+                arrItem:[]
+            }
+            let p =''
+            //     obj.children.reduce((a,b)=>{
+            //     console.log(b,'b')
+            //     return b.children.reduce((c,d)=>{
+            //         console.log(d,'d')
+            //         if(d.id===id){
+            //             arr.title= obj.name+b.name+d.name
+            //             arr.arrItem=[`${obj.id}`,`${obj.id}_${b.id}`,`${d.id}_${d.deptId}`]
+            //         }
+            //     },'')
+            // },'')
+            obj.children.forEach((itemA)=>{
+                itemA.children.forEach((itemB)=>{
+                    if(itemB.id===id){
+                        arr.title= obj.name+itemA.name+itemB.name
+                        arr.arrItem=[`${obj.id}`,`${obj.id}_${itemA.id}`,`${itemB.id}_${itemB.deptId}`]
+                    }
+                })
+            })
+            return arr
+        }
+        console.log(name('120').title)
+        console.log(name('118').arrItem)
+        console.log(name('116'))
+
+    </script>
+</body>
+
+</html>

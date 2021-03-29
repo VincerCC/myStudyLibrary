@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			window.onload=function(){
+				var num=1
+			  //防抖  立即执行版的意思是触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数。
+				function debounce(func,wait){
+					let timeout
+					let self=this   //为了保证下面箭头函数中的this指向不受影响
+					let args = arguments;
+				  return function(){
+				    if(timeout) clearTimeout(timeout)
+						var callNow = !timeout;
+						console.log(callNow)
+						if (callNow) func.apply(self, args)
+						timeout = setTimeout(() => {
+								timeout = null;
+							}, wait)
+					}
+					//刚开始timeout为undefined，callNow值为true，进入了判断，执行了一次func，所以会执行第一次点击的函数，然后进入定时器，在定时器执行完之后才会清空timeout，否则timeout为true
+					// callNow就为false，一直都进不去判断，一直都不执行函数
+				}
+				//非立即执行版的意思是触发事件后函数不会立即执行，而是在 n 秒后执行，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+				// function debounce(fn,time){
+				// 	var timer=null;
+				// 	return function(){
+				// 		//清除上一次延时器
+				// 		clearTimeout(timer);
+				// 		//重新设置新的延时器，每次点击都会清空定时器，重启一个定时器，所以只会触发最后一次func函数
+				// 		timer=setTimeout(function(){
+				// 			console.log(this)
+				// 			fn.apply(this);//将传进的fn的this指向window，并执行fn
+				// 		},time);
+				// 	}
+				// }
+
+			/**合并立即执行与非立即执行为一个方法
+		 * @desc 函数防抖
+		 * @param func 函数
+		 * @param wait 延迟执行毫秒数
+		 * @param immediate true 表立即执行，false 表非立即执行
+		 */
+			function debounce(func,wait,immediate) {
+					let timeout;//定义定时器
+					return function () {
+							let context = this;//为了保证下面箭头函数中的this指向不受影响
+							let args = arguments;
+
+							if (timeout) {
+								console.log(timeout,'timeout1')
+								clearTimeout(timeout)
+								console.log(timeout,'timeout2')
+							};//清除上一次的定时器
+							if (immediate) {//如果为true代表是立即执行防抖，为false代表是非立即执行防抖
+								// debugger
+									var callNow = !timeout;
+									console.log(callNow)
+									console.log(timeout)
+									if (callNow) func.apply(context, args)
+									timeout = setTimeout(() => {
+											timeout = null;
+									}, wait)
+									//刚开始timeout为undefined，callNow值为true，进入了判断，执行了一次func，所以会执行第一次点击的函数，然后进入定时器，在定时器执行完之后timeout才会为null，否则timeout一直都有settimeout的值
+									// callNow就为false，一直都进不去判断，一直都不执行函数
+									// 实现了触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数。
+							}else {
+								// 每次点击都会清空定时器，重启一个定时器，所以只会触发最后一次func函数
+								//实现了触发事件后函数不会立即执行，而是在 n 秒后执行，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+									timeout = setTimeout(function(){
+											func.apply(context, args)
+									}, wait);
+							}
+					}
+			}
+			function add(){
+				document.getElementById("count").innerHTML=num++
+				console.log("触发了");
+			}
+			document.getElementById("btn").onclick=debounce(add,1000,false);
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<div id="count" style="width: 20px;height: 20px;background-color: cadetblue;"></div>
+		<button id="btn">按钮</button>
+	</body>
+
+</html>

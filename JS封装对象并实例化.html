@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+    <style>
+    </style>
+    <script>
+        //变量提升已经作用域
+        console.log(v1);//undefined
+        var v1 = 100;
+        function foo() {
+            console.log(v1);//undefined
+            var v1 = 200;
+            console.log(v1);//200
+        }
+        foo();
+        console.log(v1);//100
+
+        window.onload=function(){
+        var a = {a: 1,b: 2};
+        var b = a.a;   //b=>1
+        var c = a;    //c指向a指向的对象
+        c.a = 3;      //对象里a更改为3
+        b++;          //这个b只是变量b=1，b++为2
+        console.log(a.a);  //3
+        console.log(b);     //2
+
+
+
+        var ary = Array(3);
+        ary[0]= 2; 
+        var result = ary.map(function(elem) { return '1'; }); 
+        console.log(result)
+
+
+        //用JS封装一个student对象,该对象能实例化并输出年龄和性别.控制台调用示例如下: 
+        //const student = new Student('张三', 18, '男');student.printAge();student.printSex();
+        function Student(name,age,sex){
+				//向对象中添加属性
+				this.name = name;
+				this.age = age;
+                this.sex = sex;
+        }
+        const stu=new Student('张三', 18, '男');
+        console.log(stu.age)
+        console.log(stu.sex)
+        }
+        
+    </script>
+</head>
+
+<body>
+    
+</body>
+
+</html>

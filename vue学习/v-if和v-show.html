@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			
+			<p v-if="flag">true-if</p>
+			<p v-else>false-if</p>
+			<p v-show="flag">true-show</p>
+			<p v-show="!flag">false-show</p>
+			
+			
+			<input type="button" value="切换" @click="btn"/>
+			<h3 v-if="flag">这是v-if</h3>
+			<h3 v-show="flag">这是v-show</h3>
+			<!--
+				v-if和v-show,为true时显示为false时隐藏
+			v-if每次都会重新删除，重新创建元素，性能消耗较高
+			v-show不会删除和创建，只是切换了元素的display值。渲染消耗较高-->
+
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+						flag:true
+				},
+				methods:{
+					btn(){
+						this.flag=!this.flag;
+					}
+				}
+		})
+		</script>
+	</body>
+</html>

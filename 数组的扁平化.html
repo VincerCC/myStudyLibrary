@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <script>
+        // 1.首先数组内置方法扁平化
+        // 2.flat(e),e是希望扁平化的层级，Infinity是扁平化所有层级
+        function flatArr(arr){
+            // 扁平化所有层级数组
+            let newArr = arr.flat(Infinity)
+            return newArr
+        }
+        console.log(flatArr([1,3,9,'9',5,[9,9,4],[1,[2,[3,[4]]]]]))
+
+        // 2.回调轮询进行扁平化
+        function flatArrNew(arr) {
+          let arrNew = []
+          (function flat(arr){
+            arr.forEach((item) => {
+              if(Object.prototype.toString.call(item).slice(8,-1) === 'Array') {
+                flat(item)
+                return
+              }
+              arrNew.push(item)
+            })
+            return arrNew
+          })(arr)
+        }
+        console.log(flatArr([1,3,9,'9',5,[9,9,4],[1,[2,[3,[4]]]]]))
+    </script>
+</body>
+
+</html>

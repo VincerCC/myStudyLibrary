@@ -1,0 +1,26 @@
+			/*变量提升	(预处理) 
+			 * js在代码执行之前会做一个预处理工作
+			 * 		1、通过var收集变量，但是不赋值
+			 * 		2、通过function(){}收集函数，并且定义该函数
+			 */
+			console.log(username);//预处理定义但不赋值，输出undefined
+			var username='abc'
+			console.log(username);//赋值，输出abc
+			
+			
+			fun();//预处理定义了该函数，将会正常执行代码，输出fun()
+			function fun(){
+				console.log("fun()");
+			}
+			
+			/*执行上下文(EC)
+			 * 		理解：代码执行的环境
+			 * 		时机：代码正式执行之前会进入到执行环境
+			 * 		工作：1.创建变量对象
+			 * 				1)变量
+			 * 				2)函数及函数的参数
+			 * 			2.确认this的指向
+			 * 				1)全局：this-->window
+			 * 				2)局部：this-->调用其的那个对象
+			 * 			3.创建作用域链
+			 */

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="500"></canvas>
+  <video id="video" src="./WeChat_20200628114621.mp4" controls="true"></video>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+
+    // 拿到视频组件
+    let myVideo = document.getElementById('video')
+
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+
+    let time = null
+    // 当视频开始播放
+    myVideo.onplay = function (){
+      time = setInterval(() => {
+        console.log(myVideo)
+        // ctx.clearRect(0,0,600,500)
+        // ctx.fillRect(0,0,600,500)
+        ctx.drawImage(myVideo,0,65,600,368)
+        // 设置水印
+        ctx.font="36px 微软雅黑"
+        ctx.strokeStyle = "#FFFFFF"
+        ctx.strokeText('爱奇艺',0,36)
+      },16)
+    }
+    myVideo.onpause = function (){
+      clearInterval(time)
+    }
+  </script>
+</body>
+</html>

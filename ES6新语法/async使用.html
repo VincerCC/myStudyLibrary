@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+<!-- http://www.liulongbin.top:3005/api/getnewslist -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // async返回的是new Promise对象
+        async function getData(url){
+            return new Promise((resolve,reject)=>{
+                $.ajax({
+                    method:'GET',
+                    url:url,
+                    success:(data)=>{
+                        resolve(data)//在这里可以传参数进去，然后在await那里用变量接受
+                    },
+                    error:(error)=>{
+                        reject()
+                    }
+                })
+            })
+        }
+        async function sendxml(){
+            let data1=await getData('http://www.liulongbin.top:3005/api/getnewslist')//接收传过来的data数据
+            let data2=await getData('')//接收传过来的data数据
+            let data3=await getData('http://www.liulongbin.top:3005/api/getnewslist')//接收传过来的data数据
+            // 如果不用await，就不会等待上一条数据是否完成，就会执行两次请求
+            // 用了await，就会等待上一步完成后才进行，而data2这里报错了，所以只会有第一条请求
+            // await语句后的Promise对象变成reject状态时，那么整个async函数会中断，后面的程序不会继续执行
+            console.log(data1)
+            console.log(data2)
+            console.log(data3)
+        }
+        sendxml()
+    </script>
+</body>
+
+</html>

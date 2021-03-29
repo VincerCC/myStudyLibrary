@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		
+		<style>
+			*{
+				margin:0;
+				padding: 0;
+			}
+			.demo th{
+				background-color: #bfa;
+				width: 300px;
+			}
+			.demo .Ctime{
+				width: 600px;
+			}
+			.demo td{
+				border: 1px solid #0044DD;
+				text-align: center;
+			}
+			.addbtn{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="demo">
+			<div class="addbtn">
+			ID:<input  type="text" v-model="id"/>
+			Name:<input type="text" v-model="name" @keyup.enter="add()"/>
+			<button  @click="add">添加</button>
+			<span v-fontweight="900">搜索关键字</span><input type="text" v-model="keywords" v-focus v-color="'red'" />
+			</div>
+			<table class="">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th class="Ctime">Ctime</th>
+						<th>operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,i) in search(keywords)" :key="item.id" class="trr">
+						<!--自定义了一个search()方法，同时把搜索的关键字通过传参数形式传递给search方法
+							在search方法内部通过执行for循环，把所有符合搜索关键字的数据保存到新数组返回
+						-->
+						<td >{{item.id}}</td>
+						<td >{{item.name}}</td>
+						<td >{{item.Ctime | dateFormat}}</td>
+						<td >
+							<a href="#" @click.prevent="del(item.id)">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script>
+			//定义全局过滤器实现时间的格式化
+			//dateStr就是item.Ctime传进来的字符串
+			Vue.filter("dateFormat",function(dateStr){
+				//根据给定的时间字符串得到特定的时间
+				var dt=new Date(dateStr);
+				var y=dt.getFullYear();
+				//padStart(length,fillString='') 是ES6字符串新方法，该方法可填充字符串,length为填充后长度,fillString为用什么填充	
+				var m=(dt.getMonth()+1).toString().padStart(2,fillString='0');
+				var d=dt.getDate().toString().padStart(2,fillString='0');
+				var h=dt.getHours().toString().padStart(2,fillString='0');
+				
+				var mm=dt.getMinutes().toString().padStart(2,fillString='0');
+				var s=dt.getSeconds().toString().padStart(2,fillString='0');
+				return y+"-"+m+"-"+d+" "+h+"："+mm+"："+s
+			})
+			
+			//使用Vue.directive("名称",{对象})定义全局指令
+			//参数1：指令名称，不需要加v-前缀，但是调用的时候需要加v-前缀
+			//参数2：对象，对象身上有一些函数，这些函数在特定时候可以执行相关操作
+			// 注册一个全局自定义指令 v-focus,页面加载时自动获取焦点
+			Vue.directive('focus', {
+			  // 当被绑定的元素插入到 DOM 中时……
+			  inserted: function (el) {
+			    // 聚焦元素
+			    el.focus()
+			  }
+			})
+			
+			//全局自定义一个修改获取焦点后文字的颜色的指令
+			Vue.directive('color',{
+				bind:function(el,binding){
+					el.style.color=binding.value;
+					//binding.name为color
+					//binding.value为获取绑定值,为red
+					//binding.expression为获取绑定值的字符串,为'red'
+				}
+			})
+			
+			
+			var vm=new Vue({
+				el:".demo",
+				data:{
+					id:"",
+					name:"",
+					keywords:"",
+					list:[
+					{id:1,name:"奔驰",Ctime:new Date()},
+					{id:2,name:"宝马",Ctime:new Date()},
+					{id:3,name:"劳斯莱斯",Ctime:new Date()}
+					]
+				},
+				methods:{
+					add(){
+						var car={id:this.id,name:this.name,Ctime:new Date()};
+						this.list.push(car);
+						this.id=this.name="";//添加完成，清空输入框
+					},
+					del(id){
+						//根据id先获取索引，再根据索引用splice方法删除数据
+						this.list.some((item,i)=>{
+							if(item.id==id){
+								this.list.splice(i,1);
+								return true;//some循环方法中，如果return true，则终止循环  
+							}
+						})
+					},
+					search(keywords){
+						var newlist=[];//声明一个新数组
+						this.list.forEach(item=>{//forEach遍历
+							if(item.name.indexOf(keywords)!=-1){//如果keywords包含于item.name，则向新数组添加item数据
+								newlist.push(item);
+							}
+						})
+						return newlist;
+					}
+				},
+				//自定义局部指令
+				directives:{
+					'fontweight':{
+						bind:function(el,binding){
+						el.style.fontWeight=binding.value;
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

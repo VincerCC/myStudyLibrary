@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+<!-- 将源对象的属性复制到目标对象上
+    Object.assign(目标对象，源对象1，源对象2)
+-->
+    <script>
+        let obj={name:'kobe'}
+        let obj1={age:39}
+        let obj2={sex:'男'}
+        let obj3={sex:'女'}
+        // 如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+        console.log(obj)//{name:'kobe'}
+        Object.assign(obj,obj1,obj2,obj3)//将源对象obj1、obj2的可枚举属性，复制到目标对象obj
+        console.log(obj)//{name: "kobe", age: 39, sex: "女"}
+
+
+    </script>
+</body>
+
+</html>

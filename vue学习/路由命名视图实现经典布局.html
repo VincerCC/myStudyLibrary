@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.header{
+				background-color: orange;
+				height: 80px;
+			}
+			.container{
+				display: flex;
+				height: 600px;
+			}
+			.left{
+				background-color: hotpink;
+				flex: 2;
+			}
+			.right{
+				background-color: deepskyblue;
+				flex: 8;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+				<router-view></router-view>
+				<div class="container">
+					<router-view name="left"></router-view>
+					<router-view name="right"></router-view>
+				</div>
+				
+		</div>
+		
+			
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/vue-router.js" ></script>
+		<script>
+			
+			//组件的模板对象
+			var header={
+				template:'<p class="header">Header头部区域</p>'
+			}
+			var leftBox={
+				template:'<p class="left">Left侧边栏区域</p>'
+			}
+			var rightBox={
+				template:'<p class="right">Right主体区域</p>'
+			}
+			
+			
+			//路由
+			var routerObj=new VueRouter({
+				routes:[
+					{path:'/',components:{
+						'default':header,//默认
+						'left':leftBox,
+						'right':rightBox}
+					}
+					]
+			})
+			var vm=new Vue({
+				el:'#demo',
+				data:{},
+				methods:{},
+				router:routerObj
+			})
+		</script>
+	</body>
+</html>

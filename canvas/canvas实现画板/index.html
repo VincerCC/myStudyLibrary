@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .menu{
+      height: 100px;
+      width: 100vw;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .btn{
+      width: 100px;
+      height: 30px;
+      border: 1px solid #ccc;
+      margin: 0 5px;
+      text-align: center;
+      border-radius: 20px;
+      line-height: 30px;
+    }
+    .lineBord>div{
+      height: 30px;
+      width: 30px;
+      border: 1px solid #ccc;
+      margin: 5px;
+      text-align: center;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lineBord>.bord1::before{
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #000;
+    }
+    .lineBord>.bord2::before{
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #000;
+    }
+    .lineBord>.bord3::before{
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #000;
+    }
+    #myCanvas{
+      flex:1;
+      width: 100vw;
+      height: 100vh;
+      background-color: #ccc;
+    }
+    .active{
+      box-shadow: 0 0 20px deepskyblue;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <div class="btn" data-type="pen">画笔</div>
+    <div class="btn" data-type="rectangle">矩形</div>
+    <div class="btn" data-type="circle">圆形</div>
+    <div class="lineBord">
+      <div class="bord1 active" data-type="bord1"></div>
+      <div class="bord2" data-type="bord2"></div>
+      <div class="bord3" data-type="bord3"></div>
+    </div>
+    <input type="color" id="color">
+    <div class="btn" data-type="clear">清空画板</div>
+
+    <div class="btn" data-type="rubber">橡皮擦</div>
+    <div id="download">下载图片</div>
+  </div>
+  <!--画板功能：
+      能够拖动鼠标在页面中绘图
+      能够设置画笔的粗细
+      能够在任意位置绘制图形
+      能够在任意位置绘制矩形
+      能够定制线条颜色
+  -->
+  <canvas id="myCanvas"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 设置canvas宽度和高度
+    console.log([myCanvas])
+    myCanvas.width = myCanvas.offsetWidth
+    myCanvas.height = myCanvas.offsetHeight
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let cvsCtx = myCanvas.getContext("2d")
+    // 设置画笔默认值
+    cvsCtx.strokeStyle = "#000000"
+    cvsCtx.lineWidth=6
+
+
+    let currentType = 'none' //当前选中的类型
+    let beginX = 0
+    let beginY = 0
+    let isDown = false
+    let canvasData = null //用于存放画的矩形数据，方便回显
+
+    // 切换画笔类型start
+    let btnList = document.querySelectorAll('.btn')
+    for(let i=0; i<btnList.length; i++){
+      var obj = ''
+      btnList[i].onclick = function (e){
+        // 取消之前活跃的样式
+        obj.className = "btn";
+        // 当前选择的高亮
+        e.target.className = 'btn active'
+        // 将当前高亮的保存起来，方便下次去除高亮
+        obj = btnList[i]
+
+
+        currentType = e.target.dataset.type
+        if(currentType === 'clear'){
+          // 清空画板
+          clearCanvas()
+        }
+
+        cvsCtx.globalCompositeOperation = "source-over";
+      }
+    }
+    // 切换画笔类型end
+
+
+    // 下载为图片start
+    let download = document.getElementById('download')
+    download.onclick = function (e){
+      let url = myCanvas.toDataURL()
+      var a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'download');
+      document.body.appendChild(a);
+      a.click();
+    }
+    // 下载为图片end
+
+    // 选择线段粗细start
+    let bordList = document.querySelectorAll('.lineBord div')
+    for(let i=0; i<bordList.length;i++){
+      var activeDom = bordList[0]
+      var activeDomType = 'bord1'
+      bordList[i].onclick = function (e){
+        activeDom.classList = `${activeDomType}`
+
+        e.target.className=`${e.target.dataset.type} active`
+
+        activeDom = bordList[i]
+        activeDomType = bordList[i].dataset.type
+        switch(e.target.dataset.type){
+          case 'bord1':
+            cvsCtx.lineWidth=6
+            break;
+          case 'bord2':
+            cvsCtx.lineWidth=16
+            break;
+          case 'bord3':
+            cvsCtx.lineWidth=20
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    // 选择线段粗细end
+
+    //选择画笔颜色start
+    let colorBtn = document.getElementById('color')
+    colorBtn.onchange = function(e){
+      cvsCtx.strokeStyle = e.target.value
+    }
+    //选择画笔颜色end
+
+
+    // 画板上监听鼠标按下事件
+    myCanvas.onmousedown = function (e){
+      isDown = true
+      // 拿到鼠标点击的坐标
+      beginX = e.pageX - myCanvas.offsetLeft
+      beginY = e.pageY - myCanvas.offsetTop//需要减去菜单的高度
+      if(currentType === 'pen'){
+        cvsCtx.beginPath()
+        cvsCtx.moveTo(beginX,beginY)
+      }
+    }
+    // 画板上监听鼠标移动事件
+    myCanvas.onmousemove = function (e){
+      let x = e.pageX - myCanvas.offsetLeft
+      let y = e.pageY - myCanvas.offsetTop//需要减去菜单的高度
+      if(isDown){
+        // 鼠标按下去之后，才触发移动操作
+        switch(currentType){
+          case 'pen':
+            drawPen(x,y)
+            break;
+          case 'circle':
+            clearCanvas()//鼠标移动过程中，清空画板，否则会出现很多重复内容
+            putCanvasData()//鼠标移动过程中，回显上一次画的数据
+            drawCircle(x,y)
+            break;
+          case 'rectangle':
+            clearCanvas()
+            putCanvasData()
+            drawRectangle(x,y)
+            break;
+          case 'rubber':
+            rubberCanvas(x,y)
+            break;
+          default:
+            console.log('请选择操作类型')
+            break;
+        }
+      }
+    }
+    // 画板上监听鼠标抬起事件
+    myCanvas.onmouseup = function (e){
+      isDown = false
+      // 将每次画完之后的画板数据保存起来，实现画完之后，再次绘画能回显上一次画的内容
+      canvasData = cvsCtx.getImageData(0,0,myCanvas.offsetWidth,myCanvas.offsetHeight)
+      if(currentType === 'pen'){
+
+        // 闭合绘制的路径，形成闭环
+        cvsCtx.closePath()
+      }
+    }
+    // 画线段
+    function drawPen(x,y){
+
+      // 设置线条样式 起点或者结束点的样式
+      cvsCtx.lineCap = "round"//设置为圆角
+
+      // 设置线段拐角的样式
+      cvsCtx.lineJoin = "round"//设置为圆角的
+      // 设置线段经过某个位置
+      cvsCtx.lineTo(x,y)
+      // 渲染路径
+      cvsCtx.stroke()
+    }
+
+    // 圆形，首先拿到点击的起始点(beginX,beginY)，然后拿到鼠标最后移动点(x,y)
+    // 通过抬起点减去 起始点，即为原型的直径,所以半径为(x-beginX)/2
+    // 圆心即为，起始点+半径 (beginX+(x-beginX)/2,beginY+(y-beginY)/2)
+    // 所以起始点为：
+    function drawCircle(x,y){
+      let radius = (x-beginX)/2
+      if(radius<0){
+        radius*=-1
+      }
+      let xNum = beginX+(x-beginX)/2
+      let yNum = beginY+(y-beginY)/2
+      // 开始绘制路径
+      cvsCtx.beginPath()
+        cvsCtx.arc(xNum, yNum, radius, 0, Math.PI * 2, false);
+        cvsCtx.stroke()
+      // 闭合绘制的路径，形成闭环
+      cvsCtx.closePath()
+    }
+
+    // 矩形，从鼠标点击的点(beginX,beginY)开始，画到鼠标移动最后点(x,y),宽高即为(x-beginX, y-beginY)
+    function drawRectangle(x,y){
+      // 开始绘制路径
+      cvsCtx.beginPath()
+        cvsCtx.rect(beginX, beginY, x-beginX, y-beginY);
+        cvsCtx.stroke()
+      // 闭合绘制的路径，形成闭环
+      cvsCtx.closePath()
+    }
+
+    // 橡皮擦，清空鼠标划过的canvas区域
+    function rubberCanvas(x,y){
+      cvsCtx.globalCompositeOperation = "destination-out";
+      // 设置在源图像（新画的圆）之外显示目标图像（画板已有的图像）,只有源图像之外的目标图像才会显示（超出部分），源图像透明
+      // 也就是说源图像覆盖到目标图像上后，重合部分将会透明，实现橡皮擦效果
+      cvsCtx.beginPath();
+        cvsCtx.arc(x, y, 20, 0, Math.PI*2, false);
+        cvsCtx.fill()
+      cvsCtx.closePath();
+    }
+
+    // 清空画布
+    function clearCanvas(){
+      cvsCtx.clearRect(0,0,myCanvas.offsetWidth,myCanvas.offsetHeight)
+    }
+
+    //回显上一次画板内所有内容
+    function putCanvasData(){
+      if(canvasData){
+        cvsCtx.putImageData(canvasData,0,0)
+      }
+    }
+
+  </script>
+</body>
+</html>

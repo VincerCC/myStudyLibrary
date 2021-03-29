@@ -1,0 +1,27 @@
+一般开发都要先设置，隐藏默认滚动条
+body，html{
+		height：100%
+		overflow：hidden}
+
+
+
+
+
+   *************************************************************************
+   *offsetParent （前提是要清除body和html的margin）*
+   *                                                                       *
+   *	本身定位为fixed（固定定位）                                         *
+   *		所有浏览器（火狐除外）==>offsetParent:null         	   *
+   *		(火狐）==>offsetParent:body	               		   *
+   *									   *
+   *	本身定位不为fixed（固定定位）					   *
+   *	    即开启absolute绝对定位或relative相对定位或没开启定位        	   *
+   *		父级没有定位 ==>offsetParent:body		           *
+   *		父级有定位 ==>offsetParent:定位父级	                   *
+   *                           						   *
+   *******很重要，直接影响到offsetTop和offsetLeft的使用**********************
+
+	haslayout
+		IE 7以下，如果当前元素的某个父级触发了haslayout
+		那么offsetParent就会指向这个触发了layout的父节点上
+		比如开启overflow：hidden的就是触发了haslayout

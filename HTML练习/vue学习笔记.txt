@@ -1,0 +1,117 @@
+vue模板
+	var vm=new Vue({
+			el:'选择器',
+			data:{
+				msg:'初始化内容',
+				},
+				//vue中，方法都写到methods中
+			methods:{}
+			})
+
+
+
+v-cloak用来解决闪烁问题
+	-用法<p v-cloak>{{msg}}</p>,
+	-还需要在style中加上[v-cloak]{display:none;}
+ 
+v-text也可以用来解决闪烁问题 不会显示元素中原本的内容==，只会显示msg里面的内容
+	-用法<p v-text="msg">==</p>
+
+v-html将字符串内容渲染为html代码
+	-用法<p v-html ="msg"></p>
+	- msg:'<h1>哈哈</h1>'
+	-页面最终效果为大写哈哈，即v-html将这段字符串看作是html标签解析
+
+
+v-bind:是vue中的用于绑定属性的指令，只能单向数据绑定，从M绑定到V
+	-用法：<input type="button" value="按钮" v-bind:title="mytitle">
+	-	data:{
+			mytitle:'这是自定义title'}
+	如果不用v-bind，他会将mytitle当做title值
+v-bind:可以简写为:,如:title="mytitle".
+
+
+v-on:是vue中的用于绑定事件的指令，缩写为@
+	-用法：<input type="button" value="按钮" v-on:click="show">
+	-var vm=new Vue({
+			el:'选择器',
+			data:{
+				msg:'初始化内容',
+				},
+				//vue中，方法都写到methods中
+			methods:{
+				show(){alert("我被点了")}
+					}
+			})
+v-on:click鼠标点击事件
+v-on:mouseover鼠标滑动事件
+在vue中使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了
+
+
+
+	注意：在vm实例中，如果想获取data上的数据，或者调用methods的方法，必须通过this.数据名或者this.方法名调用。
+
+事件修饰符
+.stop 阻止事件冒泡
+.prevent 阻止默认行为
+.capture 添加监听事件捕获机制
+.self只当事件在本身触发时回调，能阻止自身的冒泡行为
+.once 事件只触发一次
+
+
+
+
+v-model 双向数据绑定,只能运用在表单元素input（radio、text、address、email）、select、checkbox中
+	-用法：v-model="something"
+
+
+
+class绑定：:class='xxx'
+        其中，
+        常用   xxx可以是字符串，<p :class="'aclass'">变色</p>
+        常用   xxx可以是对象，<p :class="{aclass:true，bclass:false}">变色</p>
+        	xxx可以是数组，<p :class="['aclass','bclass']">变色</p>
+        	
+style绑定：:style="{color:a,fontSize:b+'px'}"
+        				其中，a，b为data属性
+
+
+v-for循环数组
+	用法：<p v-for="(item,i) in list">{{i}}---{{item}}</p>
+		其中item为每一项，i为每一项的索引，list为所遍历的数组
+
+
+按键抬起事件
+	@keyup="触发的事件"
+按键修饰符
+	1、@keyup.enter
+	2、@keyup.tab
+	3、@keyup.delete
+	4、@keyup.esc
+	5、@keyup.space
+	6、@keyup.up
+	7、@keyup.down
+	8、@keyup.left
+	9、@keyup.right
+
+
+#过滤器
+<p >{{msg|msgFormat("邪恶","变态")}}</p>
+//定义一个Vue全局过滤器，|作为过滤器的标识，名字叫做msgFormat，msg作为参数传给函数 
+			Vue.filter("msgFormat",function(msg,arg1,arg2){
+				return msg.replace(/单纯/g,arg1+arg2)//将msg中所有的单纯替换为邪恶变态
+			})
+
+时间过滤器
+	先导入moment.js
+	Vue.filter('dataFormat',function(dataStr,pattern="YYYY-MM-DD HH:mm:ss"){
+	//moment()//直接调用将会得到当前时间
+	return moment(dataStr).format(pattern)//传入指定时间
+	})
+
+父组件传递data数据给子组件：先通过v-bind:parentmsg="msg"绑定要传的数据到子组件标签中，然后在子组件中通过props:['parentmsg']接收传递过来的数据
+
+父组件传递方法给子组件：先通过v-on:func='show'绑定要传的方法到子组件标签中，然后在子组件中通过this.$emit('func',传参)接收传递过来的数据
+
+
+

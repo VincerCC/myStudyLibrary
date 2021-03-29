@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // proxy(target,handler) 数据代理 target要代理的对象，handler代理对象的操作集合
+    // handler{
+    //   get(target,key){
+    //    return true/false
+    //   },
+    //   set(target,key,value){
+    //    return true/false
+    //   },
+    //   deleteProperty(target,key){}
+    // }
+    //   has(target,key){}
+    let obj = {
+      a:1,
+      b:2
+    }
+    let proxyObj = new Proxy(obj,{
+      get(target,key){
+        // target是源对象，key是要获取的属性名
+        console.log('获取到'+ key + '的值是' + target[key])
+        return Reflect.get(target,key)
+      },
+      set(target,key,value){
+        // target是源对象，key是要获取的属性名，value是要设置的新值
+        console.log('设置'+ key + '的值是' + value)
+        return Reflect.set(target,key,value)
+      },
+      deleteProperty(target,key){
+        // target是源对象，key是要获取的属性名
+        Reflect.deleteProperty(target,key)
+      },
+      has(target,key){
+        // target是源对象，key是要获取的属性名
+        // 判断对象有没有某个属性，使用 'a' in proxyObj
+        return Reflect.has(target,key)
+      }
+    })
+    console.log(proxyObj.a)
+    proxyObj.b = 9
+    console.log(proxyObj)
+    delete proxyObj.b
+    console.log(obj)
+    console.log('a' in proxyObj)
+    console.log('b' in proxyObj)
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			#can{
+				background: pink;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="can" width="300" height="300"></canvas>
+	</body>
+	<script type="text/javascript" >
+		window.onload=function(){
+			var canvas=document.querySelector("#can");
+			if(canvas.getContext)
+			{
+				var ctx=canvas.getContext("2d");
+				ctx.fillStyle="green";
+				ctx.fillRect(0,0,100,100);
+				
+				
+				var imgData=ctx.createImageData(200,100);
+				for(var i=0;i<imgData.data.length;i++)
+				{
+					imgData.data[4*i+3]=100;
+				}
+				ctx.putImageData(imgData,110,0);
+			}
+			
+		};
+		
+	</script>
+</html>

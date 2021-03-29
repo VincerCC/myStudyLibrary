@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-09 16:38:03
+ * @LastEditTime: 2020-06-16 16:41:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Sdj-managere:\新建文件夹\HelloHBuilder\发送ajax的方法\JQuery的ajax使用.html
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <button class="btn">获取数据</button>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        $(".btn").click(function(){
+            $.ajax({
+                    method:'GET',
+                    url:'http://www.liulongbin.top:3005/api/getnewslist',
+                    success:(data)=>{
+                       console.log(data)
+                    },
+                    error:(error)=>{
+                    }
+            })
+        })
+
+
+    function runAsync (x) {
+        const p = new Promise((res, rej) => {
+            $.ajax({
+                    method:'GET',
+                    url:x,
+                    success:(data)=>{
+                    //    console.log(data.message)
+                       res(data.message)
+                    },
+                    error:(error)=>{
+                    }
+            })
+
+        })
+        console.log(p)
+        return p
+    }
+
+
+    Promise.all([runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video"),runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video"),runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video")])
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    Promise.race([runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video"),runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video"),runAsync("https://api.apiopen.top/getJoke?page=1&count=2&type=video")])
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    </script>
+</body>
+
+</html>

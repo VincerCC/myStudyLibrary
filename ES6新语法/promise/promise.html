@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- promise，可以将异步操作以同步的流程表达出来，避免了层层嵌套的回调函数（回调地狱） -->
+
+    <script>
+        //创建promise对象
+        let promise=new Promise((resolve,reject)=>{
+            //初始化promise状态为pending
+            //函数内一般用来执行ajax请求或者定时器等异步操作
+            // setTimeout(()=>{
+            //     console.log("111")
+                //根据异步任务的返回结果修改promise状态
+
+                //异步任务执行成功，调用resolve，会自动修改promise状态为成功状态fullfilled，然后执行promise.then的成功的回调
+                resolve();//可以在resolve()中传递参数，resolve(data)
+
+                //异步任务失败，调用reject，会自动修改promise状态为失败状态reject，然后执行promise.then的失败的回调
+                //reject()//可以在reject()中传递参数，reject(error)
+            // },2000)
+        })
+        let promise1 = new Promise((resolve,reject) => {
+            setTimeout(()=>{
+                resolve()
+            },3000)
+
+        })
+        promise.then(()=>{
+            //成功的回调
+            console.log("resolve成功了1")
+        }).then(()=>{
+            console.log("resolve成功了2")
+            //成功后才执行promise1
+            return promise1
+            //成功的回调
+        }).then(()=>{
+            //当promise1执行成功后进来这个then
+            console.log("resolve成功了3")
+            //成功的回调
+        })
+
+
+
+        // 也可以直接resolve
+        // function start() {
+        //     Promise.resolve()
+        //         .then(function(){
+        //         return $.ajax({method:'POST',url:'https://api.apiopen.top/getTangPoetry'})
+        //         })
+        //         .then(function(){
+        //         return $.ajax({method:'POST',url:'https://api.apiopen.top/getTangPoetry'})
+        //         })
+        //         .then(function(){
+        //         return $.ajax({method:'POST',url:'https://api.apiopen.top/getTangPoetry'})
+        //         })
+        // }
+        // start()
+
+        function start(times) {
+            if (!times) {
+                return
+            }
+            Promise.resolve()
+                .then(function(){
+                    return $.ajax({
+                        method:'POST',
+                        url:'https://api.apiopen.top/getTangPoetry',
+                        success:(data)=>{
+                            times--
+                        },
+                    })})
+                .then(() => start(times))
+        }
+        start(3)
+    </script>
+</body>
+
+</html>

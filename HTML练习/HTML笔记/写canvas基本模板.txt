@@ -1,0 +1,39 @@
+<script type="text/javascript">
+		window.onload=function(){
+			/*
+			1.路径容器
+				每次调用路径api时,都会往路径容器里做登记
+				调用beginPath时,清空整个路径容器
+			2.样式容器
+				每次调用样式api时,都会往样式容器里做登记
+				调用save时候,将样式容器里的状态压入样式栈
+				调用restor时候,将样式栈的栈顶状态弹出到样式样式容器里,进行覆盖
+			3.样式栈
+				调用save时候,将样式容器里的状态压入样式栈
+				调用restor时候,将样式栈的栈顶状态弹出到样式样式容器里,进行覆盖
+			*/
+			
+			var canvas = document.querySelector("#test");
+			if(canvas.getContext){
+				var ctx = canvas.getContext("2d");
+				
+				ctx.save();
+				//关于样式的设置
+				//save  restore成对出现
+				ctx.beginPath();
+				//关于路径
+				ctx.restore();
+				
+				
+				ctx.save();
+				//关于样式的设置
+				ctx.beginPath();
+				//关于路径
+				
+				ctx.fill();
+				ctx.restore();
+			}
+		}
+		
+		
+	</script>

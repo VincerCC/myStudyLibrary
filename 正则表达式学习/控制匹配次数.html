@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // let h = 'Hello helloello world @2020@'
+    // // 1.(`+`)匹配一次或多次，只针对+号前边的元素
+    // var p1 = /@+/g
+    // console.log(h.replace(p1,'换')) //Hello helloello world 换2020换。匹配@字符一次或多次
+    // var p2 = /[hH](ello)+/g
+    // console.log(h.replace(p2,'换')) //换 换 world @2020@。匹配hello和Hello字符一次或多次，匹配ello整体一次或多次（helloello，Hello）
+
+
+    // // 2.(`*`)匹配0次或多次
+    // var p3 = /[hH](ello)+[%]*/g
+    // console.log('Hello helloello% world @2020@'.replace(p3,'换'))//换 换 world @2020@ 匹配hello或者Hello后边跟着 %号0个或者多个
+
+
+    // // 3.(`?`)匹配重复的一次或者0次
+    // var p4 = /[hH](ello)+y?[%]*/g
+    // console.log('Helloy helloello% world @2020@'.replace(p4,'换'))//换 换 world @2020@ 匹配hello或者Hello后边跟着 %号0个或者多个 y字符0个或者1个
+    function toBin(num){
+      let arr = []
+      let theNum = num
+      console.log(theNum)
+      console.log(theNum%2)
+      while(theNum !== 0 ){
+        console.log(theNum%2)
+        arr.push(theNum%2)
+        theNum = Math.floor(theNum/2)
+      }
+      console.log(arr)
+      return arr.reverse().join('')
+    }
+    console.log(toBin(100))
+  </script>
+</body>
+</html>

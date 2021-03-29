@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.v-enter,.v-leave-to{
+				opacity: 0;
+				transform: translateX(10px);
+			}	
+			.v-enter-active,.v-leave-active{
+				transition: all 0.4s ease;
+			}	
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<a href="#" @click.prevent="btnLog">登录</a>
+			<a href="#" @click.prevent="btnReg">注册</a>
+			<a href="#" @click.prevent="btnApp">app</a>
+			<!--通过mode实现组件切换动画，上一个组件离开之后下一个才能进入-->
+			<transition mode="out-in">
+				<!--VUE提供了component标签，:is来展示对应名称的组件-->
+				<component :is="comName"></component>
+			</transition>
+			
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//此方法只能切换两个，如果有多个需要切换，需要用方式二
+			Vue.component('login',{
+				template:'<h3>这是登录组件</h3>'
+			})
+			
+			Vue.component('register',{
+				template:'<h3>这是注册组件</h3>'
+			})
+			
+			Vue.component('app',{
+				template:'<h3>这是app组件</h3>'
+			})
+			
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					comName:'login'
+				},
+				methods:{
+					btnLog(){
+						this.comName='login';
+					},
+					btnReg(){
+						this.comName='register';
+					},
+					btnApp(){
+						this.comName='app';
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

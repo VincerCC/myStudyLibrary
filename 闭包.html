@@ -1,0 +1,97 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-09 16:28:29
+ * @LastEditTime: 2020-11-20 18:38:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \managere:\新建文件夹\HelloHBuilder\闭包.html
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 * 闭包有3个条件：
+
+				①函数嵌套函数
+
+				②函数内部可以引用函数外部的参数和变量
+
+				③参数和变量不会被垃圾回收机制回收
+			 */
+
+			/*
+			 * 简单的闭包：
+			 * 		function fun(){
+			 * 		var a=1;
+			 * 		return function(){
+			 * 		a++;
+			 * 		console.log(a);
+			 * 			}
+			 * 		}
+			 * 		var fun2=fun();
+			 * 		fun2();  将会输出2
+			 * 		fun2();  将会输出3，因为没有销毁闭包里边的a
+			 * */
+
+			//经典闭包题
+			function fun(n,o){
+				console.log(o);
+				return {
+					fun:function(m){
+						return fun(m,n);
+					}
+				}
+			}
+			var a=fun(0);
+//n=0,console.log(o)-->undefined
+			a.fun(1);
+//a.fun(1)-->这个fun是内部的fun-->function(1)-->renturn fun(1,0)--->这个fun是外部fun-->fun(1,0)-->console.log(o)-->就是0;
+			a.fun(2);
+//因为是闭包，外部变量n=0会存储一份在内部函数fun中，以键值对形式存在，n:0，每次调用内部函数只是改变内部函数中的值，console的值不会改变-->输出0
+			a.fun(3);
+//因为是闭包，外部变量n=0会存储一份在内部函数fun中，以键值对形式存在，n:0，每次调用内部函数只是改变内部函数中的值，console的值不会改变-->输出0
+
+			var b=fun(0).fun(1).fun(2).fun(3);
+//fun(0)-->undefined
+//fun(0).fun(1)返回的是一个新的对象，也是新的闭包，会改变外部变量n的值为1-->0
+//fun(0).fun(1).fun(2)返回的是一个新的对象，也是新的闭包，会改变外部变量n的值为2-->输出上一次调用的n-->1
+//fun(0).fun(1).fun(2).fun(3)返回的是一个新的对象，也是新的闭包，会改变外部变量n的值为3-->输出上一次调用的n-->2
+
+			var c=fun(0).fun(1);
+//fun(0).fun(1)返回的是一个新的对象，也是新的闭包，会改变外部变量n的值为1-->0
+			c.fun(2);
+//外部变量n=0会存储一份在内部函数fun中，以键值对形式存在，n:0，每次调用内部函数只是改变内部函数中的值，console的值不会改变-->1
+			c.fun(3);
+//外部变量n=0会存储一份在内部函数fun中，以键值对形式存在，n:0，每次调用内部函数只是改变内部函数中的值，console的值不会改变-->1
+//c.fun(2)和c.fun(3)都试试同一个对象的闭包，不会改变外部变量的值
+		</script>
+	</head>
+	<body>
+		<ul id="ul">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script>
+			var lis = document.getElementsByTagName('li')
+			console.log(lis)
+			// for(var i = 0; i <lis.length; i++){
+			// 	lis[i].onclick = function() {
+			// 		console.log(i)
+			// 	}
+			// }
+			for(var i = 0; i <lis.length; i++){
+				(function(){
+					var index = i
+					lis[i].onclick = function() {
+						alert(index);
+					};
+				})();//调用时参数
+
+			}
+		</script>
+	</body>
+</html>

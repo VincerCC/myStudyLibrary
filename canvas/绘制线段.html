@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+
+
+
+
+    // 设置路径的颜色，默认为#000000
+    ctx.strokeStyle = "red"
+    // 设置路径线段的宽度
+    ctx.lineWidth = 10
+
+    // 设置线条样式 起点或者结束点的样式
+    // ctx.lineCap = "butt"默认为平角
+    ctx.lineCap = "round"//设置为圆角
+
+    // 设置线段拐角的样式
+    // ctx.lineJoin = "miter"//默认是尖锐的
+    ctx.lineJoin = "round"//设置为圆角的
+
+
+    // 开始绘制路径
+    ctx.beginPath()
+      // 设置绘制路径的起点
+      ctx.moveTo(100,100)
+      // 设置线段经过某个位置
+      ctx.lineTo(100,100)
+
+      ctx.moveTo(160,160)
+
+      ctx.lineTo(200,250)
+      ctx.lineTo(100,300)
+    // 闭合绘制的路径，形成闭环
+    ctx.closePath()
+    // 渲染路径
+    ctx.stroke()
+
+
+  </script>
+</body>
+</html>

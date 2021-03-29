@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!-- 如何判断数据类型？ arr是Array类型，null是Null类型
+            1.typeof，只能返回String,Number,Undefined,Object(arr和null都是Object类型),Function这五种类型
+            2.Object.prototype.toString.call(obj),可以返回所有类型 -->
+    <script>
+        let result='abc'
+        //Object.prototype.toString.call(result)   返回[object String]
+        //Object.prototype.toString.call(result).slice(8,-1)   是截取包括下标为8的开始，截取到倒数第一个（不包括），即String
+        console.log(Object.prototype.toString.call(result).slice(8,-1))
+
+
+        //定义检测数据类型的函数
+        function checkedType(data){
+            return Object.prototype.toString.call(data).slice(8,-1)
+        }
+        //实现对象/数组的深度克隆
+        function clone(data){
+            //判断拷贝的数据类型
+            let dataType=checkedType(data)
+            let result//声明用来保存最终克隆数据的变量
+            if(dataType==='Object'){
+                result={}//初始化为空对象保存数据
+            }else if(dataType==='Array'){
+                result=[]//初始化为空数组保存数据
+            }else{
+                return data//基本数据类型不用深克隆，直接返回
+            }
+
+            //遍历目标数据
+            for(let item in data){//能进来这里说明数据只能是对象/数组
+                //获取遍历的每一项值
+                let value=data[item]
+                //再次判断遍历的每一项中是否存在对象/数组
+                if(checkedType(value)==='Object'||checkedType(value)==='Array'){
+                    //进来代表遍历的数据有嵌套对象/数组
+                    //需要继续遍历
+                    result[item]=clone(value)
+                }else{//获取到的是基本数据类型或者函数
+                    result[item]=value
+                }
+            }
+            return result
+        }
+
+        let arr=[1,'a',[3,5],{name:'kobe',age:39}]
+        let arrClone=clone(arr)
+        console.log(arrClone)//[1,'a',[3,5],{name:'kobe',age:39}]
+        arrClone[0]=3
+        arrClone[2]=3
+        arrClone[3].name='wade'
+        console.log(arr)//[1,'a',[3,5],{name:'kobe',age:39}]  实现了深克隆
+    </script>
+</body>
+
+</html>

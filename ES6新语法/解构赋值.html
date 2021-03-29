@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <script>
+        let obj={name:'kobe',age:18}
+        //按照之前的方法，要拿到name和age需要这样做
+        // let name=obj.name
+        // let age=obj.age
+        // console.log(name,age)
+
+        //ES6推出对象的解构赋值，用法是这样的
+        // let {name,age}=obj
+        // console.log(name,age)
+        //需要用谁就取谁，前提是key要对应
+        let {age}=obj
+        console.log(age)
+
+        let arr=[0,1,2,3,4]
+        //之前取数组中的元素需要这样做
+        // let arr0=arr[0]
+        // let arr1=arr[1]
+        // console.log(arr0,arr1)
+        //ES6也有数组的解构赋值，用法是这样的
+        let [a,b,c,d,e]=arr//abcde可以随意更换其他变量，他是通过下标一一对应去取值
+        console.log(a,b,c,d,e)
+
+        //对象的解构赋值常用来传递参数
+        //之前是这样的
+        function fa(obj){
+            console.log(obj.name,obj.age)
+        }
+        fa(obj)
+        //使用ES6之后是这样的
+        function fb({name,age}){
+            console.log(name,age)
+        }
+        fb(obj)
+    </script>
+</body>
+
+</html>

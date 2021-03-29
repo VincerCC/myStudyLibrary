@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				background-color: #BBFFAA;
+				width: 100px;
+				height: 100px;
+			}
+			/*定义两组样式控制动画*/
+			.v-enter,
+			.v-leave-to{
+				/*v-enter是进入之前，元素的起始状态*/
+				/*v-leave-to是离开之后，元素的最终状态*/
+				opacity: 0;
+				transform: translateX(300px);
+				background-color: yellow;
+			}
+			.v-enter-active,
+			.v-leave-active{
+				transition: all 0.5s ease;
+			}
+			
+			
+			/*定义两组样式控制动画*/
+			.my-enter,
+			.my-leave-to{
+				/*my-enter是进入之前，元素的起始状态*/
+				/*my-leave-to是离开之后，元素的最终状态*/
+				opacity: 0;
+				transform: translateY(300px);
+				background-color: yellow;
+			}
+			.my-enter-active,
+			.my-leave-active{
+				transition: all 0.5s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<input type="button" value="变" @click="flag=!flag" />
+			<!--
+            	1.用transition元素把需要动画控制的元素包裹起来
+            -->
+			<transition>
+				<div class="box" v-if="flag"></div>
+			</transition>
+			
+			<hr />
+			
+			<input type="button" value="变" @click="flag2=!flag2" />
+			<!--
+            	1.用transition元素把需要动画控制的元素包裹起来
+            	2.transition加name属性，可以修改前缀v为name的内容，从而实现控制不同元素的动画
+            -->
+			<transition name="my">
+				<div class="box" v-if="flag2"></div>
+			</transition>
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					flag:false,
+					flag2:false
+				}
+		})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="name" placeholder="请输入姓名">
+    <input type="text" v-model="age" placeholder="请输入年龄">
+    <input type="text" v-model="sex" placeholder="请输入性别">
+    <input type="text" v-model="tel" placeholder="请输入电话">
+    <p>
+      姓名：<span>{{name}}</span>
+    </p>
+    <p>
+      年龄：<span>{{age}}</span>
+    </p>
+    <p>
+      性别：<span>{{sex}}</span>
+    </p>
+    <p>
+      <p>
+        电话：<span>{{tel}}</span>
+      </p>
+    </p>
+  </div>
+  <script src="./index.js"></script>
+  <script>
+    const vue = new VUE('#app',{
+      name: '',
+      age: '',
+      sex: '',
+      tel: ''
+    }, true)
+  </script>
+</body>
+</html>

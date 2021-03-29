@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.divbox{
+			width: 500px;
+			height: 200px;
+			position: relative;
+			margin: 70px auto;
+			
+			
+		}
+		.listimage{
+			width: 500px;
+			height: 200px;
+			border: 1px solid blue;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+		ul.btnbox{
+			
+			position: absolute;
+			
+			height: 15px;
+			left: 30%;
+			top: 85%;
+			display: inline-block;
+		}
+		ul.btnbox li{
+			list-style: none;
+			float: left;
+			
+			width: 40px;
+			height: 15px;
+			background: #000000;
+			margin: 0 5px;
+			
+			border: 1px dotted #FFFFFF;
+			
+		}
+		ul.btnbox .li_hover{
+			background: #BBFFAA;
+		}
+	</style>
+	<script type="text/javascript" >
+		$(function(){
+			//序列号,初始化为0
+			var flag=0;
+			//声明一个变量储存定时器
+			var time=null;
+			$(".divbox .listimage").eq(flag).show()//将第一个btn的序列号对应的图片显示出来，即第一张图片显示
+								   .siblings("div").hide();//并且隐藏同层的其他div元素
+			//获取到按钮
+			$("ul.btnbox li").hover(function(){//鼠标移入效果
+				clearInterval(time);//鼠标移入，清楚定时器
+				flag=$(this).index();//获取序列号
+//有时候用户点击太快，动画没执行完就点击下一个动画，下一个动画将会追加到队列中，会导致放开光标和动画仍然在执行
+//使用.is(":animated")判断动画是否执行完毕
+//			if(!$(".divbox .listimage").is(":animated")){//为了判断动画是否在执行，如果动画还没执行完就不能执行下一个动画
+//					$(this).addClass("li_hover")//鼠标滑到哪个哪个就添加样式
+//					   .siblings().removeClass("li_hover");//并且删除同层的其他元素的样式
+//					   
+//					   //show()可以改为fadeOut()方法使用淡入效果来显示被选元素
+//					   //hide()可以改为fadeOut() 方法使用淡出效果来隐藏被选元素
+//				$(".divbox .listimage").eq(flag).animate({opacity:"show"},200)//将移入那个btn的序列号对应的图片显示出来
+//									   .siblings("div").animate({opacity:"hide"},200);//并且隐藏同层的其他div元素
+//			}},function(){/*鼠标移出效果*/})
+//			
+				
+					$(this).addClass("li_hover")//鼠标滑到哪个哪个就添加样式
+					   .siblings().removeClass("li_hover");//并且删除同层的其他元素的样式
+					   
+					   //show()可以改为fadeOut()方法使用淡入效果来显示被选元素
+					   //hide()可以改为fadeOut() 方法使用淡出效果来隐藏被选元素
+				$(".divbox .listimage").eq(flag).fadeIn()//将移入那个btn的序列号对应的图片显示出来
+									   .siblings("div").fadeOut();//并且隐藏同层的其他div元素
+			},function(){/*鼠标移出效果*/
+			timeplay();//鼠标移出，开启定时器
+			});
+				
+		
+	//定义一个函数，放定时器
+		function timeplay(){
+			
+			//定时器
+			time=setInterval(function(){
+			flag++;
+			if(flag<$("ul.btnbox li").length){
+				   
+				$("ul.btnbox li").eq(flag).addClass("li_hover")
+					   .siblings().removeClass("li_hover");
+				$(".divbox .listimage").eq(flag).fadeIn()
+								   	   .siblings("div").fadeOut();								   	
+				if(flag==3){
+							flag=-1;
+				}				  
+			}			
+			},2000);
+		};
+		timeplay();
+		});
+	</script>
+	</head>
+	
+	<body>
+		<div class="divbox">
+			<div class="listimage" style="background: url(img/11.png)"></div>
+			<div class="listimage" style="background: url(img/22.png)"></div>
+			<div class="listimage" style="background: url(img/33.png)"></div>
+			<div class="listimage" style="background: url(img/44.png)"></div>
+			
+			<ul class="btnbox">
+				<li class="li_hover"></li>
+				<li ></li>
+				<li ></li>
+				<li ></li>
+			</ul>
+		</div>
+		
+	</body>
+</html>

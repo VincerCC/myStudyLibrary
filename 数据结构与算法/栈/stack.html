@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-06 11:07:09
+ * @LastEditTime: 2020-11-06 13:38:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \我的前端知识库\数据结构与算法\栈\stack.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./stack.js"></script>
+  <script>
+    let stack = new Stack()
+    stack.push('Jack')
+    stack.push('Tom')
+    stack.push('Mike')
+    console.log(stack.stackList)
+    setTimeout(()=>{
+      console.log('stack的长度,'+stack.size())
+      console.log('stack移除栈顶元素,'+stack.pop())
+      console.log(stack.stackList)
+      console.log('stack查看栈顶元素,'+stack.peek())
+      console.log(stack.stackList)
+      console.log('stack是否为空,'+stack.isEmpty())
+      console.log('stack拼接字符串,'+stack.toString())
+    },500)
+
+
+
+    // 栈 实现 十进制 转换 二进制
+    function toBin(num){
+      let stack2 = new Stack()
+      while(num > 0){
+        num = Math.floor(num / 2)
+        stack2.push(num % 2)
+      }
+      let binString = ''
+      while(!stack2.isEmpty()){
+        // 循环知道stackList为空停止
+        binString += stack2.pop()
+      }
+      return binString
+    }
+    console.log(toBin(100))
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    // 设置文本的字体大小
+    ctx.font = "23px 微软雅黑"
+
+    // 设置阴影大小
+    ctx.shadowBlur = 20
+    // 设置阴影颜色
+    ctx.shadowColor = 'rgba(0,0,0,1)'
+    // 设置阴影水平偏移值
+    ctx.shadowOffsetX = 0
+    // 设置阴影垂直偏移值
+    ctx.shadowOffsetY = 0
+
+    // 绘制填充文本，从100,100坐标开始绘制
+    ctx.fillText('helloWorld',100,100)
+
+    // 设置描边文本
+    ctx.strokeText('helloWorld',200,200)
+
+    var x = 0
+    setInterval(()=>{
+      if(x > 600){
+        x = 0
+      }
+      // 清空画布
+      ctx.clearRect(0,0,600,600)
+      // 重新绘制
+      ctx.strokeText('helloWorld跑马灯',x+=2,200)
+    },16)
+
+  </script>
+</body>
+</html>

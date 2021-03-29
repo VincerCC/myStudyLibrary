@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    #ggk{
+      width: 400px;
+      height: 100px;
+      position: relative;
+    }
+    .jp {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    #myCanvas{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="ggk">
+    <div class="jp">谢谢惠顾</div>
+    <canvas id="myCanvas"></canvas>
+  </div>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 拿到刮刮卡
+    let ggkDom = document.getElementById('ggk')
+    console.log(ggkDom.clientHeight)
+    let width = ggkDom.clientWidth
+    let height = ggkDom.clientHeight
+
+    myCanvas.width=width
+    myCanvas.height=height
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let cvsCtx = myCanvas.getContext("2d")
+
+    // 绘制刮刮卡灰色部分
+    cvsCtx.fillStyle = "darkgray";
+    cvsCtx.fillRect(0, 0, 400, 100);
+
+    let isDown = false
+    myCanvas.onmousedown = function (e){
+      isDown = true
+      var x = e.pageX - ggkDom.offsetLeft
+      var y = e.pageY - ggkDom.offsetTop
+      // 每次点击都将画笔 移动到点击的位置
+      cvsCtx.moveTo(x,y)
+    }
+    myCanvas.onmousemove = function(e){
+      if(isDown){
+        // 只有鼠标按下去，并且鼠标移动，才开始绘制新图层，新图层用来去除旧涂层灰色
+        // 获取当前鼠标的坐标
+        var x = e.pageX - ggkDom.offsetLeft
+        var y = e.pageY - ggkDom.offsetTop
+        // 设置在源图像（填充圆）之外显示目标图像（灰色部分）,只有源图像之外的目标图像才会显示（超出部分），源图像透明
+        // 从而实现了画圆使灰色区域变圆形透明
+        cvsCtx.globalCompositeOperation = "destination-out"
+        // 绘制 宽度为40 头尾为圆形 的线段
+        cvsCtx.lineWidth=40;//设置线宽度为40
+        cvsCtx.lineCap="round";//设置线的头尾为圆
+        cvsCtx.lineJoin="round";//设置线拐角为圆
+        cvsCtx.lineTo(x,y);
+        cvsCtx.stroke();
+      }
+
+    }
+    myCanvas.onmouseup = function (){
+      isDown = false
+    }
+  </script>
+</body>
+</html>

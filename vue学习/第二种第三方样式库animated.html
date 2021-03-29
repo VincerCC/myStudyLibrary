@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="animate.css"/>
+		<style>
+			.box{
+				width: 100px;
+				height: 100px;
+				background-color: #66AFE9;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<input type="button" value="变" @click="flag=!flag" />
+			<!--
+            	1.用animate第三方库控制动画
+            -->
+			<transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" >
+				<div class="box" v-if="flag"></div>
+			</transition>
+
+		</div>
+
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					flag:false
+				}
+		})
+		</script>
+	</body>
+</html>

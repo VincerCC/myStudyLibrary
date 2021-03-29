@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <button>1</button>
+    <br>
+    <button>2</button>
+    <br>
+    <button>3</button>
+    <br>
+    <script>
+        let btns=document.getElementsByTagName("button")
+        //这时候btns是伪数组，没有数组的一般方法，需要用Array.from(v)将它转换为真数组
+        Array.from(btns).forEach((item,index)=>{
+            console.log(item)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<ul>
+				<li v-for="(p,index) in persons" :key="index">
+					{{index}}----{{p.name}}----{{p.age}}
+					<button @click="deleteBtn(index)">删除</button>
+					<button @click="updateBtn(index)">更新</button>
+				</li>
+			</ul>
+			<ul>
+				<li v-for="(value, name, index) in obj" :key="index">
+					name是{{name}}---value是对应的值{{value}}---index是下标{{index}}
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					persons:[
+					{name:'tom',age:18},
+					{name:'jack',age:28},
+					{name:'bob',age:16},
+					{name:'kom',age:24}
+					],
+					obj:{
+						'键0':0,
+						'键1':1,
+						'键2':2
+					}
+				},
+				methods:{
+					deleteBtn(index){
+						this.persons.splice(index,1);
+					},
+					updateBtn(index){
+						this.persons.splice(index,1,{name:'vincer',age:20});
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>

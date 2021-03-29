@@ -1,0 +1,118 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-13 17:07:53
+ * @LastEditTime: 2020-04-13 18:43:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \managere:\新建文件夹\HelloHBuilder\ES6新语法\call的模拟实现.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='text'></div>
+  <div id='beginTime'></div>
+  <div id='end'></div>
+  <script>
+    var foo = {
+      value: 1
+    };
+
+    function aar() {
+        console.log(this.value);
+    }
+
+    aar.call(foo); // 1
+    aar()//undefined
+
+
+    //第一步，模拟基础实现，不传参
+    Function.prototype.call2 = function(context) {
+      // 首先要获取调用call的函数，用this可以获取
+      //this指向调用call2方法的目标
+      context.fn = this;
+      context.fn();
+      delete context.fn;
+    }
+    aar.call2(foo)//1
+
+
+    function bar(name,age) {
+        console.log(this.value);
+        console.log(name);
+        console.log(age);
+    }
+    //第二部，实现可传参
+    Function.prototype.call3 = function(context) {
+
+      var context = context || window;
+
+      // 首先要获取调用call的函数，用this可以获取
+      //this指向调用call2方法的目标
+      context.fn = this;
+      //获取传递的参数arguments
+      // Arguments 对象只定义在函数体中，包括了函数的参数和其他属性。在函数体中，arguments 指代该函数的 Arguments 对象。
+      console.log(arguments)
+      var args = []
+      for(let i = 1;i < arguments.length; i++){
+        args.push(arguments[i])
+        // obj[arguments[i-1]]=
+      }
+      // console.log(args)
+      context.fn(...args);
+      delete context.fn;
+    }
+    bar.call3(foo, 'kevin', 18);
+
+
+/**
+ * @description
+ * 倒计时-计时器-浏览器进程切后台后，去除进程暂停时间
+ * @param {number} time 倒计时时长，单位毫秒
+ * @param {number} point 倒计时间隔
+ * @param {function} func 倒计时执行函数
+ * @param {function} timeOverFunc 倒计时结束执行函数
+ * @returns {TimeOut} 倒计时唯一标识
+ * @example
+ * Utils.watchTimeInterval(10*1000, 1000, () => {}, () => {})
+ */
+
+
+    let text = document.querySelector('#text');
+    let beginTime = document.querySelector('#beginTime');
+    let end = document.querySelector('#end');
+    let runTime = 10 * 1000;
+    beginTime.innerHTML = 'currentTime: ' + new Date()
+    function watchTimeInterval(time, point, func, timeOverFunc) {
+      let _time = time;
+      let startTime = new Date().valueOf();
+      let interval = setInterval(() => {
+          let gap = (new Date().valueOf() - startTime - point);
+          if (gap < 0) {
+              gap = 0;
+          }
+          _time = _time - gap;
+          startTime = new Date().valueOf();
+          if (_time > 0) {
+              func && func();
+              _time -= point;
+          } else {
+              interval && clearInterval(interval)
+              timeOverFunc && timeOverFunc();
+          }
+      }, point)
+      return interval
+  }
+
+  watchTimeInterval(runTime,1000,()=>{
+      text.innerHTML = 'endTime: ' + new Date() //new Date().getTime();
+  },()=>{
+      end.innerHTML = ' interval end';
+  })
+  </script>
+</body>
+</html>

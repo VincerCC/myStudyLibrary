@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet">
+		<style type="text/css">
+			.swiper-container {
+    width: 500px;
+    height: 500px;
+}  
+		</style>
+	</head>
+	<body>
+		<script src="https://cdn.bootcss.com/Swiper/4.5.1/js/swiper.min.js"></script>
+		<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-color: #bfa;width: 100px;height: 100px;">Slide 1</div>
+        <div class="swiper-slide" style="background-color: #ff6700;width: 100px;height: 100px;">Slide 2</div>
+        <div class="swiper-slide" style="background-color: #baa;width: 100px;height: 100px;">Slide 3</div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    
+    <!-- 如果需要滚动条 -->
+    <div class="swiper-scrollbar"></div>
+</div>
+<div class="thumbs">
+        <div class="swiper-slide" style="background-color: #bfa;width: 100px;height: 100px;">Slide 1</div>
+        <div class="swiper-slide" style="background-color: #ff6700;width: 100px;height: 100px;">Slide 2</div>
+        <div class="swiper-slide" style="background-color: #baa;width: 100px;height: 100px;">Slide 3</div>
+    </div>
+<script>        
+  var mySwiper = new Swiper ('.swiper-container', {
+
+    direction: 'horizontal', // 垂直切换选项
+    spaceBetween:true,
+    loop: true, // 循环模式选项
+    
+    // 如果需要分页器
+//  pagination: {
+//    el: '.swiper-pagination',
+//  },
+    
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    // 如果需要滚动条
+//  scrollbar: {
+//    el: '.swiper-scrollbar',
+//  },
+  })        
+  var thumbsSwiper = new Swiper('#thumbs',{
+  spaceBetween: 10,
+  slidesPerView: 4,
+  watchSlidesVisibility: true,//防止不可点击
+})
+    
+  var date =new Date()
+  console.log(date)
+  var year =date.getFullYear()
+  var mounth =date.getMonth()+1
+  var day =date.getDate()
+  var hours=date.getHours()
+  var minutes =date.getMinutes()
+  var seconds=date.getSeconds()
+  console.log(year,mounth,day,hours,minutes,seconds)
+  </script>
+	</body>
+</html>

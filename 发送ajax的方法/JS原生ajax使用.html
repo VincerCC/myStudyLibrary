@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <button class="btn1">防抖获取数据</button>
+    <button class="btn2">节流获取数据</button>
+    <script>
+
+        let btn1=document.getElementsByClassName("btn1")
+        let btn2=document.getElementsByClassName("btn2")
+        // 防抖函数方法
+        function debounce(fn,time){
+            let timmer=null
+            let that=this
+            return function(){
+                clearTimeout(timmer)
+                timmer=setTimeout(function(){
+                    fn.apply(that)
+                },time)
+            }
+        }
+
+        // 节流函数方法
+        function throttle(fn,time){
+			//记录上一次函数被触发时间
+			var lasttime=0;
+			//记录当前函数触发时间
+			return function(){
+            var nowtime=Date.now();
+			if(nowtime-lasttime>time){
+				fn.call(this);
+				//同步时间
+                lasttime=nowtime;
+				}
+			}
+        }
+        btn1[0].onclick=debounce(get,1000)//使用节流函数实现防重复请求，控制在1s内只请求第一次
+        btn2[0].onclick=throttle(get,1000)//使用节流函数实现防重复请求，控制在1s内只请求第一次
+        function get(){
+            ajax("http://www.liulongbin.top:3005/api/getnewslist")
+        }
+        function ajax(url){
+            var xmlHttp=window.XMLHttpRequest?new XMLHttpRequest():ActiveXObject("Microsoft.XMLHTTP")
+            //ActiveXObject("microsoft.XMLHttp")为了兼容IE5和IE6
+            xmlHttp.onreadystatechange = () =>{//每当readyState的属性改变时，就会调用该函数
+                if(xmlHttp.readyState === 4){
+                    // readyState存有的XMLHttpRequest的状态从0到4发生变化。
+                    // 0：请求未初始化
+                    // 1：服务器连接已建立
+                    // 2：请求已接收
+                    // 3：请求处理中
+                    // 4：请求已完成，且响应已就绪
+                    if(xmlHttp.status === 200){//status将状态返回为数字（例如，“Not Found”为404，“OK”为200）
+                        // xmlHttp.responseText是以字符串形式返回获取到的内容
+                        //console.log(xmlHttp.responseText);//这个是js字符串类型，需要转换为json对象
+                        let data=JSON.parse(xmlHttp.responseText)
+                        console.log(data)
+                    }else{
+                        console.log("获取失败")
+                    }
+                }
+            }
+            // open(method,url,async)
+            //     规定请求的类型、URL 以及是否异步处理请求。
+
+            //     method：请求的类型；'GET' 或 'POST'
+
+            //     url：文件在服务器上的位置
+
+            //     async：true（异步）或 false（同步）
+
+            // send(string)
+            //     将请求发送到服务器。
+
+            //     string：仅用于 POST 请求
+
+
+            xmlHttp.open('GET',url);
+            xmlHttp.send();
+        }
+    </script>
+</body>
+
+</html>

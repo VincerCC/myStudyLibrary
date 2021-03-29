@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+  var obj={
+    'person':'vincer',
+    'age':'22',
+    'sex':'男',
+  }
+  var arr=Object.keys(obj)//循环遍历obj，将obj的key值返回到一个数组
+  console.log(arr)
+  var brr=Object.values(obj)//循环遍历obj，将obj的value值返回到一个数组
+  console.log(brr)
+  const ObjectFunction=()=>{
+    return Object.keys(obj)[Object.values(obj).indexOf('vincer')]//取到值为vincer的下标，返回这个下标对应的键名 person
+  }
+  console.log(ObjectFunction())
+  </script>
+</head>
+<body>
+</body>
+</html>

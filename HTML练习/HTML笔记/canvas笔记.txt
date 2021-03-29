@@ -1,0 +1,131 @@
+创建canvas
+	<canvas id="test" width="500" height="500"></canvas>
+
+关于canvas宽高的设置，常见的方法有三种：
+1、直接设置<canvas>标签的width和height属性；
+2、通过css样式进行设置，最好不用这个方法！
+3、通过js设置<canvas>标签的width和height属性。
+
+
+以下属性一般绑定在画笔中
+xxxx.rect(x,y,width,height)	创建矩形
+
+
+xxxx.fillRect(x,y,width,height);代表从x,y点开始，画个width宽height高的*填充*矩形，默认的填充颜色是黑色。
+
+xxxx.clearRect(x,y,width,height);清空给定矩形内的指定像素
+	x	要清除的矩形左上角的 x 坐标
+	y	要清除的矩形左上角的 y 坐标
+	width	要清除的矩形的宽度，以像素计
+	height	要清除的矩形的高度，以像素计
+
+
+xxxx.strokeRect(x,y,width,height);代表从x,y点开始，画个width宽height高的*不填充*矩形
+
+
+xxxx.beginPath();//每次画路径钱先清空之前的路径
+
+
+xxxx.moveTo(x,y);//画笔移动到x，y这个点
+xxxx.lineTo(x，y);//画笔移动
+xxxx.stroke();//连线
+xxxx.closePath() //方法创建从当前点到开始点的路径。关闭路径
+xxxx.fill() //方法填充当前的图像（路径）。默认颜色是黑色。如果路径未关闭，那么 fill() 方法会从路径结束点到开始点之间添加一条线，以关闭该路径，然后填充该路径
+
+
+xxxx.save()	保存当前环境的状态
+xxxx.restore()	返回之前保存过的路径状态和属性
+//save和restore一般是成对使用
+
+
+xxxx.arc(x,y,m,0,Math.PI*2,true); 
+括号内第一个和第二个参数，代表圆心坐标(x,y)。
+第三个参数是圆的半径。
+第四个参数代表圆周起始位置。0 就是起始位置。
+第五个参数是代表结束位置。360*Math.PI/180就是整个圆，180*Math.PI/180是半圆。
+第六个参数是一个布尔值，true是顺时针false是顺时针。
+
+
+xxxx.lineWidth=  ;//设置线的粗细
+
+xxxx.lineCap=  ;//lineCap 属性设置或返回线条末端线帽的样式。
+		可选值：
+			butt	默认。向线条的每个末端添加平直的边缘。
+			round	向线条的每个末端添加圆形线帽。
+			square	向线条的每个末端添加正方形线帽。
+
+xxxx.lineJoin=  ;//lineJoin 属性设置或返回所创建边角的类型，当两条线交汇时。
+		可选值:
+			bevel	创建斜角。
+			round	创建圆角。
+			miter	默认。创建尖角。
+
+
+ctx.globalCompositeOperation=  ;新的为源，旧的为目标
+			source-over(默认值):源在上面,新的图像层级比较高
+			source-in  :只留下源与目标的重叠部分(源的那一部分)
+			source-out :只留下源超过目标的部分
+			source-atop:砍掉源溢出的部分
+			
+			destination-over:目标在上面,旧的图像层级比较高
+			destination-in:只留下源与目标的重叠部分(目标的那一部分)
+			destination-out:只留下目标超过源的部分
+			destination-atop:砍掉目标溢出的部分
+
+
+*******************************************变换*****************************************
+
+xxxx.translate(x,y);这个方法用来移动canvas的原点到x,y这个位置。
+		canvas的translate变换是累加操作，如果写了两个xxxx.translate(x,y);
+						   xxxx.translate(x,y);
+						将会移动到x+x，y+y这个位置
+
+xxxx.rotate(弧度单位的值);只需要一个参数，为 旋转的弧度(度数*Math.PI/180)，是顺时针的，旋转的中心就是canvas的原点
+		canvas的rotate变换是累加操作
+
+
+xxxx.scale(x,y);这个方法接受两个参数，x，y分别是横轴和纵轴的缩放值，必须是正值，值比1.0小是缩小，比1.0大是放大。
+		canvas的scale是累乘的。
+
+
+在画布中引入图片，	var img = new Image();
+			img.src="xxxx.png";
+			img.onload=function(){
+			draw();
+			}
+				
+			function draw(){
+			ctx.drawImage(img,0,0,img.width,img.height)
+ //ctx.drawImage(img,x,y,w,h)，x，y为图片在canvas的起始坐标，w，h为宽高
+			}
+
+在画布中引入图片作为背景，var img = new Image();
+			img.src="tg.png";
+			img.onload=function(){
+				draw();
+			}
+				
+			function draw(){
+			var pattern = ctx.createPattern(img,"no-repeat")
+ //createPattern（img，repetition），可将这个方法的返回对象做完fillRect的值，达到设置背景图片作用
+	repetition为平铺方式，
+			ctx.fillStyle=pattern;
+			ctx.fillRect(0,0,300,300);
+			}
+
+
+
+
+**********************************************像素操作*****************************************
+
+var ImageData=ctx.getImageData(x,y,w,h);获取起始位置x，y，宽高为w，h的矩形
+	ImageData对象
+			width：选中区域在横向上css像素的个数
+			height：选中区域在纵向上css像素的个数
+			data:数组
+					选中区域所有像素点的rgba信息，rgba的取值从0到255
+
+ctx.putImageData(imgdata,x,y);第一个参数传递一个对象，作用是把这个对象放到x，y这个地方去
+
+ctx.createImageData(w,h);参数分别是要创建的宽高。作用是创建像素
+			返回的是imgdata对象 默认像素点的信息是rgba(0,0,0,0)，0,0,0代表黑色，0代表透明255代表不透明

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="demo">
+			<input  type="button" value="浪起来" @click="pmd"/>
+			<!--   v-on:  绑定事件，缩写为@:   -->
+			<input type="button" value="低调" @click="stoppmd"/>
+			<p>{{msg}}</p>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					msg:'猥琐发育，别浪！！！',
+					interval:null//定义一个定时器
+				},
+				//vue中，方法都写到methods中
+				methods:{
+					pmd(){
+						//如果this.interval!=null,说明他已经开启了定时器，再次点击就不能开启定时器
+						if(this.interval!=null){
+						return;}
+//						var _this=this;
+//						this.interval=setInterval(function(){
+//						var start=_this.msg.substring(0,1);//substring(a,b)   从a开始截取字符串到b
+//						var end=_this.msg.substring(1);//substring(a)   从a开始截取字符串到最后一个
+//						_this.msg=end+start;	
+
+						this.interval=setInterval(()=>{//箭头函数作用，使内部函数的this和外部的this指向一样
+							var start=this.msg.substring(0,1);//substring(a,b)   从a开始截取字符串到b
+							var end=this.msg.substring(1);//substring(a)   从a开始截取字符串到最后一个
+							this.msg=end+start;
+							},400)
+					},
+					stoppmd(){
+						clearInterval(this.interval);
+						//清除定时器后重置为null才能确保下一次能正常开启
+						this.interval=null;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

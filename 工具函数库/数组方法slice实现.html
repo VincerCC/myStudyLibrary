@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+    let arr = [1,2,3,4,5]
+
+    let brr = mySlice(arr, 0, 2)
+    let crr = mySlice(arr, 0, 10)
+    let drr = mySlice(arr)
+    console.log(brr)
+    console.log(crr)
+    console.log(drr)
+
+    let err = arr.slice(0, 2)
+    let frr = arr.slice(0, 10)
+    let grr = arr.slice()
+    console.log(err)
+    console.log(frr)
+    console.log(grr)
+
+    // [1, 2]
+    // [1, 2, 3, 4, 5]
+    // [1, 2, 3, 4, 5]
+    // [1, 2]
+    // [1, 2, 3, 4, 5]
+    // [1, 2, 3, 4, 5]
+  </script>
+</body>
+</html>

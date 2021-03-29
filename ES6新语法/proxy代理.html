@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    let person = {
+      name: "小红",
+      age: 15
+    };
+    person = new Proxy(person, {
+      get(target, key) {
+        console.log(target,key)
+         // target 是设置代理的对象，key是被修改的对象键
+        //读取对象的值会触发
+        let result = target[key];
+        //如果是获取 年龄 属性，则添加 岁字
+        if (key === "age") result += "岁";
+        return result;
+      },
+      set(target, key, value) {
+        console.log(target,key,value)
+        // target 是设置代理的对象，key是被修改的对象键，value是修改的值
+        // 改变对象的值会触发
+        if (key === "age" && Object.prototype.toString.call(value).slice(8,-1) !== "Number") {
+          // 当设置age字段时，如果改变后的值不为number类型，提示错误
+          throw Error("age字段必须为Number类型");
+        }
+        return target[key] = value
+      }
+    });
+  console.log(`我叫${person.name}  我今年${person.age}了`);
+  person.age = '20';//报错，传入为string，拦截器拦截了非 Number的修改
+  person.age = 20;
+  console.log(`我叫${person.name}  我今年${person.age}了`);
+  </script>
+</body>
+</html>

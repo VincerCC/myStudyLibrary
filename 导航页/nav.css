@@ -1,0 +1,86 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "montserrat",sans-serif;
+	box-sizing: border-box;
+}
+body{
+	background-color: #441414;
+}
+.service-section{
+	
+	background-size: cover;
+	padding: 60px 0;
+}
+.inner-width{
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 0 auto;
+	overflow: hidden;
+}
+.section-title{
+	text-align: center;
+	color: #ddd;
+	font-size: 30px;
+	text-transform: capitalize;/*设置第一个以大写字母*/
+}
+
+.services-container{
+	display: flex;
+	flex-wrap: wrap;/*让弹性盒元素在必要的时候拆行*/
+	/*justify-content:center;*//*用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式为横向居中。*/
+	align-items：center; /*设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式为纵向居中。*/
+}
+.services-box{
+	max-width: 33.3%;
+	padding: 10px;
+	text-align: center;
+	color: #ddd;
+	cursor: pointer;
+}
+.service-icon{
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	border: 3px solid #82ccdd;
+	color: #882ccdd;
+	transform: rotate(45deg);
+	margin-bottom: 30px;
+	margin-top: 16px;
+	transition: 0.3s linear;/*0.3s，匀速变化动画*/
+}
+.service-icon i{
+	display: inline-block;
+	line-height: 70px;
+	transform: rotate(-45deg);
+	font-size: 26px;
+}
+.services-box:hover .service-icon{
+	background: #82ccdd;
+	color: #ddd;
+}
+.service-title{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.service-desc{
+	font-size: 14px;
+	
+}
+
+@media only screen and (max-width:960px ) {
+	.services-box{
+		max-width: 45%;
+	}
+}
+@media only screen and (max-width:768px ) {
+	.services-box{
+		max-width: 50%;
+	}
+}
+@media only screen and (max-width:480px ) {
+	.services-box{
+		max-width: 100%;
+	}
+}

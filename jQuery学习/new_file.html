@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		body{
+			padding-left: 350px;
+			padding-top: 200px;
+			text-align: center;/*body里的所有文本居中*/
+		}
+		.DIV{
+			border: 2px solid  #FF5500;
+			overflow: hidden;
+			width: 488px;
+			/*display: inline-block;*/
+		}
+		a{
+			text-decoration: none;
+		}
+		ul,li{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			float: left;
+		}
+		.ale>li>ul{
+			position: absolute;
+			display: none;
+		}
+		.ale>li>ul>li{
+			float: none;
+		}
+		.ale>li>a{
+			color: #000000;
+			background-color: #bfa;
+			line-height: 30px;
+			padding:0 40px 0 40px ;
+			border: 1px solid  #FF5500;
+			display: block;
+		}
+		.ale>li>a:hover{
+			background-color: #FFC0CB;
+		}
+		
+		.ale>li>ul>li>a{
+			color: #000000;
+			background-color: #bfa;
+			width: 110px;
+			border: 1px solid #aac;
+			border-top: none;
+			display: block;
+		}
+		.ale>li>ul>li>a:hover{
+			background-color: #AA44FF;
+		}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".menu").mouseover(function(){
+					$(this).children("ul").show();
+				}).mouseout(function(){
+					$(this).children("ul").hide();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="DIV">
+			
+			<ul class="ale">
+				<li ><a href="#">首页</a></li>
+				<li class="menu"><a href="#">零食</a>
+					<ul>
+						<li><a href="#">辣条</a></li>
+						<li><a href="#">饼干</a></li>
+						<li><a href="#">面包</a></li>
+					</ul>
+				</li>
+				<li class="menu"><a href="#">服饰</a>
+					<ul>
+						<li><a href="#">卫衣</a></li>
+						<li><a href="#">牛仔裤</a></li>
+						<li><a href="#">毛衣</a></li>
+						<li><a href="#">西装</a></li>
+					</ul>
+				</li>
+				<li class="menu"><a href="#">联系我们</a></li>
+			</ul>
+			
+		</div>
+	</body>
+</html>

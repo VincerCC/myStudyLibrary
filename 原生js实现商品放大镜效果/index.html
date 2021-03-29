@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .fdj{
+      margin:0 auto;
+      display: flex;
+    }
+    .left{
+      width: 300px;
+      height: 300px;
+      background-image: url(../商品页面/shose.png);
+      background-position:0,0;
+      background-size: 100% 100%;
+      border: 1px solid orange;
+    }
+    .prop{
+      display: none;
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background-color: rgba(255, 215, 199, .5);
+    }
+    .right{
+      width: 300px;
+      height: 300px;
+      display: none;
+      background-image: url(../商品页面/shose.png);
+      background-position:0,0;
+      background-repeat: no-repeat;
+      /* 放大三倍 */
+      background-size: 300% 300%;
+    }
+  </style>
+</head>
+<body>
+  <div class="fdj">
+    <div class="left">
+      <div class="prop"></div>
+    </div>
+    <div class="right"></div>
+  </div>
+  <script>
+    let leftImg = document.querySelector('.left')
+    let right = document.querySelector('.right')
+    let fdj = document.querySelector('.fdj')
+    let prop = document.querySelector('.prop')
+
+
+    leftImg.onmouseenter = function(e){
+      // 鼠标移入，显示图片遮罩
+      prop.style.display = 'block'
+      // 同时设置右边放大图的显示
+      right.style.display = 'block'
+    }
+    leftImg.onmousemove = function(e){
+      let x = e.pageX - 50
+      let y = e.pageY - 50
+      // 设置遮罩不超过范围
+      if(x < fdj.offsetLeft){
+        x = fdj.offsetLeft
+      }
+      if(x > 200 + fdj.offsetLeft){
+        x = 200 + fdj.offsetLeft
+      }
+      if(y < fdj.offsetTop){
+        y = fdj.offsetTop
+      }
+      if(y > 200 + fdj.offsetTop){
+        y = 200 + fdj.offsetTop
+      }
+      prop.style.left = x + 'px'
+      prop.style.top = y + 'px'
+
+      // 修改放大图片的偏移度
+      right.style.backgroundPositionX = -3*x +'px';
+      right.style.backgroundPositionY = -3*y +'px';
+    }
+    leftImg.onmouseleave = function(e){
+      prop.style.display = 'none'
+
+      // 同时设置右边放大图的隐藏
+      right.style.display = 'none'
+    }
+  </script>
+</body>
+</html>

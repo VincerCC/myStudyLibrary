@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    // 拿到画布
+    let myCanvas = document.getElementById('myCanvas')
+    // 创建画笔 2d一般用于二纬平面的绘制
+    let ctx = myCanvas.getContext("2d")
+    // 绘制填充矩形
+    ctx.fillRect(0,0,100,50)
+
+    // 移动矩形 移动的是整个坐标轴原点，默认原点为页面的0,0位置
+    ctx.translate(300,0)
+    // 移动后坐标轴原点为300,0，在这个基础上，画100*50的矩形
+
+    ctx.fillStyle = 'pink'
+    ctx.fillRect(0,0,100,50)
+  </script>
+</body>
+</html>

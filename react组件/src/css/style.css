@@ -1,0 +1,18 @@
+.box{
+    width:400px;
+    border:1px solid #9999;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 18px;
+    box-shadow: 0 0 10px #ccc
+}
+.name{
+    padding-bottom :18px;
+}
+.content{
+    display:flex;
+    justify-content: space-between;
+}
+/* h1{
+    color: red;
+} */

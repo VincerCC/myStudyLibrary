@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var arr=[97,99,105,13,65];
+			
+			for(var i=0;i<arr.length-1;i++){
+				for(var j=0;j<arr.length-1-i;j++){
+					//升序
+					if(arr[j]>arr[j+1]){
+						var temp=arr[j];
+						arr[j]=arr[j+1];
+						arr[j+1]=temp;
+					}
+//					降序
+//					if(arr[j]<arr[j+1]){
+//						var temp=arr[j];
+//						arr[j]=arr[j+1];
+//						arr[j+1]=temp;
+//					}
+				}
+			}
+			console.log(arr);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

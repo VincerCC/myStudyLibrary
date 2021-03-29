@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		html,body{
+			height: 500%;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+		var num=1
+		/*函数节流，一个函数执行一次后，只有经过大于设定的执行周期后才会执行第二次*/
+		// 某段时间内如果一直触发事件，则会在规定的时间内每几秒执行一次，会不停地执行。
+		//fn 被节流的函数       time 执行周期
+				// 时间戳版节流函数方法，触发是在时间段内开始的时候
+				// function throttle(fn,time){
+				// 	//记录上一次函数被触发时间
+				// 	var lasttime=0;
+				// 	//记录当前函数触发时间
+				// 	return function(){
+				// 		var nowtime=Date.now();
+				// 		if(nowtime-lasttime>time){
+				// 			fn.call(this);
+				// 			//同步时间
+				// 			lasttime=nowtime;
+				// 			}
+				// 	}
+				// }
+				// 刚开始获取到上一次函数被触发时间，再拿到点击的时间戳，如果点击的时间错 - 上一次函数触发时间 > 设定的时间 才会触发函数，实现了在N秒内多次点击只会执行一次的效果
+
+        // 定时器节流函数方法，触发是在时间段内结束的时候。
+        function throttle(fn,time){
+            let canUse = true ; // 设置一个开关
+            return function(){
+                if(!canUse){ return false }
+								// if(canUse) fn.apply(this,arguments)//这里是立即执行
+								canUse  = false  // 利用闭包刚进来的时候关闭开关
+                setTimeout( ( ) => {
+									fn.apply(this,arguments)//这里是非立即执行，定时器结束才执行
+									canUse = true // 执行完才打开开关
+								},time)
+						}
+						// 刚开始canUse为true，不会进入return，然后将canUse重置为false,进入了定时器，在定时器的时间期限之后，才会将canUse重置为true,canUse为true之后，之后的点击才会生效
+						// 在定时器的时间期限内，canUse还没有重置为true，会一直进入return，就实现了在N秒内多次点击只会执行一次的效果
+				}
+				function add(){
+				document.getElementById("count").innerHTML=num++
+				console.log("触发了");
+			}
+			document.getElementById("btn").onclick=throttle(add,1000);
+		// document.onscroll=throttle(function(){console.log(Date.now())},200);
+		}
+	</script>
+	<body>
+		<div id="count" style="width: 20px;height: 20px;background-color: cadetblue;"></div>
+		<button id="btn">按钮</button>
+	</body>
+</html>

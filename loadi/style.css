@@ -1,0 +1,65 @@
+body{
+  margin: 0;
+  padding: 0;
+  background:#B7B7B7;
+  height: 100vh;
+	display: flex;/*开启弹性布局*/
+  align-items: center;/*属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的居中对齐*/
+  justify-content: center;/*属性定义flex子项在flex容器的当前行的主轴（横轴）方向上的居中对齐*/
+  font-family: "montserrat",sans-serif;
+}
+
+.loading{
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  animation: a1 2s linear infinite;/*控制转动*/
+}
+
+/*伪类元素,在元素的前面或后面添加内容,内容不会在dom中展示只是渲染CSS*/
+.loading::before,.loading::after{
+  content: '';
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.loading::before{
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);/*旋转120度*/
+}
+
+.loading::after{
+  border-top: 10px solid #3498db;
+  transform: rotate(240deg);
+}
+
+.loading span{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  text-align: center;
+  line-height: 200px;
+  animation: a2 2s linear infinite;
+  /*a2自定义的动画帧，2s是整个动画的秒数，infinite是永久循环 linear是线性变化 (step-end则是无线性变化，直接输出结果)*/
+}
+
+@keyframes a1 {/*通过 @keyframes 规则，您能够创建动画。*/
+  to{
+    transform: rotate(360deg);/*顺时针旋转360度*/
+  }
+}
+
+@keyframes a2 {
+  to{
+    transform: rotate(-360deg);/*逆时针旋转360度,跟前面的顺时针做抵消,所以文字不会旋转只会动*/
+  }
+}

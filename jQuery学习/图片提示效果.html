@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			li{
+				list-style-type: none;
+				float: left; 
+				
+			}
+			#tooltip{
+				position: absolute; 
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			
+			$(function(){
+				
+				$("a.tooltip").mouseover(function(e){
+					
+					this.mytitle=this.title;
+					this.title="";
+					var imgtitle;
+					if(this.mytitle){//如果this.mytitle不为空，则执行
+						imgtitle="<br/>"+this.mytitle;
+					}else{
+						imgtitle="";
+					}
+					var tooltip="<div id='tooltip'><img src='"+this.href+"'alt='预览图'/>"+imgtitle+"</div>";
+					$("body").append(tooltip);
+					$("#tooltip").css("top",e.pageY+10+"px")
+								 .css("left",e.pageX+20+"px")
+								 .show("fast");
+				}).mousemove(function(e){
+					$("#tooltip").css("top",e.pageY+10+"px")
+								 .css("left",e.pageX+20+"px");
+				}).mouseout(function(){
+					this.title=this.mytitle;
+					$("#tooltip").remove();
+				});
+				
+			});
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li><a href="img/1.1.png" class="tooltip" title="疑问">
+				<img src="img/1.1.png" alt="疑问"/>
+			</a></li>
+			<li><a href="img/2.2.png" class="tooltip" title="下凡">
+				<img src="img/2.2.png" alt="下凡"/>
+			</a></li>
+			<li><a href="img/3.3.png" class="tooltip" title="白毛">
+				<img src="img/3.3.png" alt="白毛"/>
+			</a></li>
+			<li><a href="img/4.4.png" class="tooltip" title="良心">
+				<img src="img/4.4.png" alt="良心"/>
+			</a></li>
+		</ul>
+	</body>
+</html>

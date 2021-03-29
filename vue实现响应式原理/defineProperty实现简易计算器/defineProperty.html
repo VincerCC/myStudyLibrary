@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+  .current{
+    background-color: pink;
+    color: #FFFFFF;
+  }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <p class="result">0</p>
+
+    <div class="input-group">
+      <input type="text" class="fInput" value="">
+      <input type="text" class="sInput" value="">
+    </div>
+
+    <div class="btn-group">
+      <button data-field="plus" class="current">+</button>
+      <button data-field="minus">-</button>
+      <button data-field="mul">*</button>
+      <button data-field="div">/</button>
+    </div>
+  </div>
+  <script src="./defineProperty.js"></script>
+</body>
+</html>

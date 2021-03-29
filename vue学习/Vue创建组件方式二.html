@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<!--如果要使用组件，直接将组件的名称，以html格式引入页面
+				如果使用的驼峰命名，则需要改为-结构
+			-->
+			<my-com></my-com>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//1使用Vue.component('组件的名称'，组件模板对象)
+			//组件只能有一个根元素，也就是<h1></h1><span></span>是错误的
+			//应该改为<div><h1></h1><span></span></div>
+			Vue.component('myCom',{
+				//通过template，指定组件要展示的html结构
+				template:'<h3>这是用extend创建的组件</h3>'
+			})
+			
+			
+			
+			
+			
+			var vm=new Vue({
+				el:'#demo',
+				data:{},
+				methods:{}
+			})
+		</script>
+	</body>
+</html>

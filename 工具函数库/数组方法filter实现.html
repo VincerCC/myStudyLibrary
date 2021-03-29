@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./util.js"></script>
+</head>
+<body>
+  <script>
+
+    let arr = [1,2,3]
+    let brr = myFilter(arr, (item, index) => {
+      return item > 1
+    })
+    let crr = arr.filter((item, index) => {
+      return item > 1
+    })
+    console.log(brr)
+    console.log(crr)
+  </script>
+</body>
+</html>

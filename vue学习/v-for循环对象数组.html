@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="demo">
+			<p v-cloak v-for="(item,i) in list">索引:{{i}}---id:{{item.id}}---name:{{item.name}}</p>
+			<!--其中item为每一项，i为每一项的索引，list为所遍历的数组-->
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					list:[
+					{id:1,name:"zs"},
+					{id:2,name:"ls"},
+					{id:3,name:"ww"},
+					{id:4,name:"ll"},
+					]
+				},
+		})
+		</script>
+	</body>
+</html>

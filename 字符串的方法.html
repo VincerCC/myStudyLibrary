@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-19 13:56:27
+ * @LastEditTime: 2020-06-19 14:29:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \新建文件夹\HelloHBuilder\字符串的方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // 字符串的常用方法
+
+    // 1.substr(start,length) 方法用于截取字符串，从一个下标开始，截取指定长度，不会改变原数据，方法返回截取的字符串
+    let str = '我是一条长长的字符串'
+    let res1 = str.substr(0,2) //从下标0开始，截取 2 个长度
+    console.log(res1)// 我是
+    console.log(str)// 我是一条长长的字符串
+
+    // 2.substring(start,end) 方法用于截取字符串，从一个下标开始，截取到指定下标，不包括指定下标这个元素,不会改变原数据，方法返回截取的字符串
+    let res2 = str.substring(0,3)//从下标0开始，截取到下标为3，不包括下标为3的元素
+    console.log(res2)// 我是一
+    console.log(str)// 我是一条长长的字符串
+
+    // 3.split(),方法用于将字符串通过某个特定的分隔符分割开为数组,不会改变原数据，返回分割后的数组
+    let res3 = str.split('的')// 将字符串通过 '的'，分隔开成数组
+    console.log(res3)//  ["我是一条长长", "字符串"]
+    console.log(str)// 我是一条长长的字符串
+
+    // 4.replace(old, new) 字符串替换，将old替换为new,方法返回新的字符串，不会改变原数据
+    let res4 = str.replace('长长','短短')
+    console.log(res4)//  ["我是一条长长", "字符串"]
+    console.log(str)// 我是一条长长的字符串
+  </script>
+</body>
+</html>

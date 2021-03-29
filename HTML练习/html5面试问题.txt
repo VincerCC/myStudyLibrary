@@ -1,0 +1,395 @@
+1、如何理解语义化。
+	答：语义化，就是使用恰当的标签，去展示恰当的内容，而不是全部用div，比如要写大标题，不用字体加粗的形式写，而是使用<h1></h1>来表示大标题。
+	    通过语义化的标签，可以让页面有良好的结构和含义，使网站可读性增强。让团队维护起来更轻松。
+
+2、html5新增的标签有哪些？
+答：
+1、结构标签
+
+（1）section：独立内容区块，可以用h1~h6组成大纲，表示文档结构，也可以有章节、页眉、页脚或页眉的其他部分；
+
+（2）article：特殊独立区块，表示这篇页眉中的核心内容；
+
+（4）header：某个区块的头部信息/标题；
+
+
+（6）footer：底部信息；
+
+（7）nav：导航条部分信息
+
+（8）figure：独立的单元，例如某个有图片与内容的新闻块。
+
+
+
+2、表单标签
+
+（1）email：必须输入邮件；
+
+（2）url：必须输入url地址；
+
+（3）number：必须输入数值；
+
+（4）range：必须输入一定范围内的数值；
+
+（5）Date Pickers：日期选择器；
+a.date：选取日、月、年
+				
+b.month：选取月、年
+	
+				c.week：选取周和年
+				
+d.time：选取时间（小时和分钟）
+				
+e.datetime：选取时间、日、月、年（UTC时间）
+				
+f.datetime-local：选取时间、日、月、年（本地时间）
+
+（6）search：搜索常规的文本域；
+
+（7）color：颜色
+
+
+
+3、媒体标签
+
+（1）video：视频
+
+（2）audio：音频
+
+（3）embed：嵌入内容（包括各种媒体），Midi、Wav、AU、MP3、Flash、AIFF等。
+
+
+
+4、其他功能标签
+
+（1）mark：标注（像荧光笔做笔记）
+
+（2）progress：进度条；<progress max="最大进度条的值" value="当前进度条的值">
+
+（3）time：数据标签，给搜索引擎使用；发布日期<time datetime="2014-12-25T09:00">9：00</time>更新日期<time datetime="2015- 01-23T04:00" pubdate>4:00</time>
+
+（4）ruby和rt：对某一个字进行注释；<ruby><rt>注释内容</rt><rp>浏览器不支持时如何显示</rp></ruby>
+
+（5）wbr：软换行，页面宽度到需要换行时换行；
+
+（6）canvas：使用JS代码做内容进行图像绘制；
+
+（7）command：按钮；
+
+（8）deteils ：展开菜单；
+
+（9）dateilst：文本域下拉提示；
+
+（10）keygen:加密；
+
+
+
+
+
+
+CSS3新增属性
+1、transparent 它代表着全透明黑色，即一个类似rgba(0,0,0,0)这样的值，background:transparent
+
+2、	content-box	背景图像相对于内容区来定位。
+	border-box	背景图像相对于边框盒来定位。
+	padding-box	背景图像相对于内边距框来定位。
+
+3、边框圆角
+	border-radius:左上角 右上角 右下角 左下角
+	border-radius:属性值1（左上角，右下角） 属性值2（右上角 左下角）
+	border-radius:属性值1（左上角） 属性值2（右上角，左下角） 属性3（右下角）
+ 半圆：border-radius: 150px 150px 0 0;
+
+4、边框阴影
+	box-shadow: h-shadow v-shadow blur spread color inset;
+注释：box-shadow 向框添加一个或多个阴影。该属性是由逗号分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0。
+
+	值	描述	测试
+	h-shadow	必需。水平阴影的位置。允许负值。	
+	v-shadow	必需。垂直阴影的位置。允许负值。	
+	blur	可选。模糊距离。	
+	spread	可选。阴影的尺寸。	
+	color	可选。阴影的颜色。	
+	inset	可选。将外部阴影 (outset) 改为内部阴影。	
+
+5、边框图片
+	border-image 属性是一个简写属性，用于设置以下属性：
+
+	border-image-source 用在边框的图片的路径。
+	border-image-slice	图片边框向内偏移。
+	border-image-width	图片边框的宽度
+	border-image-outset	边框图像区域超出边框的量。
+	border-image-repeat	图像边框是否应平铺(repeat)、铺满(round)或拉伸(stretch)。
+
+border-image: url(/statics/demosource/border_image_button.png) 0 14 0 stretch;
+}
+
+6、文本属性
+?
+		文本阴影 text-shadow ： 2px（水平，可为负数） 3px（垂直，可为负数） ?2px（模糊距离，不能为负数） ?red(颜色)；
+?
+		文本描边 -webkit-text-stroke：宽度 颜色；一定要加上-webkit-前缀
+?
+		溢出省略 ?text-overflow：ellipse（省略号）；要和overflow：hidden；white-space：nowrap使用。
+?
+		文本排版 ?dirction
+?ltr(left to right 从左到右)
+?rtl（right ?to left 从右到左），一定要配合 unicode-bidi: bidi-override; */
+? ? ? ? ? ? 		direction: rtl;
+? ? ? ? ? ? 
+		unicode-bidi: bidi-override;
+
+7、css过渡效果（重要），过渡效果通常在用户将鼠标指针浮动到元素上时发生。
+	
+transition:
+取值：
+	transition-property：height ，width.....（规定设置过渡效果的 CSS 属性的名称）
+? ? ? ? ?
+	transition-duration：3s；过渡时间
+? ? ? ? ?
+	transition-delay：1s；
+定义过渡效果何时开始
+	transition-timing-function：
+?取值：ease；开始快，后面越来越慢。
+?ease-in；开始慢，后面越来越快
+? ease-out；减速运动
+? ease-in-out；先加速后减速						   linear	规定以相同速度开始至结束的过渡效果	
+
+
+8、动画效果
+
+
+@keyframes myfirst
+{
+
+	from {background: red;}
+
+	to {background: yellow;}
+
+}
+
+
+@-moz-keyframes myfirst /* 火狐浏览器Firefox */
+{
+
+	from {background: red;}
+
+	to {background: yellow;}
+
+}
+
+
+@-webkit-keyframes myfirst /* 苹果浏览器Safari 和 谷歌浏览器Chrome */
+{
+
+	from {background: red;}
+
+	to {background: yellow;}
+
+}
+
+
+@-o-keyframes myfirst /* 欧朋浏览器Opera */
+{
+	
+from {background: red;}
+	
+to {background: yellow;}
+
+}
+@keyframes myfirst
+{
+	
+0%   {background: red; left:0px; top:0px;}
+	
+25%  {background: yellow; left:200px; top:0px;}
+
+	50%  {background: blue; left:200px; top:200px;}
+	
+75%  {background: green; left:0px; top:200px;}
+
+	100% {background: red; left:0px; top:0px;}
+
+}
+可用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。
+0% 是动画的开始，100% 是动画的完成。
+
+把 "myfirst" 动画捆绑到 div 元素，时长：5 秒：
+
+div
+{
+
+animation: myfirst 5s;
+
+-moz-animation: myfirst 5s; /* Firefox */
+
+-webkit-animation: myfirst 5s; /* Safari 和 Chrome */
+
+-o-animation: myfirst 5s; /* Opera */
+
+}
+
+animation 属性是六个动画属性的速记属性： 
+	animation-name	规定需要绑定到选择器的 keyframe 名称。。
+	animation-duration	规定完成动画所花费的时间，以秒或毫秒计。
+	animation-timing-function	规定动画的速度曲线。
+	animation-delay	规定在动画开始之前的延迟。
+	animation-iteration-count	规定动画应该播放的次数。
+	animation-direction	规定是否应该轮流反向播放动画。
+
+例：animation: myfirst 5s;
+把 "myfirst" 动画捆绑到 div 元素，时长：5 秒：
+
+
+
+
+
+
+如何理解语义化。
+	答：语义化，就是使用恰当的标签，去展示恰当的内容，而不是全部用div，比如要写大标题，不用字体加粗的形式写，而是使用<h1></h1>来表示大标题。
+	    通过语义化的标签，可以让页面有良好的结构和含义，使网站可读性增强。让团队维护起来更轻松。
+
+
+html中行内元素有哪些？   a,img,span,input
+html中块元素有哪些?      div,ul,li,p,h1-h6
+
+html5新增哪些标签？	footer，header，canvas，video，audio，email，url
+html5移除了哪些元素？	big,font
+
+验证码原理是什么？原理是服务端随机生成验证码字符串，保存在内存中，发给浏览器显示，浏览器接受用户输入的字符提交给服务端验证，验证一致就继续，否则返回提示错误！
+
+盒模型有哪些：包括margin，padding，border，content，但是w3c的content不包括border和padding，IE的盒模型包括border和padding
+
+display有哪些值？	有block，inline，none（隐藏元素）,inline-block
+
+position有哪些？		有	relative相对定位，相对于其正常位置进行定位
+				absolute绝对定位，相对于 开启了定位的最近的父元素定位
+				fixed固定定位。相对于浏览器窗口进行定位
+
+
+清除浮动	.clearfix:before,.clearfix:after{
+					/*添加一个内容*/
+					content: "";
+					/*转换为一个块元素*/
+					display: block;
+					/*清除两侧的浮动*/
+					clear: both;
+					}
+					 * 在IE6中不支持after伪类,
+					 * 所以在IE6中还需要使用hasLayout来处理
+					 */
+					.clearfix{
+						zoom:1;
+						}
+
+window对象，document对象？	window对象是一个顶层对象，document对象是window对象的一个对象属性
+
+javascript有哪些基本数据类型？	undefined、string、boolean、null、number
+javascrip有哪些引用类型？	object,array,function
+
+null和undefined区别？		null表示没有对象，undefined表示缺少值
+
+什么是闭包？			闭包就是定义在函数内部的函数
+JS如何延迟加载？			在</body>之前引入js文件
+
+同步和异步的差别？	同步	是指一个进程在执行某个请求时，若该请求需要					一段时间才能返回消息，那么进程会一直等待下去
+			异步	是指进程不需要一直等下去，而是继承执行下面的操				作，不管其他进程状态
+
+
+已知ID的input输入框，希望获取这个输入框的输入值，怎么做？(不使用第三方框架)
+
+答：document.getElementById(id).value;
+
+设置一个已知ID的div和html内容为xxx，字体颜色设置为黑色？(不使用第三方框架)
+
+答：var div = document.getElementById(id);
+
+    div.innerHTML = ”;
+
+    div.style.color = ”;
+
+
+Javascript的事件流模型都有什么？
+
+答：“事件冒泡”：事件开始由最具体的元素接受，然后逐级向上传播
+
+    “事件捕捉”：事件由最不具体的节点先接收，然后逐级向下，一直到最具体的
+
+    “DOM事件流”：三个阶段：事件捕捉，目标阶段，事件冒泡
+
+
+
+什么是Ajax？		Ajax是异步javascript和xml
+
+
+split()和join()的区别？
+答：join("，")是把数组的所有元素拼成一个字符串,以，作为分隔符
+    split("，")方法用于把一个字符串分割成字符串数组,以，作为分隔符
+
+
+数组方法pop() push() unshift() shift()?
+答：push()方法，在数组后面添加元素，是在原数组上进行操作
+    pop()方法，删除数组后面的最后一个元素
+    unshift()，在数组前面添加元素
+    shift()方法，删除数组前面的第一个元素
+
+解释下 JavaScript 中 this 是如何工作的？
+答：this 永远指向函数运行时所在的对象，而不是函数被创建时所在的对象。匿名函	数或不处于任何对象中的函数指向 window
+    1.如果是call，apply,with，指定的this是谁，就是谁
+
+    2.普通的函数调用，函数被谁调用，this就是谁
+
+
+
+线程和进程各自有什么区别和优劣呢？
+	进程是资源（CPU、内存等）分配的基本单位，它是程序执行时的一个实例。程序运行时系统就会创建一个进程，并为它分配资源，然后把该进程放入进程就绪队列，进程调度器选中它的时候就会为它分配CPU时间，程序开始真正运行。
+
+	线程是程序执行时的最小单位，它是进程的一个执行流，是CPU调度和分派的基本单位，一个进程可以由很多个线程组成，线程间共享进程的所有资源，每个线程有自己的堆栈和局部变量。线程由CPU独立调度执行，在多CPU环境下就允许多个线程同时运行。同样多线程也可以实现并发操作，每个请求分配一个线程来处理。
+
+	1.进程是资源分配的最小单位，线程是程序执行的最小单位。
+
+	2.进程有自己的独立地址空间，每启动一个进程，系统就会为它分配地址空间，建立数据表来维护代码段、堆栈段和数据段，这种操作非常昂贵。而线程是共享进程中的数据的，使用相同的地址空间，因此CPU切换一个线程的花费远比进程要小很多，同时创建一个线程的开销也比进程要小很多。
+
+	3.线程之间的通信更方便，同一进程下的线程共享全局变量、静态变量等数据，而进程之间的通信需要以通信的方式（IPC)进行。不过如何处理好同步与互斥是编写多线程程序的难点。
+	
+	4.但是多进程程序更健壮，多线程程序只要有一个线程死掉，整个进程也死掉了，而一个进程死掉并不会对另外一个进程造成影响，因为进程有自己独立的地址空间。
+
+
+
+
+
+浅谈常见设计模式
+	1.单例模式		保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+	2.工厂模式		为创建对象提供过渡接口，以便将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的
+	3.建造模式		是一种对象构建的设计模式，它可以将复杂对象的建造过程抽象出来（抽象类别），使这个抽象过程的不同实现方法可以构造出不同表现（属性）的对象。
+
+
+
+
+
+
+
+
+
+
+
+封装：就是隐藏对象的属性和实现细节,仅对外提供公共访问方式。
+	封装的好处:隐藏类的实现细节;让使用者只能通过程序员规定的方法来访问数据;可以方便的加入存取控制语句,限制不合理操作.
+
+继承：是 java 中实现代码重用的重要手段之一.java中只支持单继承,即每个类只能有一个父类.继承表达的是 is a 的关系,或者说是一种特殊和一般的关系.
+
+多态的三个条件:
+
+1.    继承的存在(继承是多态的基础,没有继承就没有多态).
+
+2.    子类重写父类的方法(多态下调用子类重写的方法).
+
+3.    父类引用变量指向子类对象(子类到父类的类型转换).
+
+面向对象的方法主要是把事物给对象化，对象包括属性与行为。
+
+面向对象可以理解成对待每一个问题，都是首先要确定这个问题由几个部分组成，而每一个部分其实就是一个对象。然后再分别设计这些对象，最后得到整个程序。
+
+面向对象优点：代码开发模块化，更易维护和修改。
+
+代码复用。

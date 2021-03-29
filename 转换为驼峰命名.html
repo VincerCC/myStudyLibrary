@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			function toString(foo){
+				var arr=foo.split('-');//split(),将字符串根据-拆分为数组
+				for(var i=1;i<arr.length;i++){
+					arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+					//charAt(0)，返回索引为0的字符
+					//.toUpperCase()转换为大写
+					//.substr(1,arr[i].length-1)从索引为1开始截取字符串，截取长度为length-1
+				}
+				return arr.join('');//将数组根据''拼接成字符串
+			}	
+		console.log(toString('get-element-by-id'));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

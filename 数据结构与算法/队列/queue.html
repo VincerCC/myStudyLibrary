@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-06 11:07:09
+ * @LastEditTime: 2020-11-06 14:39:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \我的前端知识库\数据结构与算法\栈\queue.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./queue.js"></script>
+  <script>
+    let queue = new Queue()
+    // console.log(queue)
+    // queue.endQueue('Jack')
+    // queue.endQueue('Tom')
+    // queue.endQueue('Mike')
+    // console.log(queue.queueList)
+    // setTimeout(()=>{
+    //   console.log('queue的长度,'+queue.size())
+    //   console.log('queue移除第一个进队列的元素,'+queue.delQueue())
+    //   console.log(queue.queueList)
+    //   console.log('queue查看第一个进队列的元素,'+queue.front())
+    //   console.log(queue.queueList)
+    //   console.log('queue是否为空,'+queue.isEmpty())
+    //   console.log('queue拼接字符串,'+queue.toString())
+    // },500)
+
+
+
+    // 几个人围一圈，从0开始数，数到2的淘汰，直至最后一人胜出
+    function sayNum(nameList,num){
+      console.log('8')
+      const queue2 = new Queue()
+      // 循环，将人一次加入队列
+      nameList.forEach((item)=>{
+        queue2.endQueue(item)
+      })
+      // 当队列的长度大于1时，游戏还在继续，等于1时，游戏结束
+      while(queue2.size() > 1){
+        for(let i = 0; i < num; i++){
+          // 将出去队列的元素，重新添加到队列尾部
+          if( i === num-1){
+            queue2.delQueue()
+            console.log(queue2.queueList)
+          }else{
+            queue2.endQueue(queue2.delQueue())
+            console.log(queue2.queueList)
+          }
+
+
+        }
+      }
+      return queue2.front()
+    }
+    console.log(sayNum(['Jack','Tom','Mike','Lucy'],3))
+  </script>
+</body>
+</html>

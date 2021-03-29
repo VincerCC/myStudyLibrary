@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 加密,sault加密位数
+    var strEncryptFn = function (str,sault){
+      if(!str) return ''
+      let EncryptArr = str.split('').map((item) => {
+        return String.fromCharCode(item.charCodeAt(0) + sault)
+      })
+      console.log(EncryptArr)
+      return EncryptArr.join('')
+    }
+    //解密,sault解密位数
+    var strDecryptFn = function (str,sault){
+      if(!str) return ''
+      let DecryptArr = str.split('').map((item) => {
+        return String.fromCharCode(item.charCodeAt(0) - sault)
+      })
+      console.log(DecryptArr)
+      return DecryptArr.join('')
+    }
+    let strEncrypt = strEncryptFn('hello',6)
+    let strDecrypt = strDecryptFn(strEncrypt,6)
+    console.log(strEncrypt)
+    console.log(strDecrypt)
+  </script>
+</body>
+</html>

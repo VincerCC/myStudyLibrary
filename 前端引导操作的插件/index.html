@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+</head>
+<body>
+  <!-- 官网 -->
+  <a href="https://kamranahmed.info/driver.js/">driver.js</a>
+  <h1 id="h1">你好1</h1>
+  <button id="btnH1">高亮h1</button>
+  <h1 id="h2">你好2</h1>
+  <button id="btnH2">高亮h2</button>
+
+  <hr />
+  带步骤的高亮
+  <h1 id="h3">你好3</h1>
+  <h1 id="h4">你好4</h1>
+  <h1 id="h5">你好5</h1>
+
+  <button id="btnH3">高亮h3-h4-h5</button>
+  <script>
+    let driver = new Driver()
+    let btnH1 = document.getElementById('btnH1')
+    let btnH2 = document.getElementById('btnH2')
+    let btnH3 = document.getElementById('btnH3')
+    btnH1.onclick = function (){
+      setTimeout(()=>{
+
+        driver.highlight('#h1')
+      },50)
+    }
+    btnH2.onclick = function (){
+      setTimeout(()=>{
+
+        driver.highlight({
+          element:'#h2',
+          popover:{
+            title:'啊哈哈哈',
+            description:'真不错'
+          }
+        })
+      },50)
+    }
+
+    const stepArr = [
+      {
+        element:'#h3',//需要高亮的元素
+        popover:{
+          // 弹出框配置
+          title:'我是H3',//标题
+          description:'真不错3'//内容
+        },
+        nextBtnText:'下一步',//下一步按钮文本
+        onNext:()=>{
+          // 点击下一步会触发函数
+          console.log('下一步')
+        },
+        doneBtnText:'完成',//完成按钮文本
+        prevBtnText:'上一步',//上一步按钮文本
+        closeBtnText:'关闭'//关闭按钮文本
+      },
+      {
+        element:'#h4',
+        popover:{
+          title:'我是H4',
+          description:'真不错4'
+        },
+        nextBtnText:'下一步',//下一步按钮文本
+        doneBtnText:'完成',//完成按钮文本
+        prevBtnText:'上一步',//上一步按钮文本
+        closeBtnText:'关闭'//关闭按钮文本
+      },
+      {
+        element:'#h5',
+        popover:{
+          title:'我是H5',
+          description:'真不错5'
+        },
+        doneBtnText:'完成',//完成按钮文本
+        prevBtnText:'上一步',//上一步按钮文本
+        closeBtnText:'关闭',//关闭按钮文本
+        onHighlightStarted: (Element) => {console.log('onHighlightStarted')}, // Called when element is about to be highlighted
+        onHighlighted: (Element) => {console.log('onHighlighted')},      // Called when element is fully highlighted
+        onDeselected: (Element) => {console.log('onDeselected')},       // Called when element has been deselected
+        onReset: (Element) => {console.log('onReset')},            // Called when overlay is about to be cleared
+        onNext: (Element) => {console.log('onNext')},                    // Called when moving to next step on any step
+        onPrevious: (Element) => {console.log('onPrevious')},                // Called when moving to previous step on any step
+      }
+    ]
+    btnH3.onclick = function (){
+      setTimeout(()=>{
+        // 定义步骤
+        driver.defineSteps(stepArr)
+        driver.start()
+      },50)
+    }
+  </script>
+</body>
+</html>

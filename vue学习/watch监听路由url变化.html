@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<!--1、安装路由-->
+		<script type="text/javascript" src="js/vue-router.js" ></script>
+		<style>
+			.myclass{
+				color:red;
+				font-size: 32px;
+				background-color: hotpink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<!--这是vue-router提供的元素，专门用来放路由规则匹配到的组件-->
+			<router-view></router-view>
+			<router-link to="/login" tag="span">登录</router-link>
+			<router-link to="/register">注册</router-link>
+		</div>
+		
+		<script>
+			//login为组件模板对象
+			var login={
+				template:'<h1>我是登录组件</h1>'
+			}
+			var register={
+				template:'<h1>我是注册组件</h1>'
+			}
+//			 Vue.component('login',{
+//			 	template:'<h1>我是组件</h1>'
+//			 })这里的login是模板名称
+
+
+			//2、创建一个路由对象,在new路由的时候，乐意为构造函数传递一个配置对象
+			var routerObj=new VueRouter({
+				//这个配置对象中的routes，表示路由匹配规则的意思
+				routes:[//路由匹配规则
+				//每个路由规则都是一个对象，对象身上都有两个属性
+				//1.path	表示监听哪个路由链接地址
+				//2.component	表示如果路由的前面匹配的path，则展示component对应那个组件
+				//			component属性值必须是组件模板对象，不能是模板名称
+				
+					{path:'/',redirect:'/login'},//这里会更改默认加载进来的页面为login页面
+					{path:'/login',component:login},
+					{path:'/register',component:register}
+				],
+				//linkActiveClass可以自定义选中时候link的样式
+				linkActiveClass:'myclass'
+			})
+			var vm=new Vue({
+				el:'#demo',
+				data:{},
+				methods:{},
+				//将路由规则对象注册到vm实例上，用来监听url地址变化，然后展示对应的组件
+				router:routerObj,
+				watch:{
+					//this.$route.path可以获取到路由url
+					'$route.path':function(newvalue,oldvalue){
+						console.log(newvalue,oldvalue)
+						if(newvalue=='/login'){
+							console.log("欢迎来到登录界面")
+						}else if(newvalue=='/register'){
+							console.log("欢迎来到注册界面")
+						}
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

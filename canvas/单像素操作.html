@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+
+			#can{
+				background: gray;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="can" width="300" height="300"></canvas>
+	</body>
+	<script type="text/javascript" >
+		window.onload=function(){
+			var canvas=document.querySelector("#can");
+			if(canvas.getContext)
+			{
+				var ctx=canvas.getContext("2d");
+				ctx.save();
+				ctx.fillStyle="skyblue";
+				ctx.beginPath();
+				ctx.fillRect(50,50,100,100);
+				ctx.restore();
+
+				var imagedata=ctx.getImageData(0,0,canvas.width,canvas.height);
+				console.log(imagedata)
+				for(var i=0;i<imagedata.width;i++){
+					setPxInfo(imagedata,i,49,[255,255,0,255]);
+				}
+				ctx.putImageData(imagedata,0,0);
+
+			}
+
+			//获取像素内的单个像素rgba，x,y代表偏移量，
+			function getPxInfo(imagedata,x,y){
+				var color=[];
+
+				var data=imagedata.data;
+
+				var w=imagedata.widtht;
+				//r
+				color[0]=data[(y*w+x)*4];
+				//g
+				color[1]=data[(y*w+x)*4+1];
+				//b
+				color[2]=data[(y*w+x)*4+2];
+				//a
+				color[3]=data[(y*w+x)*4 +3];
+				return color;
+			}
+			//修改像素内的单个像素rgba，x,y代表偏移量，color代表要修改成什么样颜色例如[0,0,0,255]就是黑色不透明颜色
+			function setPxInfo(imagedata,x,y,color){
+
+
+				var data=imagedata.data;
+
+				var w=imagedata.width;
+				//r
+				data[(y*w+x)*4]=color[0];
+				//g
+				data[(y*w+x)*4+1]=color[1];
+				//b
+				data[(y*w+x)*4+2]=color[2];
+				//a
+				data[(y*w+x)*4 +3]=color[3];
+
+			}
+		};
+
+	</script>
+</html>

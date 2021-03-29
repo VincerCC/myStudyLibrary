@@ -1,0 +1,127 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-09 16:28:32
+ * @LastEditTime: 2020-06-19 17:49:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \新建文件夹\HelloHBuilder\ES6新语法\用Set、Map容器为数组去重.html
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <script>
+
+
+        //用Set实现数组去重
+        let arrarr=[1,2,3,3,'3',2,4,6,9,7,6,5]
+        let set=new Set(arrarr)
+
+        console.log(set)//输出[1, 2, 3,'3', 4, 6, 9, 7, 5]
+
+
+        //用Map实现数组去重
+        var unique=function(arr) {
+			const res = new Map();//可以实现数组去重，因为new Map的键值对的key是唯一的，将数组的元素作为key实现去重
+			console.log(res)
+			return arr.filter((item) => {
+                // debugger
+                console.log(item)
+                //res.has(item)判断res中有没有item，如果有，返回true
+                // !res.has(item) && res.set(item, 1),如果item的值已经存在于res中的键值，!true，则不set，否则才set进去
+				// console.log(res.has(item),1)
+				// console.log(res.set(item))
+                return !res.has(item) && res.set(item, 1)//如果res没有item，才往res塞入item,    set(key,value)
+                // 当res中没有item时，return返回true,筛选出item的值保存
+				})
+		}
+
+        console.log(unique(arrarr))
+
+
+
+        var arr=[8,10,96,120,3,8,96,11,8,0,10,0,10,82,'82']
+			var t=[];
+			t[0]=arr[0];
+			for(var i=0;i<arr.length;i++){
+				for(var j=0;j<t.length;j++){
+					if(t[j]===arr[i]){
+						break;
+					}
+					if(j==t.length-1){
+						t[j+1]=arr[i];//向数组增加一个值，可用t.push(arr[i]);代替
+					}
+				}
+			}
+			console.log(t);
+
+
+
+
+
+		function unique1(arr) {
+          var unique = {}
+          arr.forEach(function (item) {
+			// 循环数组，将数组的每个值，转化为JSON格式，作为对象unique的键名，不会重复，最终unique是这样的
+			// unique = {'a':1,'b':2}
+            unique[JSON.stringify(item)] = item
+		    })
+			// Object.keys(unique),获取到对象的键名，产生新数组，进行map遍历，遍历中将键名格式转换为js，并且return出去，返回遍历结果组成的数组.将unique对象的键名还原成对象数组
+            arr = Object.keys(unique).map(function (u) {
+                return JSON.parse(u)//里边的每一项键都是JSON格式的，如果不转换的话，会出现""9""这种情况
+          })
+        return arr
+		}
+		function unique2(arr) {
+          var unique = {}
+          let brr = []
+          arr.forEach(function (item) {
+			// 循环数组，将数组的每个值，转化为JSON格式，作为对象unique的键名，不会重复，最终unique是这样的
+			// unique = {'a':1,'b':2}
+            unique[JSON.stringify(item)] = item
+		  })
+          console.log(unique,'unique')
+          for(let item in unique){
+            //   for in 能循环对象的键
+			brr.push(JSON.parse(item))
+		  }
+        return brr
+		}
+        let aarr=[1,3,9,'9',5,9,9,4]
+        console.log(unique1(aarr))
+        console.log(unique2(aarr))
+        console.log(unique(aarr))
+
+
+
+
+        // 支持多维数组去重
+        // 1.首先数组扁平化
+        // 2.使用map实现去重，缺点是不能去重'9'和9
+        function flatArr(arr){
+            // 扁平化所有层级数组
+            let newArr = arr.flat(Infinity)
+            var map = new Map()
+            return newArr.filter((item) => {
+                console.log(map)
+                if(!map.has(item)) {
+                    // 如果map中不包含当前item项，代表不重复，往map塞入当前item，并且return当前item记录
+                    map.set(item,1)
+                    return true
+                }
+                return false
+            })
+        }
+        console.log(flatArr([1,3,9,'9',5,[9,9,4]]))
+    </script>
+</body>
+
+</html>

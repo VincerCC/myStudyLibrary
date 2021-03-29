@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"></meta>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin:0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+
+			}
+			#can{
+				position: absolute;
+				left:0;
+				top:0;
+
+
+			}
+			#ggk,ul,ul>li{
+				height: 100%;
+			}
+			ul>li{
+				background: url(img/b.png);
+				background-size:100% 100% ;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ggk">
+			<canvas id="can" ></canvas>
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript" >
+		window.onload=function(){
+			var canvas=document.querySelector("#can");
+			canvas.width=document.documentElement.clientWidth;
+			canvas.height=document.documentElement.clientHeight;
+			if(canvas.getContext) {
+				var ctx=canvas.getContext("2d");
+
+				var img=new Image();
+				img.src="img/a.png";
+				img.onload=function(){
+					draw();
+				};
+
+
+				function draw(){
+				ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+				canvas.addEventListener("touchstart",function(ev){//绑定手指或鼠标点击函数
+						ev = ev||event;//解决兼容性问题
+						var touchC = ev.changedTouches[0];//拿到手指
+
+						var x = touchC.clientX - canvas.offsetLeft;
+						//手指点击的位置=手指到浏览器的水平偏移量-画布的水平偏移量
+						//clientX 事件属性返回当事件被触发时鼠标指针相对于浏览器页面（或客户区）的水平坐标。
+						//offsetLeft 当前元素和定位父元素之间的偏移量
+						var y = touchC.clientY - canvas.offsetTop;
+
+
+
+						// ctx.save();
+						// ctx.globalCompositeOperation="destination-out";
+						// //只留下目标超过源的部分
+						// //当手指点击时，手指画的为源，canvas为目标，手指滑动时只留下目标超过源的部分，也就是滑哪里哪里刮开
+						// ctx.lineWidth=40;//设置线宽度为40
+						// ctx.lineCap="round";//设置线的头尾为圆
+						// ctx.lineJoin="round";//设置线拐角为圆
+
+						// ctx.beginPath();//清空路径容器
+
+						ctx.moveTo(x,y);//手指点击时，将画笔移动到这个地方
+						// ctx.lineTo(x+1,y+1);//移动画笔
+						// ctx.stroke();//闭合画线
+						// ctx.restore();//
+				})
+
+				canvas.addEventListener("touchmove",function(ev){//绑定手指或鼠标滑动函数
+						ev = ev||event;
+						var touchC = ev.changedTouches[0];
+
+						var x = touchC.clientX - canvas.offsetLeft;
+						var y = touchC.clientY - canvas.offsetTop;
+
+						ctx.save();
+						ctx.globalCompositeOperation="destination-out";//只留下目标超过源的部分
+						//当手指点击时，手指画的为源，canvas为目标，手指滑动时只留下目标超过源的部分，也就是滑哪里哪里刮开
+						ctx.lineWidth=40;//设置线宽度为40
+						ctx.lineCap="round";//设置线的头尾为圆
+						ctx.lineJoin="round";//设置线拐角为圆
+						ctx.lineTo(x,y);
+						ctx.stroke();
+						ctx.restore();
+					})
+
+				}
+			}
+		}
+	</script>
+</html>

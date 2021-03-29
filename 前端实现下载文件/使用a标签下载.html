@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- a标签不能下载跨域的图片，可以使用blob将跨域地址转成blob数据格式，再将blob数据格式转成url即可下载 -->
+  <a download="image" href="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3489670964,4227425969&fm=26&gp=0.jpg">下载跨域图片</a>
+  <hr>
+  <a downLoad="我是自定义名字" href="" id="downLoad">下载</a>
+  <script>
+    function downLoad(url){
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET',url)
+      xhr.responseType = 'blob'
+      xhr.send()
+      xhr.onload = function(){
+        const fileBlob = xhr.response
+        console.log(fileBlob)
+        // 将blob转成url地址
+        const fileUrl = URL.createObjectURL(fileBlob)
+        console.log(fileUrl)
+        let elementA = document.querySelector('#downLoad')
+        elementA.href = fileUrl
+      }
+    }
+    downLoad('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3489670964,4227425969&fm=26&gp=0.jpg')
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+对象.事件 = function(event){
+
+	event = event || window.event;//解决浏览器兼容问题
+
+	 
+	};

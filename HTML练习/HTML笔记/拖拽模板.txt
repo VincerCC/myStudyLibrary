@@ -1,0 +1,23 @@
+xxxx.onmousedown=function(ev)//鼠标被按下响应函数
+				{
+				ev = ev || window.event;//解决兼容性问题
+				if(xxxx.setCapture)
+	//setCapture捕获以下鼠标事件：onmousedown、onmouseup、onclick、ondblclick、onmouseover和onmouseout。
+				{
+					xxxx.setCapture();
+				}
+				
+				document.onmousemove=function(ev)//鼠标被移动时触发
+				{
+					
+				}
+				document.onmouseup=function()//鼠标抬起时触发
+				{
+					document.onmousemove=document.onmouseup=null;//结束前面的函数作用
+					if(document.releaseCapture)//结束捕获
+					{
+						document.releaseCapture();
+					}
+				}
+				return false;
+			}//拖拽模板

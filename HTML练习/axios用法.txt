@@ -1,0 +1,13 @@
+安装axios    npm i axios -s
+哪里需要用axios就在哪里导入axios     import axios from 'axios'
+
+axios.get('api/getlunbo').then(result=>{
+					this.lunbotuList=result.data.message
+//console.log(result.data.message)
+				})
+
+
+
+在main.js设置根路径
+	import axios from 'axios'
+	axios.defaults.baseURL = 'http://www.liulongbin.top:3005';

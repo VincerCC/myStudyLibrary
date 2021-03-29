@@ -1,0 +1,64 @@
+- <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: black;
+			}
+			#test{
+				background: white;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="test" width="300" height="300">
+			
+		</canvas>
+	</body>
+	<script type="text/javascript"> 
+	window.onload=function(){
+		var canvas=document.querySelector("#test");//获取画布
+		canvas.width=document.documentElement.clientWidth;//设置画布的宽高为浏览器的宽高
+		canvas.height=document.documentElement.clientHeight;
+		if (canvas.getContext){
+			var ctx=canvas.getContext("2d");//获取画笔
+			var flag=0;
+			var valueX=0;//控制X轴的移动
+			var valueY=0;//控制Y轴的移动
+			setInterval(function(){//定时调用函数
+			ctx.clearRect(0,0,canvas.width,canvas.height);//清空样式
+			flag++;//每次进来函数，图片从0自加
+			valueX+=10;
+			valueY+=4;
+			if(flag==9){//当到了第九张，设置为第一张
+				flag=1;
+			}
+			var imge=new Image();//画布中，画图片
+			imge.src="img/q_r"+(flag)+".jpg";//图片每次进来函数会切换
+			imge.onload=function(){
+				draw(this);//画图片
+			}
+			},100);
+		}
+		function draw(imge){//画图片函数
+			ctx.drawImage(imge,valueX,valueY);
+		}
+	};
+	</script>
+</html>

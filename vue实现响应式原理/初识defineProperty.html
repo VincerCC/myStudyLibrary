@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function defineProperty (){
+      let obj = {}
+      let a = ''
+      let b = ''
+      // Object.defineProperty(obj, prop, descriptor)
+      // obj 需要定义属性的对象
+      // prop：要定义 或 修改的属性名 或 Symbol
+      // descriptor：描述的集合对象
+      //           value 默认值
+      //           writable 是否可修改，默认为false不可修改
+      //           enumerable 是否可枚举，默认为false不可枚举
+      //           configurable 是否可操作(删除),默认false不可操作
+      // 注意 value 和 writable任何一个都与get、set互斥，不能同时存在
+      //           get() 对属性进行获取会触发get方法
+      //           set(newVal) 对属性进行设置会触发set方法
+
+
+      // Object.defineProperties(obj,{
+      //   prop1:{
+      //         get(){},
+      //         set(){}
+      //   }
+      //   prop2:{
+      //         get(){},
+      //         set(){}
+      //   }
+      // })
+      // 能够同时设置多个属性值
+      Object.defineProperty(obj, 'a', {
+        get(){
+          return a
+        },
+        set(newVal){
+          console.log('成功set值'+ newVal + '到obj')
+          a = newVal
+        }
+      })
+      Object.defineProperty(obj, 'b', {
+        value: 'b',
+        writable:true,
+        enumerable:true,
+        configurable:true,
+        // 注意 value 和 writable任何一个都与get、set互斥，不能同时存在
+        // get(){
+        //   return b
+        // },
+        // set(newVal){
+        //   console.log('成功set'+ newVal + '到obj')
+        //   b = newVal
+        // }
+      })
+      return obj
+    }
+    let obj = defineProperty()
+    obj.a = 2
+    obj.b = 2
+    console.log(obj)// {a:2,b:2}
+    for (let k in obj){
+      console.log(k) //只能枚举出 b
+    }
+    delete obj.a
+    delete obj.b
+    console.log(obj)// {a:2}
+
+
+
+
+    function defineProperties (){
+      let obj = {}
+      let a = ''
+      let b = ''
+      Object.defineProperties(obj,{
+        'a': {
+          get(){
+            return a
+          },
+          set(newVal){
+            console.log('成功set a值'+ newVal + '到obj')
+            a = newVal
+          }
+        },
+        'b': {
+          get(){
+            return b
+          },
+          set(newVal){
+            console.log('成功set b值'+ newVal + '到obj')
+            b = newVal
+          }
+        }
+      })
+      return obj
+    }
+    let obj2 = defineProperties()
+    obj2.a = 1
+    obj2.b = 11
+    console.log(obj2) //{a: 1,b: 11}
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul></ul>
+  <script>
+    // document.createDocumentFragment() 用来创建一个虚拟的节点对象，虚拟节点插入文档树时，插入的不是DocumentFragment自身，而是DocumentFragment的所有子孙节点
+    // 在添加多个dom元素时，可以先将这些元素添加到虚拟节点中，再统一将虚拟节点添加到页面，会减少页面渲染dom次数
+    // window.requestAnimationFrame() 会把每一帧所有的dom操作收集起来，在一次回流或者重绘中完成，一般频率为每秒60帧
+    // 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+    // 在隐藏或者不可见的元素在，requestAnimationFrame不会进行回流或者重这就意味着消耗更少的cpu、gpu、内存
+    let ul = document.querySelector('ul')
+    // 十万条数据
+    let dataNum = 100000
+    // 一次插入20条
+    let setNum = 20
+    // 需要插入多少次,总数/一次插入数量，向下取整
+    let needNum = Math.ceil(dataNum/setNum)
+    // 记录插入次数
+    let hasSetNum = 0
+    function add(){
+      // 创建一个虚拟节点
+      let fragment = document.createDocumentFragment()
+      for(let i=0; i<setNum; i++){
+        let li = document.createElement('li')
+        li.innerText = Math.floor(Math.random()* 100000)
+        // 将所有li设置为虚拟节点的子节点
+        fragment.appendChild(li)
+      }
+      // 将虚拟节点下边的所有li设置为ul的子节点，虚拟节点插入文档树时，插入的不是DocumentFragment自身，而是DocumentFragment的所有子孙节点
+      ul.appendChild(fragment)
+      hasSetNum++
+      loop()
+    }
+
+    function loop(){
+      if(hasSetNum < needNum){
+        window.requestAnimationFrame(add)
+      }
+    }
+    loop()
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="120" height="40"></canvas>
+  <div id="btn">1</div>
+  <div id="btn">2</div>
+  <div id="btn">3</div>
+  <div id="btn">4</div>
+  <script>
+    function yzmFn(idSelector,w,h){
+      let width = w
+      let height = h
+      // 拿到画布
+      let myCanvas = document.querySelector(idSelector)
+      // 创建画笔 2d一般用于二纬平面的绘制
+      let ctx = myCanvas.getContext("2d")
+
+
+      // 随机生成数字
+      function randomNumber(min,max){
+        let n = parseInt(Math.random() * (max -min) + min)
+        if([58,59,60,61,62,63,64,91,92,93,94,95,96].includes(n)){
+          return randomNumber(min,max)
+        }
+        return n
+      }
+      // 随机生成颜色
+      function randomColor(min,max){
+        let r = randomNumber(min,max)
+        let g = randomNumber(min,max)
+        let b = randomNumber(min,max)
+        return `rgba(${r},${g},${b})`
+      }
+      // 绘制背景
+      // 背景要稍微浅色，rgba值过大，颜色越浅
+      ctx.fillStyle = randomColor(180,255)
+      ctx.fillRect(0,0,width,height)
+
+      // 绘制随机字符串 a-Z，1-9，
+      // 使用ASCII值对应变换 49-122
+      let randomArr = []
+      for(let i=0; i<4; i++){
+
+        // 取出随机的字母或数字
+        var c = String.fromCharCode(randomNumber(49,122))
+        randomArr.push(c)
+        // 取出随机字体大小
+        var fs = randomNumber(18,30)
+        // 随机数字字母旋转角度
+        var deg = randomNumber(-30,30)
+
+        // 绘制文本
+        ctx.font = fs + 'px 微软雅黑'
+        ctx.textBaseline = 'top'
+
+        // 随机设置字体填充颜色
+        ctx.fillStyle = randomColor(0,120)
+
+        ctx.save()
+        // 设置每个字符的位置
+        ctx.translate(30*i + 15, 15)
+
+        // 旋转字符
+        ctx.rotate(deg * Math.PI/180)
+
+        // 填充字符
+        ctx.fillText(c,-10,-10)
+        ctx.restore()
+      }
+
+
+      // 随机生成干扰线
+      for(let line=0; line<4; line++){
+        ctx.beginPath()
+          ctx.moveTo(randomNumber(0,120),randomNumber(0,40))
+          ctx.lineTo(randomNumber(0,120),randomNumber(0,40))
+          ctx.strokeStyle = randomColor(180,255)
+        ctx.closePath()
+        ctx.stroke()
+      }
+
+      // 随机生成干扰圆点
+      for(let line=0; line<40; line++){
+        ctx.beginPath()
+          // ctx.moveTo(randomNumber(0,120),randomNumber(0,40))
+          ctx.arc(randomNumber(0,120),randomNumber(0,40), 1, 0, Math.PI*2, false);
+        ctx.closePath()
+          ctx.fillStyle = randomColor(180,255)
+          ctx.fill()
+      }
+      return randomArr.join('')
+    }
+    let yzm = yzmFn('#myCanvas',120,40)
+    console.log(yzm)
+
+    let btns = document.querySelectorAll('#btn')
+    console.log(btns)
+    for(var i=0; i<4;i++){
+      btns[i].onclick = (function(index){
+        console.log(index)
+        return function(){
+          let j = index
+          console.log(j)
+        }
+      })(i)
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-06 16:18:19
+ * @LastEditTime: 2020-11-06 18:54:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \我的前端知识库\数据结构与算法\链表\linkList.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./linkList.js"></script>
+  <script>
+    let nodeList = new LinkList()
+    nodeList.append('a')
+    nodeList.append('b')
+    nodeList.append('c')
+    nodeList.insert('d',1)
+
+    console.log(nodeList)
+    console.log(nodeList.getPosition(0))
+    console.log(nodeList.getIndexOf('c'))
+  </script>
+</body>
+</html>

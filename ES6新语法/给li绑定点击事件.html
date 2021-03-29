@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <ul>
+        <li>我下标0</li>
+        <li>我下标1</li>
+        <li>我下标2</li>
+    </ul>
+    <script>
+        var lis=document.getElementsByTagName('li')
+        // for(var i=0;i<lis.length;i++){
+        //     lis[i].onclick=function(){
+        //         console.log(i)//这样绑定会出现无论点击哪一个都是输出最后一个下标
+        //     }
+        // }
+        //解决方法一：利用闭包
+        // for(var i=0;i<lis.length;i++){
+        //     (function (i) {
+        //         lis[i].onclick=function(){
+        //         console.log(i)//这样使用闭包(()=>{})()可以解决
+        //     }
+        //     })(i)
+        // }
+        //解决方法二:使用ES6的let声明变量i
+        for(let i=0;i<lis.length;i++){
+            lis[i].onclick=function(){
+                console.log(i)//这样省时省力
+            }
+        }
+    </script>
+</body>
+
+</html>

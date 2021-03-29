@@ -1,0 +1,30 @@
+Bootstrap 是移动设备优先的
+
+容器
+	1.流体容器.container-fluid
+	2.固定容器.container
+		  值				width
+		>=1200(lg 大屏PC)		1170
+		1200>?>=992(md 中屏PC)		970
+		992>?>=768(sm 平板)		750
+		768>(xs 移动手机)		auto
+	3.栅格系统
+		随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列
+
+
+
+文本居中 class='text-center'
+
+到一定宽度显示元素class='visible-xs'，<=768时候显示
+
+到一定宽度隐藏元素class='hidden-xs'，<=768时候隐藏
+
+
+	col-lg-3 大屏PC显示3/12列
+	col-md-4 中屏PC显示4/12列
+	col-sm-6 平板显示6/12列
+
+列排序  col-lg-push-9向右移动9/12
+	col-lg-pull-9向左移动9/12 注意lg、md、sm、xs不可以跳着写，实在不需要写						可以写col-lg/md/sm/xs-push-0
+
+列偏移	col-lg-offset-9向右偏移9/12

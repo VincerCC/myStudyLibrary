@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        var  obj={
+            name:'kobe'
+        }
+        function foo(data){
+            // arguments传入的类数组参数
+            console.log(this,arguments);
+        }
+        foo()//没使用call.apply.bind之前this是window, window.foo()
+        foo.call(obj,1,2,3)//使用了call将this指向了obj，传参直接传入，是立即调用函数
+        foo.apply(obj,[1,2,3])//使用了apply将this指向了obj，传参需要用数组包裹，是立即调用函数
+        foo.bind(obj,1,2,3)//使用了bind将this指向了obj，传参直接传入，他需要用一个变量接收，并且要手动调用，bind一般用来修改回调函数的this，例如setTimeout
+        var bar =foo.bind(obj,33)
+        bar()
+    </script>
+</body>
+
+</html>

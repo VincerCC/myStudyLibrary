@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<!--
+				父组件中，可以在引用子组件的时候，通过属性绑定v-bind的形式，把需要传递给子组件
+				的数据，传递到子组件内部
+			-->
+			<my-com v-bind:parentmsg="msg"></my-com>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+	
+			var vm=new Vue({
+				el:'#demo',
+				data:{
+					msg:'这是父组件的数据'
+				},
+				methods:{},
+				components:{
+					//子组件默认无法直接访问父组件的data和methods
+					myCom:{
+						data:function(){
+              return {
+                a:0
+              }
+							//data中的数据是可读可写的
+						},
+						template:'<h1>这是子组件---{{parentmsg}}</h1>',
+						props:{
+              // 'parentmsg'
+              parentmsg:{
+                type:String,
+                default:'111'
+              }
+            }
+						//props的数据是只读不可写的
+						//把父组件传递过来的parentmsg属性，在props数组中定义，才能正常使用数据
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

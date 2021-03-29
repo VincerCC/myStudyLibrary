@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.()表示分组匹配
+    var p1 = /(https|http):\/\//g
+
+    console.log('https://www.baidu.com'.replace(p1,'@')) //@www.baidu.com
+    console.log('http://www.虎牙.com'.replace(p1,'@')) //@www.虎牙.com
+
+    var p2 = /(https|http):\/{0,1}/g // {0,1}说明这个可以出现0-1次重复
+
+    console.log('https://www.baidu.com'.replace(p2,'@')) //@/www.baidu.com
+    console.log('http://www.虎牙.com'.replace(p2,'@')) //@/www.虎牙.com
+  </script>
+</body>
+</html>

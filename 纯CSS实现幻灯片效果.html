@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>纯CSS实现图片幻灯片效果(www.newxing.com)</title>
+    <meta http-equiv="content-type" content="text/html;charset=gb2312" />
+    <style type="text/css">
+        dl { position:absolute;width:240px;height:170px;border:10px solid #eee;  }
+        dd { margin:0;width:240px;height:170px;overflow:hidden;  }
+        img{ border:1px solid black   }
+        dt { position:absolute;right:3px;top:50px;   }
+        a { display:block;
+        margin:1px;
+        width:20px;
+        height:20px;
+        text-align:center;
+        font:700 12px/20px "宋体",sans-serif;
+        color:#fff;
+        text-decoration:none;
+        background:#666;
+        border:1px solid #fff;
+        filter:alpha(opacity=40);
+        opacity:.4;   }
+        a:hover {background:#000}
+    </style>
+</head>
+<body>
+<dl>
+    <dt><a href="#a" title="">1</a>
+    <a href="#b" title="">2</a>
+    <a href="#c" title="">3</a>
+    </dt>
+    <dd><img src="http://www.newxing.com/img/450/1.jpg" width="240" height="170" alt="" id="a" />
+        <img src="http://www.newxing.com/img/450/2.jpg" width="240" height="170" alt="" id="b" />
+        <img src="http://www.newxing.com/img/450/3.jpg" width="240" height="170" alt="" id="c" />
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>text</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!-- 
+        find(function(item,index){return true}):找出第一个满足条件返回true的元素
+        findindex(function(item,index){return true}):找出第一个满足条件返回true的元素的下标
+     -->
+    <script>
+        let arr=[3,2,9,7,6,5,4,1,6,8,7,2]
+        let brr=arr.find(function(item,index){
+            return item>7
+        })//返回第一个大于7的元素
+        console.log(brr)//8
+        let crr=arr.findIndex((item,index)=>{
+            return item>3
+        })//返回第一个大于3的下标
+        console.log(crr)//2
+    </script>
+</body>
+
+</html>

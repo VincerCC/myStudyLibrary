@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.aclass{
+				color:red;
+			}
+			.bclass{
+				color: #BBFFAA;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--
+        	作者：858860068@qq.com
+        	时间：2019-06-22
+        	描述：
+        	class绑定：:class='xxx'
+        	其中，
+        	常用   xxx可以是字符串，<p :class="'aclass'">变色</p>
+        	常用    xxx可以是对象，<p :class="{aclass:true，bclass:false}">变色</p>
+        		xxx可以是数组，<p :class="['aclass','bclass']">变色</p>
+        	
+        	style绑定：:style="{color:a,fontSize:b+'px'}"
+        				其中，a，b为data属性
+        -->
+		<div id="demo">
+			<p :class="a">变色</p>
+			<button @click="btn">点我</button>
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:"#demo",
+				data:{
+					a:"aclass"
+				},
+				methods:{
+				btn(){
+					this.a="bclass";
+				}
+			}
+		})
+		</script>
+	</body>
+</html>
