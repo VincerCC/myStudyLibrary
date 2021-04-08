@@ -16,7 +16,7 @@ fs.readFile('./a.txt', 'UTF8', (err, data) => {
 fs.readFile('./b.txt', 'UTF8', (err, data) => {
   arr.push(data)
 })
-console.log('arr', arr) // 返回为空，应该readFile是异步的，先执行了这句同步代码
+console.log('arr', arr) // 返回为空，因为readFile是异步的，先执行了这句同步代码
 
 
 

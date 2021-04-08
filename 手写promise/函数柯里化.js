@@ -18,6 +18,9 @@ console.log(myIsString('a'))
 
 // 实现通用的柯里化函数：高阶函数
 function curring(fn){
+  // fn.length fn的参数个数
+  //  curring(isType) -> isType(type, val) 参数个数为2
+  //  curring(sum) ->  sum(a,b,c,d) 参数个数为2
   let args = [] // 用于保存传入的参数
   const inner = (args) => {
     if(args.length >= fn.length) {
