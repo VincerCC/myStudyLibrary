@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'//把创建好的组件和虚拟Dom放到页面�
 
 // 1.安装react-router-dom
 // 2.导入
-// 3.使用 props.history.push('/home')
+// 3.使用 this.props.history.push('/home')
 // hash模式
 // import {HashRouter as Router,Link,Route} from 'react-router-dom'
 // History模式

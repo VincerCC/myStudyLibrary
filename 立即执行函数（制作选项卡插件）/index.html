@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #my-tab{
+      width: 500px;
+      height: 500px;
+      border: 1px solid #000;
+      margin: 50px auto;
+    }
+    .tab-wrapper{
+      height: 50px;
+      border-bottom: 1px solid #000;
+    }
+    .tab-item{
+      float: left;
+      width: 33.33333%;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+    }
+    .tab-item.active{
+      background-color: #000;
+      color: #fff;
+    }
+    .page-wrapper{
+      position: relative;
+      height: 450px;
+    }
+    .page-item{
+      display: none;
+      position: absolute;
+      float: left;
+      height: 450px;
+      width: 100%;
+      text-align: center;
+      line-height: 450px;
+
+    }
+    .page-item.active{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script src="./util.js"></script>
+  <script src="./template.js"></script>
+  <div id="my-tab" data='[
+  {
+    "tab": "选项卡1",
+    "page": "页面1"
+  },
+  {
+    "tab": "选项卡2",
+    "page": "页面2"
+  },
+  {
+    "tab": "选项卡3",
+    "page": "页面3"
+  }
+  ]'></div>
+  <script src="./myTab.js"></script>
+  <script>
+    new MyTab('#my-tab').init()
+  </script>
+</body>
+</html>

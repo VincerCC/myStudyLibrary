@@ -1,10 +1,10 @@
 
 const fs = require('fs')
 fs.readFile('./a.txt', 'UTF8', (err, data) => {
-  console.log(data)
+  console.log(data,'dataA')
 })
 fs.readFile('./b.txt', 'UTF8', (err, data) => {
-  console.log(data)
+  console.log(data,'dataB')
 })
 // 如果我想要拿到两个文件的结果该怎么做呢？
 // 方法一（不行），使用数组
@@ -34,7 +34,7 @@ function after(time, fn){
 }
 
 let out = after(2, (arr) => {
-  console.log(arr)
+  console.log('after',arr)
 })
 
 fs.readFile('./a.txt', 'UTF8', (err, data) => {
