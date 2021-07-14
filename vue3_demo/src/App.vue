@@ -21,6 +21,8 @@
     <li v-for="(item,index) in data.responseData" :key="index">{{item.name}}</li>
     <li v-for="(item,index) in responseData" :key="index">{{item.name}}</li>
   </ul> -->
+  <hr><hr><br><br>
+  <myDirectives />
 </template>
 
 <script>
@@ -38,6 +40,7 @@ import { reactive, ref,watch, provide,readonly,toRefs, getCurrentInstance } from
 // import myRefs from './components/通过ref拿到元素或组件.vue'
 // import myToRef from './components/toRef.vue'
 import myToRefs from './components/toRefs.vue'
+import myDirectives from './components/directives指令.vue'
 
 
 
@@ -67,7 +70,8 @@ export default {
     // provideAndInject,
     // myRefs,
     // myToRef,
-    myToRefs
+    myToRefs,
+    myDirectives
   },
   setup(props, ctx) {
     return

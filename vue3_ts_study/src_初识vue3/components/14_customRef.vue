@@ -13,6 +13,8 @@ function useDebounceRef<T>(value: T, delay: number | undefined = 200) {
   // 存储定时器id
   let timeOut: number;
   return customRef((track, trigger) => {
+    // track 告诉vue去追踪数据
+    // trigger 告诉vue去更新界面，触发响应
     return {
       // 返回数据
       get() {
