@@ -8,6 +8,7 @@ const actions = {
   addList(state, action){
     console.log(state, 'actions_state', action, 'actions_action')
     state.list.push(state.myValue)
+    state.myValue = ''
     return state
   },
 }

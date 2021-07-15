@@ -1,4 +1,4 @@
-import actions from './../actions/index'
+import actions from '../actions/index'
 const initState = {
   defaultState: '我是默认state',
   list: [

@@ -1,7 +1,7 @@
 // 两种创建组件的方式和.js
 import React, { Component } from 'react'//创建组件，虚拟Dom元素，生命周期
 import ReactDOM from 'react-dom'//把创建好的组件和虚拟Dom放到页面上展示
-
+// 组件名称开头必须为大写
 //使用外部组件
 // 导入
 import Hello1 from '@/component/hello'

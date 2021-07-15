@@ -11,7 +11,7 @@ export default class Home extends React.Component{
       ...store.getState(),
       msg: 'myStore'
     }
-
+    this.handleClick = this.handleClick.bind(this)
 
 
   }
@@ -22,8 +22,9 @@ export default class Home extends React.Component{
       this.setState(store.getState())
     })
   }
-  handleClick = () => {
+  handleClick(){
     console.log('handleClick')
+    console.log(this)
     // 通知reducer去新增数据，reducer内部会继续通知actions执行addList方法
     store.dispatch({
       type: 'addList'
