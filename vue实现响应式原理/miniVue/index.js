@@ -11,6 +11,7 @@ class VUE {
     this._data = data
     this.isProxy = isProxy
     this.domPool = {}
+    this.data = {}
     this.init()
   }
   init(){
@@ -21,7 +22,6 @@ class VUE {
   // Object.defineProperty监听数据
   definePropertyListenerData(){
     const _this = this
-    this.data = {}
     for(let key in _this._data){
       Object.defineProperty(this.data, key, {
         get(){

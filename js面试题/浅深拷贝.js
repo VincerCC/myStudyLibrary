@@ -6,7 +6,7 @@ let newArr = arr.slice();
 arr[0] = 9
 // (浅拷贝只拷贝了数组的第一层级)
 console.log(arr[3] === newArr[3]) // true
-console.log(arr === newArr) // falsee
+console.log(arr === newArr) // false
 console.log(newArr, '---数组浅克隆---', arr)
 
 /**
@@ -20,7 +20,7 @@ console.log(newArr, '---数组浅克隆---', arr)
  *  |                                   |
  *  |浅拷贝                              |指向同一个地址
  *  v                                   |
- * 0x000001                             |
+ * 0x000002                             |
  * newArr[                              |
  *  0: 1                                |
  *  1: 2                                |
@@ -68,22 +68,22 @@ console.log(newObj, '---对象浅克隆---', obj)
 
 /**
  * 0x000001
- * obj[
+ * obj{
  *  a: 1
  *  b: {
  *    c: 0x123456                  ------------->  0x123456[c: 2]
  *  }                                   |
- * ]                                    |
+ * }                                    |
  *  |                                   |
  *  |浅拷贝                              |指向同一个地址
  *  v                                   |
- * 0x000001                             |
- * newObj[                              |
+ * 0x000002                             |
+ * newObj{                              |
  *  a: 1                                |
  *  b: {                                v
  *    c: 0x123456   ------------->  0x123456[c: 2]
  *  }
- * ]
+ * }
  *
  */
 

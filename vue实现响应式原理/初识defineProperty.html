@@ -24,6 +24,7 @@
       //           set(newVal) 对属性进行设置会触发set方法
 
 
+      // 能够同时设置多个属性值
       // Object.defineProperties(obj,{
       //   prop1:{
       //         get(){},
@@ -34,7 +35,8 @@
       //         set(){}
       //   }
       // })
-      // 能够同时设置多个属性值
+
+
       Object.defineProperty(obj, 'a', {
         get(){
           return a

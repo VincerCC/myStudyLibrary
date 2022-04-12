@@ -1,0 +1,1 @@
+export const SET_CURRENT_ROUTE_NAME: string = 'SET_CURRENT_ROUTE_NAME';

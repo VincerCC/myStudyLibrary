@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #dropArea {
+    width: 300px;
+    height: 300px;
+    border: 1px dashed gray;
+    margin-bottom: 20px;
+  }
+  #dropArea p {
+    text-align: center;
+    color: #999;
+  }
+  #dropArea.highlighted {
+    background-color: #ddd;
+  }
+  #imagePreview {
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+  #imagePreview img {
+    width: 100%;
+    display: block;
+    margin: auto;
+  }
+  </style>
+</head>
+<body>
+  <div id="dropArea">
+    <p>拖拽上传文件</p>
+    <div id="imagePreview"></div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>

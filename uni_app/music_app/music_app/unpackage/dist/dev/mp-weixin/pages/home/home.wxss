@@ -1,0 +1,45 @@
+.page.data-v-92bb8f34 {
+  padding-top: 50px;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+  padding-bottom: 60px;
+}
+.tabItem.data-v-92bb8f34 {
+  margin: 0 5px;
+  color: gray;
+}
+.active.data-v-92bb8f34 {
+  position: relative;
+  color: #000000;
+  font-size: 0.4rem;
+}
+.active.data-v-92bb8f34::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background-color: #d71345;
+  left: 0;
+  bottom: -5px;
+}
+.search.data-v-92bb8f34 {
+  width: 75%;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  background-color: #fafafa;
+  font-size: 16px;
+}
+.searchIcon.data-v-92bb8f34 {
+  font-size: 20px;
+  margin: 10px;
+  color: #ccc;
+}
+.searchText.data-v-92bb8f34 {
+  margin-left: 5px;
+  color: #ccc;
+}
+.icon.data-v-92bb8f34 {
+  font-size: 22px;
+}

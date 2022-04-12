@@ -2,9 +2,11 @@
 import { REDUCE, ADD } from './mutation-types'
 export default {
   //增加
-  increment({commit}){
+  increment(context, data){
+      console.log(context)
+      console.log(data)
     //提交add的mutations
-    commit(ADD)
+    context.commit(ADD)
   },
   //减少
   decrement({commit}){

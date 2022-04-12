@@ -1,0 +1,67 @@
+.recommendationSongList.data-v-ffbb71b2 {
+  border-top: 1px solid #dcdcdc;
+  padding: 10px;
+  margin-top: 10px;
+  border-bottom: 10px solid #dcdcdc;
+}
+.titleHead.data-v-ffbb71b2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.title.data-v-ffbb71b2 {
+  font-weight: bold;
+}
+.more.data-v-ffbb71b2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 25px;
+  border: 1px solid #dcdcdc;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.songList.data-v-ffbb71b2 {
+  display: flex;
+  overflow-x: scroll;
+  padding: 0 10px;
+  margin-top: 20px;
+}
+.songItem.data-v-ffbb71b2 {
+  border-radius: 20px;
+  margin-right: 15px;
+}
+.songCount.data-v-ffbb71b2 {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 20px;
+}
+.songImg.data-v-ffbb71b2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+.playWrap.data-v-ffbb71b2 {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  color: #ffffff;
+  line-height: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0 3px;
+}
+.playIcon.data-v-ffbb71b2 {
+  font-size: 13px;
+  margin-right: 5px;
+}
+.playCount.data-v-ffbb71b2 {
+  font-size: 12px;
+}
+.songName.data-v-ffbb71b2 {
+  font-size: 13px;
+  line-height: 20px;
+}

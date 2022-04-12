@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 首先从原始数组中找到最小的元素，并把该元素放在数组的最前面，然后再从剩下的元素中寻找最小的元素，放在之前最小元素的后面，直到排序完毕。
+    let example=[8,94,15,88,55,76,21,39];
+    function swap(i, minIndex, arr) {
+      var temp = arr[i]
+      arr[i] = arr[minIndex]
+      arr[minIndex] = temp
+    }
+    function selectSort(arr){
+        let len = arr.length;
+        console.time('选择排序耗时');
+        for(var i = 0; i <len;i++){
+          for(var j = i+1; j < len; j++){
+              if(arr[j] < arr[i]){
+                swap(i, j, arr)
+              }
+          }
+        }
+        console.timeEnd('选择排序耗时')
+        return arr
+    }
+    console.log(selectSort(example));
+
+  </script>
+</body>
+</html>

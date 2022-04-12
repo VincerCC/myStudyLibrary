@@ -28,7 +28,14 @@ interface PointArr {
   [index: number]: number;
 }
 let pointArr: PointArr = [1, 2, 3]; //[1,2,3,'5']不能将类型“string”分配给类型“number”。
-
+interface anyObj {
+  // 代表这个接口约束了任意个key，但对应的值为number类型
+  [propname: string]: number;
+}
+let obj: anyObj = {
+  name: 1,
+  // age: '18' // 不能将类型“string”分配给类型“number”。
+}
 // 【参数 约束接口】
 interface name {
   firstName: string;
@@ -97,6 +104,16 @@ interface oneInterFace {
 // 接口twoInterFace 继承（extends）了 接口oneInterFace
 interface twoInterFace extends oneInterFace {
   work(str: string): void;
+}
+let dog: twoInterFace = {
+    // 如果没有name属性，eat方法，work方法，将会报错
+    name: 'string', // 如果没有name方法，报错类型 "{ eat(): void; work(): void; }" 中缺少属性 "name"，但类型 "twoInterFace" 中需要该属性
+    // 如果没有eat方法，报错类型 "{ eat(): void; work(): void; }" 中缺少属性 "eat"，但类型 "twoInterFace" 中需要该属性
+    eat(): void {
+      alert("eat");
+    },
+    // 如果没有work方法，报错类型 "{ eat(): void; work(): void; }" 中缺少属性 "work"，但类型 "twoInterFace" 中需要该属性
+    work(): void {}
 }
 class Dogs implements twoInterFace {
   // 如果没有name属性，eat方法，work方法，将会报错

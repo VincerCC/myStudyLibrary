@@ -30,7 +30,7 @@ namespace b{
   type Person = typeof p
   // 通过typeof获取到类型Person，去定义p1
   let p1:Person={
-    // 类型“{}”缺少类型“{ name: string; age: number; }”中的以下属性: name, age
+    // 不填的话，类型“{}”缺少类型“{ name: string; age: number; }”中的以下属性: name, age
     name:'人',
     age:18
   }

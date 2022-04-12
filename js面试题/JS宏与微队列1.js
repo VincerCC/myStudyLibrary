@@ -33,7 +33,6 @@ new Promise((resolve)=>{
 });
 
 console.log('end');
-
 //1，执行同步代码，输出start
 //2，遇到setTimeout，放入宏队列，宏队列:[setTimeout]
 //3，执行async1，遇到同步代码，输出async1Start，目前已经输出  【start，async1Start】
@@ -53,15 +52,6 @@ console.log('end');
 // async1End
 // promise2
 // setTimeout
-
-
-
-
-
-
-//输出：t1  async1 start  async2 t2 promise t3 async1 end  promise.then  setTimeout
-//宏队列：[setTimeout]
-//微队列：[async1 end,promise.then]
 
 
 

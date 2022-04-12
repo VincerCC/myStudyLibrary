@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "music",
+  "usingComponents": {
+    "my-header": "../../components/header",
+    "banner": "../../components/banner",
+    "application-list": "../../components/applicationList",
+    "recommendation-song-list": "../../components/recommendationSongList"
+  }
+}

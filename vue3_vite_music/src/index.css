@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#app{
+  /* background-color: #fffef9; */
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.maxLineTwo {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="lib/three.js"></script>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    function init() {
+      // 创建场景
+      var scene = new THREE.Scene();
+
+      // 创建摄像机 PerspectiveCamera（透视摄像机）
+      // 第一个参数是视野角度（FOV）。视野角度就是无论在什么时候，你所能在显示器上看到的场景的范围，它的值是角度单位。
+      // 第二个参数是长宽比（aspect ratio）。 也就是你用一个物体的宽除以它的高的值。比如说，当你在一个宽屏电视上播放老电影时，可以看到图像仿佛是被压扁的。
+      // 接下来的两个参数是近截面（near）和远截面（far）。 当物体某些部分比摄像机的远截面远或者比近截面近的时候，该这些部分将不会被渲染到场景中。或许现在你不用担心这个值的影响，但未来为了获得更好的渲染性能，你将可以在你的应用程序里去设置它。
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000)
+
+      console.log(camera)
+      // 创建渲染器
+      var renderer = new THREE.WebGLRenderer()
+
+      // 设置渲染器的初始颜色
+      renderer.setClearColor(new THREE.Color(0xEEEEEE))
+
+      // 设置输出canvas画面的大小
+      renderer.setSize(window.innerWidth, window.innerHeight)
+
+      // 显示三维坐标系 ，传入坐标轴长度
+      var axes = new THREE.AxisHelper(20)
+
+      // 添加坐标系到场景
+      scene.add(axes)
+
+      // 创建一个地面的几何体,参数是宽高
+      var planeGeometry = new THREE.PlaneGeometry(20, 20)
+
+      // 给地面物体上色
+      var planeMaterial = new THREE.MeshBasicMaterial({color: 0xcccccc})
+
+      // 创建地面
+      var plane = new THREE.Mesh(planeGeometry, planeMaterial)
+
+      // 物体移动位置
+      plane.rotation.x = -0.5*Math.PI // 绕着x轴 旋转 90
+
+
+      plane.position.x = 0
+      plane.position.y = 0
+      plane.position.z = 0
+
+      // 将地面添加到场景中
+      scene.add(plane)
+
+      // 定位摄像机，到场景的中心点
+      camera.position.x = 5
+      camera.position.y = 5
+      camera.position.z = 30
+      camera.lookAt(scene.position)
+
+      // 将渲染器 输出到html元素中
+      document.getElementById('app').appendChild(renderer.domElement)
+      renderer.render(scene, camera)
+
+    }
+    window.onload = init()
+  </script>
+</body>
+</html>

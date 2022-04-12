@@ -92,6 +92,11 @@ console.log(typeof strr ,strr)//string '我是字符串'
 let strrr= duanyan as string
 console.log(typeof strrr ,strrr)//string ''我是字符串'
 
+let image1 = document.querySelector('#img')
+// image1.src // 报错，类型Element上不存在属性src
+// 解决：使用类型断言指定img为HTMLImageElement类型
+let image2 = document.querySelector('#img') as HTMLImageElement
+image2.src // ok
 
 //【接口】 为一组对象内容进行校验
 interface  data  {

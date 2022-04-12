@@ -1,0 +1,1 @@
+<view class="applicationList data-v-1e922ea3"><view wx:for="{{a}}" wx:for-item="item" wx:key="d" class="applicationItem data-v-1e922ea3" bindtap="{{item.c}}"><view class="applicationIcon data-v-1e922ea3"><image class="data-v-1e922ea3" src="{{item.a}}"></image></view><label class="applicationName data-v-1e922ea3">{{item.b}}</label></view></view>

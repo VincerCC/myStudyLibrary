@@ -38,7 +38,7 @@ export default {
     //增加
     increment(){
       //通知vuex去加1
-      this.$store.dispatch('increment')//分发消息,触发store中对应的actions调用，参数(消息名，传参数)
+      this.$store.dispatch('increment', ['a', 'b'])//分发消息,触发store中对应的actions调用，参数(消息名，传参数)
     },
     mapIncrement(){
       //通知vuex去加1

@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "music",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#d71345",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/shouye.png",
+        "selectedIconPath": "static/shouye_active.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/boke.png",
+        "selectedIconPath": "static/boke_active.png",
+        "text": "播客"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/wode.png",
+        "selectedIconPath": "static/wode_active.png",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/guanzhu.png",
+        "selectedIconPath": "static/guanzhu_active.png",
+        "text": "关注"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/yuncun.png",
+        "selectedIconPath": "static/yuncun_active.png",
+        "text": "云村"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

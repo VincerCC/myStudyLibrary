@@ -1,0 +1,14 @@
+.map, #container {
+  height: 100%;
+}
+.cityNavBar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f6f5f5;
+  z-index: 999;
+}
+#container{
+  /* padding-top: 45px; */
+}

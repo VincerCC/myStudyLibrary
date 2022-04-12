@@ -63,8 +63,7 @@ new Foo.getName() // 2  实际就是调用Foo的静态方法, 但是getName里�
 
 new Foo().getName() // 3
 /**
- * new Foo().getName() === Foo.prototype.getName()
- *
+ * new Foo().getName() ，因为 Foo 上没有 getName()方法，所以往原型找 ===> Foo.prototype.getName()
  * 先执行Foo函数，而Foo此时作为构造函数却有返回值。在原题中，返回的是this，而this在构造函数中本来就代表当前实例化对象，遂最终Foo函数返回实例化对象。
  * 之后调用实例化对象的getName函数，因为在Foo构造函数中没有为实例化对象添加任何属性(this.a=1类似操作)，遂到当前对象的原型对象（prototype）中寻找getName，找到后输出3。
 

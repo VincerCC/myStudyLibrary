@@ -1,4 +1,6 @@
 //创建类
+namespace classText {
+
 class Animal {
   // 修饰符
   // public 公有，在类里面、子类、类外面都可访问 【默认】
@@ -30,6 +32,7 @@ class Animal {
   }
   run(): void {
     alert("run只在父类有");
+    // console.log(this.age) // 属性“age”在类型“Animal”上不存在。你的意思是改为访问静态成员“Animal.age”吗?
   }
   static work(): void {
     // 静态方法里面不能直接获取类里边非静态的属性，只能获取到类里边的static修饰的静态属性
@@ -98,3 +101,5 @@ let p = new Person("珠峰");
 console.log(p.oldName);
 p.oldName = "架构";
 console.log(p.oldName);
+
+}

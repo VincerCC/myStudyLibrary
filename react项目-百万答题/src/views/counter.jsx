@@ -32,6 +32,7 @@ import { Button } from 'antd-mobile'
 // 计数器
 class Counter extends React.Component{
   constructor(props){
+    console.log(props,'props')
     super(props)
     this.state = {
       questionList:[]
@@ -61,7 +62,9 @@ class Counter extends React.Component{
   }
 }
 // 将state的数据映射到props函数中
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
+  console.log(state,'state')
+  console.log(ownProps,'ownProps')
   return {
     value:state.num
   }

@@ -93,3 +93,10 @@ function defaultT<T = number>(name: T): T {
 console.log(defaultT<string>("string"));
 console.log(defaultT(99999));
 console.log(defaultT("string")); //这里不报错是因为，当我不传泛型，ts会根据入参类型帮我去猜我的泛型类型
+
+
+// 泛型数组
+function forEach<A> (arr: A[]) : A[]{
+  return arr
+}
+forEach<string>(['1', '2'])//类型“number”的参数不能赋给类型“string[]”的参数。

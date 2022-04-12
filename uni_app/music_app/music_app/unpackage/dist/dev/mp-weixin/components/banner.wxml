@@ -1,0 +1,1 @@
+<view class="swipeWrap data-v-1f25ebb2"><swiper class="my-swipe data-v-1f25ebb2" autoplay interval="{{3000}}" circular indicator-dots indicator-active-color="red"><swiper-item wx:for="{{a}}" wx:for-item="item" wx:key="b" class="data-v-1f25ebb2" bindtap="{{item.c}}"><image src="{{item.a}}" class="swipeImg data-v-1f25ebb2"></image></swiper-item></swiper></view>

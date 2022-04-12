@@ -31,28 +31,38 @@ function test(a){
   function d(){};
 }
 test(2)
+
+
+/**
+ * AO = {
+ *    1. 找形参、变量声明，复制 undefined
+ *      a: undefined
+ *      b: undefined
+ *    2. 实参赋值给形参
+ *      a: 2
+ *    3. 寻找函数体，赋值
+ *      a: function a() {}
+ *      d: function d() {}
+ *    4. 执行函数
+ *      输出 a => function a() {}
+ *      a = 1
+ *      输出 a => 1
+ *      输出 a => 1
+ *      b = function(){}
+ *      输出 b => function(){}
+ * }
+ *
+*/
 // 输出
 // ƒ a(){}
 // 1
 // 1
 // ƒ (){}
-// AO activation object 活跃对象，函数上下文
-// 1.寻找函数形参，和变量声明，赋值undefined
-// 2.寻找函数实参，赋值给形参
-// 3.寻找函数体声明
-// 4.执行函数
-// AO = {
-//    a: undefined -> 1.，寻找函数形参，和变量声明，找到形参a，赋值undefined
-//       2 -> 2.找到函数实参2，赋值给形参a
-//       function a(){}; -> 3.寻找函数体声明，赋值给a
-//       1 -> 4.执行函数,将1赋值给a
-//    b: undefined -> 1.寻找变量声明，找到变量b，赋值undefined
-//       function(){}; -> 4.执行函数，，b赋值function(){};
-//    d: function d(){}; -> 3.寻找函数体声明，赋值给d
-// }
 
 
 console.log('======================')
+
+
 function test2(a,b){
   console.log(a);
   c = 0;
@@ -89,6 +99,10 @@ test2(1)
 */
 
 console.log('======================')
+
+
+
+
 // GO global object 全局上下文
 // 1.寻找变量声明，赋值undefined
 // 2.寻找函数体声明

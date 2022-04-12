@@ -1,0 +1,22 @@
+.flex_wrap{
+  padding: 15px;
+}
+.menuItem{
+  text-align: center;
+}
+.menuName{
+  margin-top: 10px;
+}
+.group{
+  border-top: 1px solid #ccc;
+  height: 25px;
+  line-height: 25px;
+  padding: 10px 20px;
+}
+.title{
+  font-size: 18px;
+}
+.more{
+  float: right;
+  font-size: 13px;
+}

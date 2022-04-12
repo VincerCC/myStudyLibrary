@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<my-com v-slot="timeObj">
+				{{timeObj.d}}天{{timeObj.h}}小时{{timeObj.m}}分钟{{timeObj.s}}秒
+			</my-com>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			//1.1使用Vue.extend来创建全局的Vue组件
+			let myCom = Vue.extend({
+				template:`
+        <div>
+          <slot v-bind="{d: days, h: hours, m: mins, s: seconds}"></slot>
+        </div>
+        `,
+        data() {
+          return {
+            days: '2',
+            hours: '10',
+            mins: '23',
+            seconds: '56',
+          }
+        }
+			})
+			Vue.component('myCom',myCom)
+
+
+
+
+			var vm=new Vue({
+				el:'#demo',
+			})
+		</script>
+	</body>
+</html>
