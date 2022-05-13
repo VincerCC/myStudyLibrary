@@ -4,6 +4,7 @@
  * 创建事件池->发布计划
  */
 
+// 调度中心（邮局）
 let events = {
   // 支持指定调用某个事件池事件
   /**
@@ -42,6 +43,8 @@ let events = {
     }
   }
 }
+
+// （人）订阅者 订阅 名为 el的事件
 events.on('e1',()=>{
   console.log('第一个事件池事件1')
 })
@@ -57,5 +60,7 @@ events.on('e2',()=>{
 events.on('e2',()=>{
   console.log('第二个事件池事件2')
 })
+
+// （邮局）派发通知订阅者
 events.emit('e1')
 events.emit('e2')

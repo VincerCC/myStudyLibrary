@@ -18,3 +18,4 @@ var hb = new HbData<myClass>()
 // hb.add({name:'1'}) //类型 "{ name: string; }" 中缺少属性 "age"，但类型 "myClass" 中需要该属性。ts(2345)
 // hb.add(1) //类型“number”的参数不能赋给类型“myClass”的参数。
 hb.add(mc)
+

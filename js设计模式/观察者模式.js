@@ -1,7 +1,7 @@
 /**
  * 观察者模式：vue2.0响应式原理
  *    观察者模式(Observer pattern)是一种软件设计模式，在这种模式中，
- *    一个称为subject的对象维护一个observer列表，
+ *    一个称为subject的对象，维护一个存放多个 observer 的列表，
  *    在状态发生变化时自动通知它们，通常是调用它们的一个方法。
  */
 class Observer1 {

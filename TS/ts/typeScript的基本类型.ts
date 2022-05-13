@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-05-30 16:47:24
- * @LastEditTime: 2020-10-15 11:35:23
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-10 10:52:47
+ * @LastEditors: 刘颖聪 liuyc@jee-soft.cn
  * @Description: In User Settings Edit
  * @FilePath: \TS\typeScript.ts
  */
@@ -129,6 +129,12 @@ function show<T>(data:T):T{
 let output:string = show<string>("myString");//这里我们明确的指定了T是string类型，并做为一个参数传给函数，函数返回类型也是string类型
 // let output:number = show<string>("myString");//错误，无法将string赋值给number
 // let output:string = show<string>(99);//错误，类型“number”的参数不能赋给类型“string”的参数
+
+
+// unknown类型: 只能被赋值给 any 类型和 unknown 类型本身
+let anyType: any = '9'
+anyType = 9
+let anyType2: string = anyType
 
 
 

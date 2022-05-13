@@ -31,7 +31,7 @@ class HttpClient1{
 // http.run()
 
 // 属性装饰器
-function upperCase (target:any,propertyName:string){
+function upperCase (target:any, propertyName:string){
   // 如果装饰器装饰的是属性，target将指向类的原型
   // 如果装饰器装饰的是类，target将指向类的定义
   // 所以target[propertyName]是name
